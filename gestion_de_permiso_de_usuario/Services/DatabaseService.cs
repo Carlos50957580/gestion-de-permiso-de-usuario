@@ -8,8 +8,8 @@ using Microsoft.Extensions.Configuration;
 
 public class DatabaseService
 {
-    private readonly string _connectionString;
-    private SqlConnection conexion;
+    public readonly string _connectionString;
+    public SqlConnection conexion;
     public DatabaseService(IConfiguration configuration)
     {
         _connectionString = configuration.GetConnectionString("DefaultConnection");

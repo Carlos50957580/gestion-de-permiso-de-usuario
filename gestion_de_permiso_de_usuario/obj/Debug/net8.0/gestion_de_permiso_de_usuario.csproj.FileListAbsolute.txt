@@ -38,3 +38,11 @@ C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\obj\Debug\net8
 C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\obj\Debug\net8.0\gestion_de_permiso_de_usuario.pdb
 C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\obj\Debug\net8.0\gestion_de_permiso_de_usuario.genruntimeconfig.cache
 C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\obj\Debug\net8.0\ref\gestion_de_permiso_de_usuario.dll
+C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\bin\Debug\net8.0\JetBrains.Annotations.dll
+C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Nito.AsyncEx.Context.dll
+C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Nito.AsyncEx.Tasks.dll
+C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Nito.Disposables.dll
+C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\bin\Debug\net8.0\System.Linq.Dynamic.Core.dll
+C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Volo.Abp.Core.dll
+C:\Users\o99zz94\Desktop\Copia real\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Volo.Abp.VirtualFileSystem.dll

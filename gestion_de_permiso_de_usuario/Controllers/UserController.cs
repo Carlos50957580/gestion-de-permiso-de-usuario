@@ -1,27 +1,33 @@
 ﻿using gestion_de_permiso_de_usuario.Models;
 using gestion_de_permiso_de_usuario.Services;
+using gestion_de_permiso_de_usuario.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-namespace gestion_de_permiso_de_usuario.Controllers
+using Microsoft.Extensions.Configuration;
+namespace gestion_de_permiso_de_usuario.Controllers;
 
+
+public class UserController : Controller
 {
-    public class UserController : Controller
+
+    private readonly UserData _UserData;
+
+    public UserController(UserData userdata)
     {
-        private readonly DatabaseService _databaseService;
-
-        public UserController(DatabaseService databaseService)
-        {
-            _databaseService = databaseService;
-        }
-
-        public IActionResult Index()
-        {
-            List<User> entities = _databaseService.GetUser();
-            return View(entities);
-        }
-
-
+        _UserData = userdata;
     }
 
+    public IActionResult Index()
+    {
+        List<User> Lista = _UserData.GetUser();
+        return View(Lista);
+    }
+
+
 }
+
+
+
+
+
 
