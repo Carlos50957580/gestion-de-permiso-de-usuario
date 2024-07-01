@@ -53,6 +53,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.6, )"
+            },
+            "Volo.Abp.VirtualFileSystem": {
+              "target": "Package",
+              "version": "[8.2.0, )"
             }
           },
           "imports": [

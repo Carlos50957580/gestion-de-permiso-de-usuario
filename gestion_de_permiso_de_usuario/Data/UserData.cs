@@ -12,31 +12,48 @@ namespace gestion_de_permiso_de_usuario.Data
 
         }
 
-
         public List<User> GetUser()
         {
-            List<User> entities = new List<User>();
+            List<User> Lista = new List<User>();
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            try
             {
-                SqlCommand command = new SqlCommand("SELECT nombe as Nombre FROM Userd", connection);
-                command.CommandType = CommandType.Text;
 
-                connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    while (reader.Read())
-                    {
-                        entities.Add(new User
-                        {
-                            Nombre = reader.GetString(0)
-                        });
-                    }
+                    SqlCommand command = new SqlCommand("SELECT UsuarioID,NombreUsuario,PersonaID,RolID,Contraseña,FechaCambio,Estado, CreadoPor, ActualizadoPor FROM Usuarios", connection);
+                    command.CommandType = CommandType.Text;
 
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Lista.Add(new User
+                            {
+                                UsuarioID = Convert.ToInt32(reader["UsuarioID"]), 
+                                NombreUsuario = reader["NombreUsuario"].ToString(),
+                                PersonaID = Convert.ToInt32(reader["PersonaID"]),
+                                RolID = Convert.ToInt32(reader["RolID"]),
+                                Contraseña = reader["Contraseña"].ToString(),
+                                FechaCambio = reader["FechaCambio"].ToString(),
+                                Estado = Convert.ToBoolean(reader["Estado"]),
+                                CreadoPor = reader["CreadoPor"].ToString(),
+                                ActualizadoPor = reader["ActualizadoPor"].ToString()
+                              
+                            });
+                        }
+
+                    }
                 }
             }
+            catch
+            {
+                //Lista = new List<User>();
 
-            return entities;
+            }
+
+            return Lista;
         }
     }
 }

@@ -28,5 +28,15 @@ namespace gestion_de_permiso_de_usuario.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public JsonResult ListaUsuarios()
+        {
+            List<User> pLista = new List<User>();
+
+            pLista = new UserController().GetUser();
+
+            return Json(pLista);
+
+        }
     }
 }

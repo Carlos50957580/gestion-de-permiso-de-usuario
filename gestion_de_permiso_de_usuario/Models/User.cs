@@ -2,7 +2,17 @@
 {
     public class User
     {
-        public string Nombre {  get; set; }
-        public string Apellidos {  get; set; }
+        public int UsuarioID {  get; set; }
+        public string NombreUsuario {  get; set; }
+        public int PersonaID { get; set; }
+        public int RolID { get; set; }
+        public string Contraseña { get; set; }
+        public string FechaCambio { get; set; }
+        public bool Estado { get; set; }
+        public string CreadoPor { get; set; }
+        public string ActualizadoPor { get; set; }
+
+
+        //Recuerda actualizar pendejo
     }
 }
