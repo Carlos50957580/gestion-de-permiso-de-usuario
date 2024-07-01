@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\gestion_de_permiso_de_usuario.props" />
+</Project>

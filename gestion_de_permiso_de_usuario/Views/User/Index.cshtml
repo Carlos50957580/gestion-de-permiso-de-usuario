@@ -1,0 +1,19 @@
+﻿@model IEnumerable<gestion_de_permiso_de_usuario.Models.User>
+
+<h2>Your Entities</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entity in Model)
+        {
+            <tr>
+                <td>@entity.NombreUsuario</td>
+            </tr>
+        }
+    </tbody>
+</table>
