@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
+    "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
   },
   "projects": {
-    "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
+    "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "projectUniqueName": "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
         "projectName": "gestion_de_permiso_de_usuario",
-        "projectPath": "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
-        "packagesPath": "C:\\Users\\o99zz96\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\obj\\",
+        "projectPath": "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "packagesPath": "C:\\Users\\o99zz94\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\o99zz96\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\o99zz94\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -49,6 +45,20 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.6, )"
+            },
+            "Volo.Abp.VirtualFileSystem": {
+              "target": "Package",
+              "version": "[8.2.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -68,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
