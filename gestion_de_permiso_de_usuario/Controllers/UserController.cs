@@ -8,27 +8,25 @@ namespace gestion_de_permiso_de_usuario.Controllers;
 
 
 public class UserController : Controller
-{ 
-    private UserData objUsuario = new UserData();
+{
 
-    public List<User> GetUser()
+    private readonly UserData _UserData;
+
+    public UserController(UserData userdata)
     {
-    return objUsuario.GetUser(); 
+        _UserData = userdata;
     }
+
+    public IActionResult Index()
+    {
+        List<User> Lista = _UserData.GetUser();
+        return View(Lista);
+    }
+
+
 }
 
-//    private readonly DatabaseService _databaseService;
 
-//    public UserController(DatabaseService databaseService)
-//    {
-//        _databaseService = databaseService;
-//    }
-
-//    public IActionResult Index()
-//    {
-//        List<User> Lista = _databaseService.GetUser();
-//        return View(Lista);
-//    }
 
 
 
