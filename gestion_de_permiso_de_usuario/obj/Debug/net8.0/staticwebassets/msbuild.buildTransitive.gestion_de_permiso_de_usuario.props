@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\gestion_de_permiso_de_usuario.props" />
+</Project>

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
+    "C:\\Users\\Elvys Brito\\Desktop\\Raidy\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
   },
   "projects": {
-    "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
+    "C:\\Users\\Elvys Brito\\Desktop\\Raidy\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "projectUniqueName": "C:\\Users\\Elvys Brito\\Desktop\\Raidy\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
         "projectName": "gestion_de_permiso_de_usuario",
-        "projectPath": "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
-        "packagesPath": "C:\\Users\\o99zz96\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\o99zz96\\Desktop\\Nueva carpeta (7)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario\\obj\\",
+        "projectPath": "C:\\Users\\Elvys Brito\\Desktop\\Raidy\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "packagesPath": "C:\\Users\\Elvys Brito\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Elvys Brito\\Desktop\\Raidy\\gestion_de_permiso_de_usuario\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\o99zz96\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Elvys Brito\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -49,6 +48,20 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.2.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -68,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
