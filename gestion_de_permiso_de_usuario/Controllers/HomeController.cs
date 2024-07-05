@@ -37,7 +37,13 @@ namespace gestion_de_permiso_de_usuario.Controllers
         public JsonResult ListaUsuarios()
         {
             List<User> pLista = _cnUsuario.GetUser();
-            return Json(pLista);
+            return Json( new { data = pLista });
         }
+
+        public ActionResult Usuarios()
+        {
+            return View();
+        }
+
     }
 }
