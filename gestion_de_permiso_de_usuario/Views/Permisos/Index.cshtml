@@ -9,52 +9,54 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Crear Nuevo Permiso</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombrePermiso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreadoPor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCambio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActualizadoPor)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombrePermiso)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreadoPor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaCambio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActualizadoPor)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.PermisoID" class="btn btn-warning">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.PermisoID" class="btn btn-info">Detalles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PermisoID" class="btn btn-danger">Eliminar</a>
-                </td>
+                <th>
+                    Nombre del Permiso
+                </th>
+                <th>
+                    Descripción
+                </th>
+                <th>
+                    Creado Por
+                </th>
+                <th>
+                    Fecha de Cambio
+                </th>
+                <th>
+                    Actualizado Por
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombrePermiso)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreadoPor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaCambio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActualizadoPor)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PermisoID" class="btn btn-warning">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.PermisoID" class="btn btn-info">Detalles</a> |
+                        <a asp-action="Delete" asp-route-id="@item.PermisoID" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
