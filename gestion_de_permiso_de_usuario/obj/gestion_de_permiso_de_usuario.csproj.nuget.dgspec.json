@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
+    "C:\\Users\\o99zz96\\source\\repos\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
   },
   "projects": {
-    "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
+    "C:\\Users\\o99zz96\\source\\repos\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "projectUniqueName": "C:\\Users\\o99zz96\\source\\repos\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
         "projectName": "gestion_de_permiso_de_usuario",
-        "projectPath": "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
-        "packagesPath": "C:\\Users\\o99zz94\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\o99zz94\\Desktop\\Copia real\\gestion_de_permiso_de_usuario\\obj\\",
+        "projectPath": "C:\\Users\\o99zz96\\source\\repos\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "packagesPath": "C:\\Users\\o99zz96\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\o99zz96\\source\\repos\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\o99zz94\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\o99zz96\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -46,6 +46,22 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "ADO.Net.Client": {
+              "target": "Package",
+              "version": "[1.4.4, )"
+            },
+            "ADO.Net.Client.Core": {
+              "target": "Package",
+              "version": "[1.4.5, )"
+            },
+            "ADO.Net.Client.Implementation": {
+              "target": "Package",
+              "version": "[1.4.4, )"
+            },
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.2.1, )"
+            },
             "Microsoft.Extensions.Options": {
               "target": "Package",
               "version": "[8.0.2, )"
