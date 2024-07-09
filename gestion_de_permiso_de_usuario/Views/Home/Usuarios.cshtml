@@ -21,55 +21,57 @@
             </div>
 
             <hr />
-
-            <table id="tabla" class="display cell-border" style="width: 100%">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Rol</th>
-                        <th>Estado</th>
-                        <th>Creado Por</th>
-                    </tr>
-                </thead>
-                <tbody>
-               
-
-
-                </tbody>
-            </table>
-
+            <table class="table datatable w-100" id="tabla"></table>
         </div>
 
     </div>
 </div>
 
 @section Scripts {
-    <script> 
-       
+    <script>
+        let listarUsuario = `@Url.Action("ListaUsuarios", "Home")`;
 
-        $.ajax({//Utilizando ajax para obtener los usuarios, recomiendo investigar mas.
-            url: '@Url.Action("ListaUsuarios","Home")', //Llamamos al metodo desde el HomeController
-            type: "GET",
-            dataType: "Json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                console.log(data)
-            }
-        }) 
+        // $.ajax({//Utilizando ajax para obtener los usuarios, recomiendo investigar mas.
+        //     url: '@Url.Action("ListaUsuarios","Home")', //Llamamos al metodo desde el HomeController
+        //     type: "GET",
+        //     dataType: "Json",
+        //     contentType: "application/json; charset=utf-8",
+        //     success: function (data) {
+
+        //         console.log(data)
+        //     }
+        // }) 
         
         $(document).ready(function () {
             $("#tabla").DataTable({
-                responsive: true;
-                ordering: false;
-                "ajax": {
-                    url: '@Url.Action("ListaUsuarios", "Home")',
+                info:false,
+                destroy:true,
+                ajax: {
+                    url:listarUsuario,
                     type: "GET",
-                    dataType: "Json"
-                }
+                    dataType: "application/json",
+                    dataSrc:""
+
+                },
+                columns: [
+                    { data: "NombreUsuario", title: "Username"},
+                    { data: "PersonaID" },
+                    { data: "RolID" },
+                    { data: "FechaCambio" },
+                    { data: "Estado" },
+                    { data: "CreadoPor" }
+                ]
             });
-
-
-        })
+            // $.ajax({
+            //     url: listarUsuario,
+            //     type: "GET",
+            //     dataType: "application/json",
+            //     contentType: 'json',
+            //     success: (response) =>{
+            //         console.log(response);
+            //     }
+            // });
+        });
 
     </script>
 }
