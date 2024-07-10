@@ -18,8 +18,13 @@ namespace gestion_de_permiso_de_usuario.Models
         [StringLength(25)]
         public string CreadoPor { get; set; }
         public DateTime FechaCambio { get; set; } = DateTime.Now;
-        [Required]
-        [StringLength(25)]
-        public string ActualizadoPor { get; set; }
+        public string ActualizadoPor { get; set; } = "Sistema";
+    }
+
+    public enum EstadoPermiso
+    {
+        Activo = 1,
+        Inactivo = 0
     }
 }
+

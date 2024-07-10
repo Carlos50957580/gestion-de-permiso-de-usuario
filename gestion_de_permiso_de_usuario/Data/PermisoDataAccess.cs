@@ -22,14 +22,13 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO Permisos (NombrePermiso, Descripcion, Estado, CreadoPor, FechaCambio, ActualizadoPor) VALUES (@NombrePermiso, @Descripcion, @Estado, @CreadoPor, @FechaCambio, @ActualizadoPor)", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO Permisos (NombrePermiso, Descripcion, Estado, CreadoPor, FechaCambio) VALUES (@NombrePermiso, @Descripcion, @Estado, @CreadoPor, @FechaCambio)", conn);
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.AddWithValue("@NombrePermiso", permiso.NombrePermiso);
                     cmd.Parameters.AddWithValue("@Descripcion", permiso.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", permiso.Estado);
                     cmd.Parameters.AddWithValue("@CreadoPor", permiso.CreadoPor);
                     cmd.Parameters.AddWithValue("@FechaCambio", permiso.FechaCambio);
-                    cmd.Parameters.AddWithValue("@ActualizadoPor", permiso.ActualizadoPor);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -40,6 +39,7 @@ namespace gestion_de_permiso_de_usuario.Data
                 throw new Exception("Error al agregar el permiso: " + ex.Message);
             }
         }
+
 
         public List<Permiso> GetPermisos()
         {

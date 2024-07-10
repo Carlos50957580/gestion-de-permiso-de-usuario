@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
@@ -25,7 +24,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Permisos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("NombrePermiso,Descripcion,CreadoPor,ActualizadoPor")] Permiso permiso)
+        public IActionResult Create([Bind("NombrePermiso,Descripcion,CreadoPor")] Permiso permiso)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +61,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Permisos/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PermisoID,NombrePermiso,Descripcion,Estado,CreadoPor,FechaCambio,ActualizadoPor")] Permiso permiso)
+        public IActionResult Edit(int id, [Bind("PermisoID,NombrePermiso,Descripcion,Estado,CreadoPor,ActualizadoPor")] Permiso permiso)
         {
             if (id != permiso.PermisoID)
             {
@@ -74,13 +73,13 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 try
                 {
                     _permisoDataAccess.UpdatePermiso(permiso);
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
                 {
                     ModelState.AddModelError(string.Empty, "Error al actualizar el permiso: " + ex.Message);
                     return View(permiso);
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(permiso);
         }
@@ -101,6 +100,5 @@ namespace gestion_de_permiso_de_usuario.Controllers
 
             return View(permiso);
         }
-
     }
 }

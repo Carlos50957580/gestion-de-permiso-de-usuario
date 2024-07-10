@@ -9,59 +9,59 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = gestion_de_permiso_de_usuario
 build_property.RootNamespace = gestion_de_permiso_de_usuario
-build_property.ProjectDir = C:\Users\PYC\Desktop\Nueva carpeta (5)\gestion_de_permiso_de_usuario\
+build_property.ProjectDir = C:\Users\PYC\Desktop\Nueva carpeta (6)\gestion_de_permiso_de_usuario\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\PYC\Desktop\Nueva carpeta (5)\gestion_de_permiso_de_usuario
+build_property.MSBuildProjectDirectory = C:\Users\PYC\Desktop\Nueva carpeta (6)\gestion_de_permiso_de_usuario
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/Home/Index.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/Home/Privacy.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/Permisos/Create.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/Permisos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVybWlzb3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/Permisos/Details.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/Permisos/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVybWlzb3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/Permisos/Edit.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/Permisos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVybWlzb3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/Permisos/Index.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/Permisos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVybWlzb3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/Shared/Error.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/User/Index.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/_ViewImports.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/_ViewStart.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PYC/Desktop/Nueva carpeta (5)/gestion_de_permiso_de_usuario/Views/Shared/_Layout.cshtml]
+[C:/Users/PYC/Desktop/Nueva carpeta (6)/gestion_de_permiso_de_usuario/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-2ccc3byd21
