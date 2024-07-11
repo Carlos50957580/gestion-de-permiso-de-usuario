@@ -1,0 +1,84 @@
+﻿@{    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item">Resumen</li>
+    <li class="breadcrumb-item active">Personas</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="bi bi-people me-1"></i> Lista de Personas
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success mb-3 mt-3">Nuevo</button>
+            </div>
+
+            <hr />
+            <table id="tabla" class="display cell-border" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Genero</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Ultimo cambio</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let listarPersona = `@Url.Action("ListaPersonas", "Home")`;
+
+        $.ajax({//Utilizando ajax para obtener los usuarios, recomiendo investigar mas.
+            url: listarPersona, //Llamamos al metodo desde el HomeController
+            type: "GET",
+            dataType: "Json",
+            contentType: "application/json; charset=utf-8",
+            success: function (dataP) {
+
+                console.log(dataP)
+            }
+        })
+
+        $(document).ready(function () {
+            $("#tabla").DataTable({
+                responsive: true,
+                ordering: true,
+                paging: true,
+                info: true,
+                lengthChange: true,
+                ajax: {
+                    url: listarPersona,
+                    type: "GET",
+                    dataType: "json"
+                },
+                columns: [
+                    { dataP: "Nombre" },
+                    { dataP: "Apellido" },
+                    { dataP: "FechaNacimiento" },
+                    { dataP: "Genero" },
+                    { dataP: "Telefono" },
+                    { dataP: "Correo" },
+                    { dataP: "FechaCambio" },
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                },
+            });
+        });
+    </script>
+}
+

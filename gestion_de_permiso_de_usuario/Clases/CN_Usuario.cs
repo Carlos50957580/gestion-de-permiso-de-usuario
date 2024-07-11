@@ -1,6 +1,5 @@
 ﻿using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
-
 namespace gestion_de_permiso_de_usuario.Clases
 {
     public class CN_Usuario

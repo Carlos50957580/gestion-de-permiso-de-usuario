@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Usuarios";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -23,14 +23,14 @@
             <hr />
             <table id="tabla" class="display cell-border" style="width: 100%">
                 <thead>
-                <tr>
+                    <tr>
                         <th>Username</th>
                         <th>Nombre</th>
                         <th>Rol</th>
                         <th>Ultimo cambio</th>
                         <th>Estado</th>
                         <th>Autor</th>
-                </tr>
+                    </tr>
                 </thead>
                 <tbody></tbody>
             </table>
@@ -43,7 +43,7 @@
         let listarUsuario = `@Url.Action("ListaUsuarios", "Home")`;
 
         $.ajax({//Utilizando ajax para obtener los usuarios, recomiendo investigar mas.
-            url: '@Url.Action("ListaUsuarios","Home")', //Llamamos al metodo desde el HomeController
+            url: '@Url.Action("ListaUsuarios", "Home")', //Llamamos al metodo desde el HomeController
             type: "GET",
             dataType: "Json",
             contentType: "application/json; charset=utf-8",
@@ -51,39 +51,48 @@
 
                 console.log(data)
             }
-        }) 
-        
+        })
+
         $(document).ready(function () {
             $("#tabla").DataTable({
-                responsive : true,
-                ordering : false,
+                responsive: true,
+                ordering: true,
+                "paging": true,
+                "info": true,
+                "lengthChange": true, 
                 ajax: {
-                    url:listarUsuario,
+                    url: listarUsuario,
                     type: "GET",
-                    dataType: "json",
+                    dataType: "json"
                 },
                 columns: [
-                    { data: "nombreUsuario", "autoWidth": true },
-                    { data: "personaID", "autoWidth": true },
-                    { data: "rolID", "autoWidth": true },
-                    { data: "fechaCambio", "autoWidth": true },
-                    { data: "estado", "render": function (valor) {
+                    { data: "nombreUsuario"},
+                    { data: "personaID"},
+                    { data: "rolID"},
+                    { data: "fechaCambio"},
+                    {
+                        data: "estado", "render": function (valor) {
                             if (valor) {
                                 return '<button type="button" class="btn btn-success">Sí</button>'
                             }
                             else {
                                 return '<button type="button" class="btn btn-danger">No</button>'
                             }
-                        }, "autoWidth": true,
+                        }
                     },
-                    { data: "creadoPor", "autoWidth": true },
-                    { "defaultContent": '<button type="button" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button>'+
-                                        '<button type="button"class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button>',
+                    { data: "creadoPor"},
+                    {
+                        "defaultContent": '<button type="button" class="btn btn-warning btn-sm"><i class="bi bi-pencil"></i></button>' +
+                            '<button type="button"class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button>',
+                        "orderable": false,
+                        "searchable": false,
+                        "width":"90px"
                     }
-
-                ]
+                ],
+                    language: {
+                        url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                    },
             });
         });
-
     </script>
 }

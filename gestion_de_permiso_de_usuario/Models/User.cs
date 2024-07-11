@@ -22,7 +22,5 @@ namespace gestion_de_permiso_de_usuario.Models
         [StringLength(25)]
         public string ActualizadoPor { get; set; }
 
-
-        //Recuerda actualizar pendejo
     }
 }
