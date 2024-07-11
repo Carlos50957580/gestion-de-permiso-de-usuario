@@ -5508,19 +5508,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\o99zz96\\.nuget\\packages\\": {}
+    "C:\\Users\\PYC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\o99zz96\\Source\\Repos\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+      "projectUniqueName": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (6)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
       "projectName": "gestion_de_permiso_de_usuario",
-      "projectPath": "C:\\Users\\o99zz96\\Source\\Repos\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
-      "packagesPath": "C:\\Users\\o99zz96\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\o99zz96\\Source\\Repos\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\obj\\",
+      "projectPath": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (6)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+      "packagesPath": "C:\\Users\\PYC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (6)\\gestion_de_permiso_de_usuario\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\o99zz96\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PYC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
