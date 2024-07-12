@@ -1,0 +1,43 @@
+﻿@model gestion_de_permiso_de_usuario.Models.Rol
+
+@{
+    ViewData["Title"] = "Crear Rol";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div class="form-group">
+                        <br />
+
+                        <label asp-for="NombreRol" class="control-label">Nombre del Rol</label>
+                        <input asp-for="NombreRol" class="form-control" />
+                        <span asp-validation-for="NombreRol" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label">Descripción</label>
+                        <input asp-for="Descripcion" class="form-control" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
