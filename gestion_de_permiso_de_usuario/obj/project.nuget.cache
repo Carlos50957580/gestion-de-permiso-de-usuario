@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TbnMbI34Agk=",
+  "dgSpecHash": "gm7gW2g4PTs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (6)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+  "projectFilePath": "C:\\Users\\PYC\\Desktop\\Nueva carpeta\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PYC\\.nuget\\packages\\ado.net.client\\1.4.4\\ado.net.client.1.4.4.nupkg.sha512",
     "C:\\Users\\PYC\\.nuget\\packages\\ado.net.client.annotations\\1.2.0\\ado.net.client.annotations.1.2.0.nupkg.sha512",
