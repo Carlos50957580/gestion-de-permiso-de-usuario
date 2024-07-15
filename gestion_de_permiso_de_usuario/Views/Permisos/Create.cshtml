@@ -4,7 +4,7 @@
     ViewData["Title"] = "Crear Permiso";
 }
 
-<h2>@ViewData["Title"]</h2>
+@* <h2>@ViewData["Title"]</h2> *@
 
 <hr />
 <div class="row">
@@ -13,6 +13,7 @@
             <div class="card-body">
                 <form asp-action="Create">
                     <div class="form-group">
+                        <hr />
                         <label asp-for="NombrePermiso" class="control-label">Nombre del Permiso</label>
                         <input asp-for="NombrePermiso" class="form-control" />
                         <span asp-validation-for="NombrePermiso" class="text-danger"></span>
@@ -30,15 +31,12 @@
                     <br />
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Crear</button>
+                        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
 </div>
 
 @section Scripts {

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Editar Permiso";
 }
 
-<h2>@ViewData["Title"]</h2>
+@* <h2>@ViewData["Title"]</h2> *@
 
 <hr />
 <div class="row">
@@ -15,6 +15,7 @@
                     <input type="hidden" asp-for="PermisoID" />
 
                     <div class="form-group">
+                        <hr />
                         <label asp-for="NombrePermiso" class="control-label">Nombre del Permiso</label>
                         <input asp-for="NombrePermiso" class="form-control" />
                         <span asp-validation-for="NombrePermiso" class="text-danger"></span>
@@ -50,15 +51,12 @@
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
 </div>
 
 @section Scripts {
