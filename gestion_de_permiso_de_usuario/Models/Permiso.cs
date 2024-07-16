@@ -16,7 +16,7 @@ namespace gestion_de_permiso_de_usuario.Models
         public int Estado { get; set; } = 1; // Estado activo por defecto
         [Required]
         [StringLength(25)]
-        public string CreadoPor { get; set; }
+        public string CreadoPor { get; set; } = "Sistema";
         public DateTime FechaCambio { get; set; } = DateTime.Now;
         public string ActualizadoPor { get; set; } = "Sistema";
     }
@@ -27,4 +27,3 @@ namespace gestion_de_permiso_de_usuario.Models
         Inactivo = 0
     }
 }
-

@@ -4,8 +4,6 @@
     ViewData["Title"] = "Editar Permiso";
 }
 
-@* <h2>@ViewData["Title"]</h2> *@
-
 <hr />
 <div class="row">
     <div class="col-md-6">
@@ -15,7 +13,7 @@
                     <input type="hidden" asp-for="PermisoID" />
 
                     <div class="form-group">
-                        <hr />
+                        <br />
                         <label asp-for="NombrePermiso" class="control-label">Nombre del Permiso</label>
                         <input asp-for="NombrePermiso" class="form-control" />
                         <span asp-validation-for="NombrePermiso" class="text-danger"></span>
@@ -34,29 +32,32 @@
                         </select>
                         <span asp-validation-for="Estado" class="text-danger"></span>
                     </div>
-
+                    @*
                     <div class="form-group">
-                        <label asp-for="CreadoPor" class="control-label">Creado Por</label>
-                        <input asp-for="CreadoPor" class="form-control" />
-                        <span asp-validation-for="CreadoPor" class="text-danger"></span>
-                    </div>
+                    <label asp-for="CreadoPor" class="control-label">Creado Por</label>
+                    <input asp-for="CreadoPor" class="form-control" />
+                    <span asp-validation-for="CreadoPor" class="text-danger"></span>
+                    </div> *@
 
-                    <div class="form-group">
-                        <label asp-for="ActualizadoPor" class="control-label">Actualizado Por</label>
-                        <input asp-for="ActualizadoPor" class="form-control" />
-                        <span asp-validation-for="ActualizadoPor" class="text-danger"></span>
-                    </div>
+                    @*                     <div class="form-group">
+                    <label asp-for="ActualizadoPor" class="control-label">Actualizado Por</label>
+                    <input asp-for="ActualizadoPor" class="form-control" />
+                    <span asp-validation-for="ActualizadoPor" class="text-danger"></span>
+                    </div> *@
 
                     <br>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
 </div>
 
 @section Scripts {

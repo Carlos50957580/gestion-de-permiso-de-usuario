@@ -4,8 +4,6 @@
     ViewData["Title"] = "Lista de Permisos";
 }
 
-@* <h2>@ViewData["Title"]</h2> *@
-
 <p>
     <a asp-action="Create" class="btn btn-primary">Crear Nuevo Permiso</a>
 </p>
@@ -43,8 +41,9 @@
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <a asp-action="Edit" asp-route-id="@item.PermisoID" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
                             <a asp-action="Details" asp-route-id="@item.PermisoID" class="btn btn-info"><i class="bi bi-eye"></i></a>
-@*                             <a asp-action="Delete" asp-route-id="@item.PermisoID" class="btn btn-danger"><i class="bi bi-trash"></i></a>
- *@                        </div>
+                            @*                             <a asp-action="Delete" asp-route-id="@item.PermisoID" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                        *@
+                        </div>
                     </td>
                 </tr>
             }
@@ -80,3 +79,4 @@
         });
     </script>
 }
+
