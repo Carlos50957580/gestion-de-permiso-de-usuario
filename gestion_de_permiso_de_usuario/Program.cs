@@ -1,15 +1,24 @@
+using gestion_de_permiso_de_usuario.Clases;
+using gestion_de_permiso_de_usuario.Data;
+using gestion_de_permiso_de_usuario.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Agregar servicios al contenedor.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+builder.Services.AddTransient<DatabaseService>();
+builder.Services.AddTransient<UserData>();
+builder.Services.AddTransient<CN_Usuario>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configurar la canalización HTTP.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -25,3 +34,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+

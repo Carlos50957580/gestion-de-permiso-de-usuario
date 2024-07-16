@@ -1,0 +1,67 @@
+﻿@model gestion_de_permiso_de_usuario.Models.Permiso
+
+@{
+    ViewData["Title"] = "Editar Permiso";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Edit">
+                    <input type="hidden" asp-for="PermisoID" />
+
+                    <div class="form-group">
+                        <br />
+                        <label asp-for="NombrePermiso" class="control-label">Nombre del Permiso</label>
+                        <input asp-for="NombrePermiso" class="form-control" />
+                        <span asp-validation-for="NombrePermiso" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="control-label">Descripción</label>
+                        <input asp-for="Descripcion" class="form-control" />
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Estado" class="control-label">Estado</label>
+                        <select asp-for="Estado" asp-items="Html.GetEnumSelectList<gestion_de_permiso_de_usuario.Models.EstadoPermiso>()" class="form-control">
+                            <option value="">Selecciona el Estado</option>
+                        </select>
+                        <span asp-validation-for="Estado" class="text-danger"></span>
+                    </div>
+                    @*
+                    <div class="form-group">
+                    <label asp-for="CreadoPor" class="control-label">Creado Por</label>
+                    <input asp-for="CreadoPor" class="form-control" />
+                    <span asp-validation-for="CreadoPor" class="text-danger"></span>
+                    </div> *@
+
+                    @*                     <div class="form-group">
+                    <label asp-for="ActualizadoPor" class="control-label">Actualizado Por</label>
+                    <input asp-for="ActualizadoPor" class="form-control" />
+                    <span asp-validation-for="ActualizadoPor" class="text-danger"></span>
+                    </div> *@
+
+                    <br>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
