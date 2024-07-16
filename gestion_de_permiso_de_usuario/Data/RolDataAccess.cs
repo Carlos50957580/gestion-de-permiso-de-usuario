@@ -127,5 +127,71 @@ namespace gestion_de_permiso_de_usuario.Data
                 throw new Exception("Error al actualizar el rol: " + ex.Message);
             }
         }
+
+        public void AsignarPermisosARol(int rolID, int[] permisosSeleccionados)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("DELETE FROM RolPermisos WHERE RolID = @RolID", conn);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@RolID", rolID);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    foreach (var permisoID in permisosSeleccionados)
+                    {
+                        SqlCommand cmdInsert = new SqlCommand("INSERT INTO RolPermisos (RolID, PermisoID) VALUES (@RolID, @PermisoID)", conn);
+                        cmdInsert.CommandType = CommandType.Text;
+                        cmdInsert.Parameters.AddWithValue("@RolID", rolID);
+                        cmdInsert.Parameters.AddWithValue("@PermisoID", permisoID);
+                        cmdInsert.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al asignar permisos al rol: " + ex.Message);
+            }
+        }
+
+        public List<Permiso> GetPermisosAsignados(int rolID)
+        {
+            List<Permiso> permisos = new List<Permiso>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand(
+                        "SELECT p.PermisoID, p.NombrePermiso, p.Descripcion " +
+                        "FROM Permisos p " +
+                        "INNER JOIN RolPermisos rp ON p.PermisoID = rp.PermisoID " +
+                        "WHERE rp.RolID = @RolID", conn);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.AddWithValue("@RolID", rolID);
+                    conn.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        permisos.Add(new Permiso
+                        {
+                            PermisoID = Convert.ToInt32(reader["PermisoID"]),
+                            NombrePermiso = reader["NombrePermiso"].ToString(),
+                            Descripcion = reader["Descripcion"].ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los permisos asignados: " + ex.Message);
+            }
+
+            return permisos;
+        }
     }
+
 }

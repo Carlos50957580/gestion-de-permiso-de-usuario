@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
@@ -9,10 +10,12 @@ namespace gestion_de_permiso_de_usuario.Controllers
     public class RolesController : Controller
     {
         private readonly RolDataAccess _rolDataAccess;
+        private readonly PermisoDataAccess _permisoDataAccess;
 
         public RolesController(IConfiguration configuration)
         {
             _rolDataAccess = new RolDataAccess(configuration);
+            _permisoDataAccess = new PermisoDataAccess(configuration);
         }
 
         // GET: Roles/Create
@@ -98,7 +101,49 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 return NotFound();
             }
 
+            var permisosAsignados = _rolDataAccess.GetPermisosAsignados(rol.RolID);
+            ViewBag.PermisosAsignados = permisosAsignados;
+
             return View(rol);
+        }
+
+        // GET: Roles/Asignar
+        public IActionResult Asignar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var rol = _rolDataAccess.GetRolById(id.Value);
+            if (rol == null)
+            {
+                return NotFound();
+            }
+
+            var permisos = _permisoDataAccess.GetPermisos();
+            ViewBag.Permisos = permisos;
+            ViewBag.RolID = rol.RolID;
+            ViewBag.NombreRol = rol.NombreRol;
+
+            return View();
+        }
+
+        // POST: Roles/Asignar
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Asignar(int rolId, int[] permisosSeleccionados)
+        {
+            try
+            {
+                _rolDataAccess.AsignarPermisosARol(rolId, permisosSeleccionados);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "Error al asignar permisos al rol: " + ex.Message);
+                return View();
+            }
         }
     }
 }
