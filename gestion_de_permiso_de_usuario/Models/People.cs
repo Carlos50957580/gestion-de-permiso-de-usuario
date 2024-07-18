@@ -13,7 +13,7 @@ namespace gestion_de_permiso_de_usuario.Models
         [StringLength(50)]
         public string FechaNacimiento { get; set; }
         public string Genero { get; set; }
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
         [Required]
         [StringLength(25)]
         public string Correo { get; set; }

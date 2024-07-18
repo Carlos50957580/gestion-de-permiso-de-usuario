@@ -2,6 +2,7 @@
 using gestion_de_permiso_de_usuario.Services;
 using System.Data.SqlClient;
 using System.Data;
+using NuGet.Protocol.Plugins;
 namespace gestion_de_permiso_de_usuario.Data
 {
     public class PersonaData : DatabaseService
@@ -35,7 +36,7 @@ namespace gestion_de_permiso_de_usuario.Data
                                 Apellido = reader["Apellido"].ToString(),
                                 FechaNacimiento = reader["FechaNacimiento"].ToString(),
                                 Genero = reader["Genero"].ToString(),
-                                Telefono = Convert.ToInt32(reader["Telefono"]),
+                                Telefono = reader["Telefono"].ToString(),
                                 Correo = reader["Correo"].ToString(),
                                 FechaCambio = reader["FechaCambio"].ToString()
 
@@ -47,11 +48,104 @@ namespace gestion_de_permiso_de_usuario.Data
             }
             catch
             {
-                //Lista = new List<User>();
+                //Esto es un herramienta sorpresa que nos ayudará más tarde, ha ha.
 
             }
-
             return Lista1;
+        }
+
+        public int Registrar(People obj, out string Mensaje)
+        {
+            int idautogenerado = 0;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_RegistrarPersona", connection);
+                    cmd.Parameters.AddWithValue("Nombre", obj.Nombre);
+                    cmd.Parameters.AddWithValue("Apellido", obj.Apellido);
+                    cmd.Parameters.AddWithValue("FechaNacimiento", obj.FechaNacimiento);
+                    cmd.Parameters.AddWithValue("Genero", obj.Genero);
+                    cmd.Parameters.AddWithValue("Telefono", obj.Telefono);
+                    cmd.Parameters.AddWithValue("Correo", obj.Correo);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    connection.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    idautogenerado = Convert.ToInt32(cmd.Parameters["Resultado"].Value);
+                    Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                idautogenerado = 0;
+                Mensaje = ex.Message;
+            }
+            return idautogenerado;
+        }
+
+        public bool Editar(People obj, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_EditarUsuario", connection);
+                    cmd.Parameters.AddWithValue("PersonaID", obj.PersonaID);
+                    cmd.Parameters.AddWithValue("Nombre", obj.Nombre);
+                    cmd.Parameters.AddWithValue("Apellido", obj.Apellido);
+                    cmd.Parameters.AddWithValue("FechaNacimiento", obj.FechaNacimiento);
+                    cmd.Parameters.AddWithValue("Genero", obj.Genero);
+                    cmd.Parameters.AddWithValue("Telefono", obj.Telefono);
+                    cmd.Parameters.AddWithValue("Correo", obj.Correo);
+                    cmd.Parameters.Add("Resultado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 500).Direction = ParameterDirection.Output;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    connection.Open();
+                    cmd.ExecuteNonQuery();
+
+                    resultado = Convert.ToBoolean(cmd.Parameters["Resultado"].Value);
+                    Mensaje = cmd.Parameters["Mensaje"].Value.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                Mensaje = ex.Message;
+            }
+            return resultado;
+
+            }
+        public bool Eliminar(int id, out string Mensaje)
+        {
+            bool resultado = false;
+            Mensaje = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("delete top (1) from Personas where PersonaID = @id", connection);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.CommandType = CommandType.Text;
+                    connection.Open();
+                    resultado = cmd.ExecuteNonQuery() > 0 ? true : false;
+                }
+            }
+            catch (Exception ex)
+            {
+                resultado = false;
+                Mensaje = ex.Message;
+            }
+            return resultado;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@{
+﻿@{    
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -6,18 +6,15 @@
 <ol class="breadcrumb mb-4 mt-4">
     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
     <li class="breadcrumb-item">Resumen</li>
-    <li class="breadcrumb-item active">Usuarios</li>
+    <li class="breadcrumb-item active">Personas</li>
 </ol>
 
 <div class="card">
     <div class="card-header">
-        <i class="bi bi-people me-1"></i> Lista de Usuarios
+        <i class="bi bi-people me-1"></i> Lista de Personas
     </div>
 
     <div class="card-body">
-
-        <input id="txtId" type="hidden" value="0" />
-
         <div class="row">
             <div class="col-12">
                 <button type="button" class="btn btn-success mb-3 mt-3" onclick="abrirModal(null)">Nuevo</button>
@@ -27,12 +24,13 @@
             <table id="tabla" class="display cell-border" style="width: 100%">
                 <thead>
                     <tr>
-                        <th>Username</th>
                         <th>Nombre</th>
-                        <th>Rol</th>
+                        <th>Apellido</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Genero</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
                         <th>Ultimo cambio</th>
-                        <th>Estado</th>
-                        <th>Autor</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -41,7 +39,7 @@
     </div>
 </div>
 
-<div class="modal" tabindex="-1" id="formodal" data-bs-backdrop="static">
+<div class="modal" tabindex="-1" id="formodal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -49,13 +47,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body g-2">
+
+                <input id="txtId" type="hidden" value="0"/>
+
                 <div class="row">
 
                     <form>
-                        <div class="mb-3">
-                            <label for="txtUser" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="txtUser">
-                        </div>
 
                         <div class="mb-3">
                             <label for="txtNombre" class="form-label">Nombre</label>
@@ -63,33 +60,35 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Rol</label>
-                            <select class="form-select" id="cboRol" aria-label="Default select example">
-                                <option selected>Selecciona el rol</option>
-                                <option value="1">Admin</option>
-                                <option value="2">Admin de admins</option>
-                                <option value="3">El master admin</option>
+                            <label for="txtApellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="txtApellido">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="txtNac" class="form-label">Fecha de nacimiento</label>
+                            <input type="text" class="form-control" id="txtNac">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Sexo</label>
+                            <select class="form-select" id="cboSexo" aria-label="Default select example">
+                                <option selected>Selecciona tu sexo</option>
+                                <option value="1">Hombre</option>
+                                <option value="2">Mujer</option>
+                                <option value="3">Otro</option>
                             </select>
                         </div>
 
                         <div class="mb-3">
-                            <label for="txtFecha" class="form-label">Ultimo Cambio</label>
-                            <input type="text" class="form-control" id="txtFecha">
+                            <label for="txtTelefono" class="form-label">Numero de telefono</label>
+                            <input type="text" class="form-control" id="txtTelefono">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Estado</label>
-                            <select class="form-select" id="cboEstado" aria-label="Default select example">
-                                <option selected>Selecciona un estado</option>
-                                <option value="1">Activo</option>
-                                <option value="2">Inactivo</option>
-                                <option value="3">Mitad/Mitad</option>
-                            </select>
+                            <label for="textCorreo" class="form-label">Correo </label>
+                            <input type="text" class="form-control" id="textCorreo">
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Autor</label>
-                            <input type="text" class="form-control" id="txtAutor">
-                        </div>
+                              
                     </form>
 
                 </div>
@@ -101,42 +100,44 @@
         </div>
     </div>
 </div>
-
 @section Scripts {
     <script>
+
         var table;
         var filaSeleccionada;
 
         function abrirModal(Json) {
 
             $("#txtId").val(0);
-            $("#txtUser").val("");
             $("#txtNombre").val("");
-            $("#cboRol").val("");
-            $("#txtFecha").val("");
-            $("#cboEstado").val(1);
-            $("#txtAutor").val("");
+            $("#txtApellido").val("");
+            $("#txtNac").val("");
+            $("#cboSexo").val("");
+            $("#txtTelefono").val("");
+            $("#textCorreo").val("");
 
             if (Json != null) {
-                $("#txtId").val(Json.usuarioID);
-                $("#txtUser").val(Json.nombreUsuario);
-                $("#txtNombre").val(Json.personaID);
-                $("#cboRol").val(Json.rolID);
-                $("#txtFecha").val(Json.fechaCambio);
-                $("#cboEstado").val(Json.estado == true ? 1 : 0);
-                $("#txtAutor").val(Json.creadoPor);
+                $("#txtId").val(Json.personaID);
+                $("#txtNombre").val(Json.nombre);
+                $("#txtApellido").val(Json.apellido);
+                $("#txtNac").val(Json.fechaNacimiento);
+                $("#cboSexo").val(Json.genero == "Masculino" ? 1 : 2); //Nota: Revisar en caso de que sea otro.
+                $("#txtTelefono").val(Json.telefono);
+                $("#textCorreo").val(Json.correo);
             }
+
             $("#formodal").modal("show");
         }
 
-        let listarUsuario = `@Url.Action("ListaUsuarios", "Home")`;
+        let listarPersona = `@Url.Action("ListaPersonas", "Home")`;
 
-        // $.ajax({
-        //     url: listarUsuario,
+        // $.ajax({//Utilizando ajax para obtener los usuarios, recomiendo investigar mas.
+        //     url: listarPersona, //Llamamos al metodo desde el HomeController
         //     type: "GET",
         //     dataType: "Json",
         //     contentType: "application/json; charset=utf-8",
         //     success: function (data) {
+
         //         console.log(data)
         //     }
         // })
@@ -149,26 +150,18 @@
                 info: true,
                 lengthChange: true,
                 ajax: {
-                    url: listarUsuario,
+                    url: listarPersona,
                     type: "GET",
                     dataType: "json"
                 },
                 columns: [
-                    { data: "nombreUsuario" },
-                    { data: "personaID" },
-                    { data: "rolID" },
+                    { data: "nombre" },
+                    { data: "apellido" },
+                    { data: "fechaNacimiento" },
+                    { data: "genero" },
+                    { data: "telefono" },
+                    { data: "correo" },
                     { data: "fechaCambio" },
-                    {
-                        data: "estado", "render": function (valor) {
-                            if (valor) {
-                                return '<button type="button" class="btn btn-success">Sí</button>'
-                            }
-                            else {
-                                return '<button type="button" class="btn btn-danger">No</button>'
-                            }
-                        }
-                    },
-                    { data: "creadoPor" },
                     {
                         "defaultContent": '<button type="button" class="btn btn-warning btn-sm btn-editar"><i class="bi bi-pencil"></i></button>' +
                             '<button type="button"class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button>',
@@ -186,30 +179,28 @@
                 filaSeleccionada = table.row($(this).closest("tr")).data();
                 var data = table.row(filaSeleccionada).data();
                 abrirModal(data);
-            });
-
-            
+            }); 
         });
         function Guardar() {
-                var Usuario = {
-                    //actualizadoPor: Para mas adelante
-                    // contraseña: Para mas adelante
-                    creadoPor: $("#txtAutor").val(),
-                    estado: $("#cboEstado").val() == 1 ? true: false,
-                    fechaCambio: $("#txtFecha").val(),
-                    nombreUsuario: $("#txtUser").val(),
-                    personaID: $("#txtNombre").val(),
-                    rolID: $("#cboRol").val(),
-                    usuarioID: $("#txtId").val()
+                var Persona = {
+                    apellido: $("#txtApellido").val(),
+                    correo: $("#textCorreo").val(),
+                    // fechaCambio:  $("#textCambio").val(), Por si se usa mas adelante
+                    fechaNacimiento: $("#txtNac").val(),
+                    genero: $("#cboSexo").val(),
+                    nombre: $("#txtNombre").val(),
+                    personaID: $("#txtId").val(),
+                    telefono:$("#txtTelefono").val()
                 }
 
-            if (Usuario.usuarioID == 0) {
-                    table.row.add(Usuario).draw(false);
+                if (Persona.personaID == 0) {
+                    table.row.add(Persona).draw(false);
 
                 } else {
-                    table.row(filaSeleccionada).data(Usuario).draw(false);
+                   table.row(filaSeleccionada).data(Persona).draw(false);
                 }
                 $("#formodal").modal("hide");
             }
     </script>
 }
+

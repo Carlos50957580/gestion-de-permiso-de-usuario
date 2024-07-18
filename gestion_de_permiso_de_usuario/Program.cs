@@ -12,6 +12,9 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddTransient<DatabaseService>();
 builder.Services.AddTransient<UserData>();
 builder.Services.AddTransient<CN_Usuario>();
+builder.Services.AddTransient<PersonaData>();
+builder.Services.AddTransient<CN_Persona>();
+
 
 var app = builder.Build();
 

@@ -45,17 +45,12 @@ namespace gestion_de_permiso_de_usuario.Controllers
         public JsonResult ListaPersonas()
         {
             List<People> pLista = _cnPersona.GetPeople();
-            return Json(new { dataP = pLista });
+            return Json(new { data = pLista });
         }
 
         public ActionResult Usuarios()
         {
             return View();
-        }
-
-        public ActionResult Personas()
-        {
-            return View();  
         }
 
     }
