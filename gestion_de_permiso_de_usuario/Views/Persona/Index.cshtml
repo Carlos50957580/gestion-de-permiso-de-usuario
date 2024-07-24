@@ -102,9 +102,10 @@
 </div>
 @section Scripts {
     <script>
-
         var table;
         var filaSeleccionada;
+        let listarPersona = `@Url.Action("ListaPersonas", "PersonaController")`;
+        let GuardarPersona = `@Url.Action("GuardarPersona", "PersonaController")`;
 
         function abrirModal(Json) {
 
@@ -128,8 +129,6 @@
 
             $("#formodal").modal("show");
         }
-
-        let listarPersona = `@Url.Action("ListaPersonas", "Home")`;
 
         // $.ajax({//Utilizando ajax para obtener los usuarios, recomiendo investigar mas.
         //     url: listarPersona, //Llamamos al metodo desde el HomeController
@@ -161,7 +160,7 @@
                     { data: "genero" },
                     { data: "telefono" },
                     { data: "correo" },
-                    { data: "fechaCambio" },
+                    // { data: "fechaCambio" },
                     {
                         "defaultContent": '<button type="button" class="btn btn-warning btn-sm btn-editar"><i class="bi bi-pencil"></i></button>' +
                             '<button type="button"class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button>',
@@ -182,25 +181,38 @@
             }); 
         });
         function Guardar() {
-                var Persona = {
-                    apellido: $("#txtApellido").val(),
-                    correo: $("#textCorreo").val(),
-                    // fechaCambio:  $("#textCambio").val(), Por si se usa mas adelante
-                    fechaNacimiento: $("#txtNac").val(),
-                    genero: $("#cboSexo").val(),
-                    nombre: $("#txtNombre").val(),
-                    personaID: $("#txtId").val(),
-                    telefono:$("#txtTelefono").val()
-                }
+            var Persona = {
+                personaID: $("#txtId").val(),
+                nombre: $("#txtNombre").val(),
+                apellido: $("#txtApellido").val(),
+                fechaNacimiento: $("#txtNac").val(),
+                genero: $("#cboSexo").val(),
+                telefono: $("#txtTelefono").val(),
+                correo: $("#textCorreo").val()
+            };
 
-                if (Persona.personaID == 0) {
-                    table.row.add(Persona).draw(false);
-
-                } else {
-                   table.row(filaSeleccionada).data(Persona).draw(false);
+            $.ajax({
+                url: GuardarPersona,
+                type: "POST",
+                data: JSON.stringify({ objeto: Persona }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.resultado != 0) {
+                        if (Persona.personaID == 0) {
+                            Persona.personaID = data.resultado;
+                            table.row.add(Persona).draw(false);
+                        } else {
+                            table.row(filaSeleccionada).data(Persona).draw(false);
+                        }
+                        $("#formodal").modal("hide");
+                    } else {
+                        alert(data.mensaje);
+                    }
                 }
-                $("#formodal").modal("hide");
-            }
+            });
+        }
+
     </script>
 }
 

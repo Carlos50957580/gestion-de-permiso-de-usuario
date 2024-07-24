@@ -124,7 +124,7 @@ namespace gestion_de_permiso_de_usuario.Data
             }
             return resultado;
 
-            }
+        }
         public bool Eliminar(int id, out string Mensaje)
         {
             bool resultado = false;
@@ -149,3 +149,4 @@ namespace gestion_de_permiso_de_usuario.Data
         }
     }
 }
+

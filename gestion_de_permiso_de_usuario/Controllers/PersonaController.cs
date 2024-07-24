@@ -7,12 +7,15 @@ namespace gestion_de_permiso_de_usuario.Controllers
 {
     public class PersonaController : Controller
     {
-
+        private readonly PersonaData _objPersona;
         private readonly PersonaData _PersonaData;
+        private readonly CN_Persona _cnPersona;
 
-        public PersonaController(PersonaData personadata)
+
+        public PersonaController(PersonaData personadata, CN_Persona cnPersona)
         {
             _PersonaData = personadata;
+            _cnPersona = cnPersona;
         }
 
         public IActionResult Index()
@@ -21,21 +24,28 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(Lista1);
         }
 
-        //[HttpPost]
-        //public JsonResult GuardarPersona(People objeto)
-        //{
-        //    object resultado;
-        //    string mensaje = string.Empty;
+        public JsonResult ListaPersonas()
+        {
+            List<People> pLista = _cnPersona.GetPeople();
+            return Json(new { data = pLista });
+        }
 
-        //    if (objeto.PersonaID == 0)
-        //    {
-        //        resultado = new CN_Persona().Registrar(objeto, out mensaje);
-        //    }
-        //    else
-        //    {
-        //        resultado = new CN_Persona().Editar(objeto, out mensaje);
-        //    }
-        //}
+        [HttpPost]
+        public JsonResult GuardarPersona(People objeto)
+        {
+            object resultado;
+            string mensaje = string.Empty;
+
+            if (objeto.PersonaID == 0)
+            {
+                resultado = _cnPersona.Registrar(objeto);
+            }
+            else
+            {
+                resultado = _cnPersona.Editar(objeto, out mensaje);
+            }
+            return Json(new { resultado = resultado, mensaje = mensaje });
+        }
 
     }
 }

@@ -11,13 +11,11 @@ namespace gestion_de_permiso_de_usuario.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly CN_Usuario _cnUsuario;
-        private readonly CN_Persona _cnPersona; 
 
-        public HomeController(ILogger<HomeController> logger, CN_Usuario cnUsuario, CN_Persona cnPersona)
+        public HomeController(ILogger<HomeController> logger, CN_Usuario cnUsuario)
         {
             _logger = logger;
             _cnUsuario = cnUsuario;
-            _cnPersona = cnPersona;
         }
 
         public IActionResult Index()
@@ -39,14 +37,9 @@ namespace gestion_de_permiso_de_usuario.Controllers
         public JsonResult ListaUsuarios()
         {
             List<User> uLista = _cnUsuario.GetUser();
-            return Json( new { data = uLista });
+            return Json(new { data = uLista });
         }
 
-        public JsonResult ListaPersonas()
-        {
-            List<People> pLista = _cnPersona.GetPeople();
-            return Json(new { data = pLista });
-        }
 
         public ActionResult Usuarios()
         {
@@ -55,3 +48,4 @@ namespace gestion_de_permiso_de_usuario.Controllers
 
     }
 }
+
