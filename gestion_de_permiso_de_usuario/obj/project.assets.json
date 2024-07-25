@@ -10424,11 +10424,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Elvys Brito\\Desktop\\RaidyRaul\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+      "projectUniqueName": "C:\\Users\\Elvys Brito\\Desktop\\New folder (2)\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
       "projectName": "gestion_de_permiso_de_usuario",
-      "projectPath": "C:\\Users\\Elvys Brito\\Desktop\\RaidyRaul\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+      "projectPath": "C:\\Users\\Elvys Brito\\Desktop\\New folder (2)\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
       "packagesPath": "C:\\Users\\Elvys Brito\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Elvys Brito\\Desktop\\RaidyRaul\\gestion_de_permiso_de_usuario\\obj\\",
+      "outputPath": "C:\\Users\\Elvys Brito\\Desktop\\New folder (2)\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
