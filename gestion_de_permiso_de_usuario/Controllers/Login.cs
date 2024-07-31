@@ -6,7 +6,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
 {
     public class Login : Controller
     {
-        private string conexion = "Server=DESKTOP-LT3JSRI;Database=Pasantes;Integrated Security=True;TrustServerCertificate=True;";
+        private string conexion = "Server=UASDDATADB;Database=Pasantes;User Id=pasante_user;Password=12345678;TrustServerCertificate=True;";
 
         public IActionResult Registrar()
         {
@@ -15,7 +15,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
 
 
         [HttpPost]
-        public IActionResult Registrar(Personas personas)
+        public IActionResult Registrar(Persona personas)
         {
             using SqlConnection con = new SqlConnection(conexion);
             {
