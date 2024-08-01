@@ -1,19 +1,235 @@
 ﻿@model IEnumerable<gestion_de_permiso_de_usuario.Models.User>
+@{
+    ViewData["Title"] = "Index";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<h2>Your Entities</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var entity in Model)
-        {
-            <tr>
-                <td>@entity.NombreUsuario</td>
-            </tr>
+<div class="card">
+    <div class="card-header">
+        <i class="bi bi-people me-1"></i> Lista de Usuarios
+    </div>
+
+    <div class="card-body">
+
+        <input id="txtId" type="hidden" value="0" />
+
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success mb-3 mt-3" onclick="abrirModal(null)">Nuevo</button>
+            </div>
+
+            <hr />
+            <div class="table-responsive">
+                <table id="usersTable" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre de Usuario</th>
+                            <th>Persona ID</th>
+                            <th>Rol ID</th>
+                            <th>Contraseña</th>
+                            <th>Fecha de Cambio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.UsuarioID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.NombreUsuario)</td>
+                                <td>@Html.DisplayFor(modelItem => item.PersonaID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.RolID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Contraseña)</td>
+                                <td>@Html.DisplayFor(modelItem => item.FechaCambio)</td>
+                                <td>
+                                    @if (item.Estado)
+                                    {
+                                        <button type="button" class="btn btn-success">Sí</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-danger">No</button>
+                                    }
+                                </td>
+
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-warning btn-sm btn-editar"><i class="bi bi-pencil"></i></button>
+                                        <button type="button" class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" id="formodal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body g-2">
+                <div class="row">
+
+                    <form>
+                        <div class="mb-3">
+                            <label for="txtNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="txtNombre">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="txtUser" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="txtUser">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="txtcontraseña" class="form-label">Contraseña</label>
+                            <input type="text" class="form-control" id="txtcontraseña">
+                        </div>
+                      
+
+                        <div class="mb-3">
+                            <label class="form-label">Rol</label>
+                            <select class="form-select" id="cboRol" aria-label="Default select example">
+                                <option selected>Selecciona el rol</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Admin de admins</option>
+                                <option value="3">El master admin</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="txtFecha" class="form-label">Ultimo Cambio</label>
+                            <input type="text" class="form-control" id="txtFecha">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select" id="cboEstado" aria-label="Default select example">
+                                <option selected>Selecciona un estado</option>
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>
+                                <option value="3">Mitad/Mitad</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Autor</label>
+                            <input type="text" class="form-control" id="txtAutor">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var table;
+        var filaSeleccionada;
+
+        function abrirModal(Json) {
+
+            $("#txtId").val(0);
+            $("#txtNombre").val("");
+            $("#txtUser").val("");
+            $("#txtcontraseña").val("");
+            $("#cboRol").val("");
+            $("#txtFecha").val("");
+            $("#cboEstado").val(1);
+            $("#txtAutor").val("");
+            
+            if (Json != null) {
+                $("#txtId").val(Json.usuarioID);
+                $("#txtNombre").val(Json.personaID);
+                $("#txtUser").val(Json.nombreUsuario);
+                $("#txtcontraseña").val(Json.contraseña);
+                $("#cboRol").val(Json.rolID);
+                $("#txtFecha").val(Json.fechaCambio);
+                $("#cboEstado").val(Json.estado == true ? 1 : 0);
+                $("#txtAutor").val(Json.creadoPor);
+            }
+            $("#formodal").modal("show");
+            console.log(Json.contraseña);
         }
-    </tbody>
-</table>
+
+        function Guardar() {
+            var Usuario = {
+                //actualizadoPor: Para mas adelante
+                contraseña: $("txtcontraseña").val(),
+                creadoPor: $("#txtAutor").val(),
+                estado: $("#cboEstado").val() == 1 ? true : false,
+                fechaCambio: $("#txtFecha").val(),
+                nombreUsuario: $("#txtUser").val(),
+                personaID: $("#txtNombre").val(),
+                rolID: $("#cboRol").val(),
+                usuarioID: $("#txtId").val()
+            }
+
+            if (Usuario.usuarioID == 0) {
+                table.row.add(Usuario).draw(false);
+
+            } else {
+                table.row(filaSeleccionada).data(Usuario).draw(false);
+            }
+            $("#formodal").modal("hide");
+
+        }
+
+        $(document).ready(function () {
+            var table = $('#usersTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "info": true,
+                "lengthChange": true,
+                "pageLength": 10,
+                "language": {
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros en total)",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            $("#usersTable").on("click", ".btn-editar", function () {
+                var fila = $(this).closest("tr");
+                var data = table.row(fila).data();
+                var usuarioID = data[0];  // Suponiendo que el ID está en la primera columna
+
+                $.ajax({
+                    url: `/User/GetUsuarioById/${usuarioID}`,
+                    type: "GET",
+                    success: function (response) {
+                        abrirModal(response);
+                    },
+                    error: function () {
+                        alert("Error al obtener los datos del usuario.");
+                    }
+                });
+        });
+     });
+        
+    </script>
+}

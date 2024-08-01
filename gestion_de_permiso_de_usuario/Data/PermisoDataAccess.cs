@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -22,8 +23,8 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO Permisos (NombrePermiso, Descripcion, Estado, CreadoPor, FechaCambio) VALUES (@NombrePermiso, @Descripcion, @Estado, @CreadoPor, @FechaCambio)", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spAddPermiso", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@NombrePermiso", permiso.NombrePermiso);
                     cmd.Parameters.AddWithValue("@Descripcion", permiso.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", permiso.Estado);
@@ -40,7 +41,6 @@ namespace gestion_de_permiso_de_usuario.Data
             }
         }
 
-
         public List<Permiso> GetPermisos()
         {
             List<Permiso> permisos = new List<Permiso>();
@@ -49,8 +49,8 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM Permisos", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spGetPermisos", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -85,8 +85,8 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM Permisos WHERE PermisoID = @PermisoID", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spGetPermisoById", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@PermisoID", permisoID);
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -120,13 +120,13 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("UPDATE Permisos SET NombrePermiso = @NombrePermiso, Descripcion = @Descripcion, Estado = @Estado, FechaCambio = GETDATE(), ActualizadoPor = @ActualizadoPor WHERE PermisoID = @PermisoID", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spUpdatePermiso", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@PermisoID", permiso.PermisoID);
                     cmd.Parameters.AddWithValue("@NombrePermiso", permiso.NombrePermiso);
                     cmd.Parameters.AddWithValue("@Descripcion", permiso.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", permiso.Estado);
                     cmd.Parameters.AddWithValue("@ActualizadoPor", permiso.ActualizadoPor);
-                    cmd.Parameters.AddWithValue("@PermisoID", permiso.PermisoID);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

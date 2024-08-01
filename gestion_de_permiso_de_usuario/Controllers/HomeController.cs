@@ -33,11 +33,5 @@ namespace gestion_de_permiso_de_usuario.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        public JsonResult ListaUsuarios()
-        {
-            List<User> pLista = _cnUsuario.GetUser();
-            return Json(pLista);
-        }
     }
 }

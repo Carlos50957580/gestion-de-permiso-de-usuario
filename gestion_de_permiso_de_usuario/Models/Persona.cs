@@ -11,8 +11,8 @@ namespace gestion_de_permiso_de_usuario.Models
         [Required]
         [StringLength(25)]
         public string Apellido { get; set; }
-        [Required]
         public DateTime FechaNacimiento { get; set; }
+        public string FechaNacimiento2 { get; set; }
         public string Genero { get; set; }
         public string Telefono { get; set; }
         [Required]

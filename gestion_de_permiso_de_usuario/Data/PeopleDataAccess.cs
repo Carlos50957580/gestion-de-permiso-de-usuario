@@ -16,31 +16,31 @@ namespace gestion_de_permiso_de_usuario.Data
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        //public void AddPersona(Persona persona)
-        //{
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(_connectionString))
-        //        {
-        //            SqlCommand cmd = new SqlCommand("INSERT INTO Personas (Nombre, Apellido, FechaNacimiento, Genero, Telefono, Correo, FechaCambio) VALUES (@Nombre, @Apellido, @FechaNacimiento, @Genero, @Telefono, @Correo, @FechaCambio)", conn);
-        //            cmd.CommandType = CommandType.Text;
-        //            cmd.Parameters.AddWithValue("@Nombre", persona.Nombre);
-        //            cmd.Parameters.AddWithValue("@Apellido", persona.Apellido);
-        //            cmd.Parameters.AddWithValue("@FechaNacimiento", persona.FechaNacimiento);
-        //            cmd.Parameters.AddWithValue("@Genero", persona.Genero);
-        //            cmd.Parameters.AddWithValue("@Telefono", persona.Telefono);
-        //            cmd.Parameters.AddWithValue("@Correo", persona.Correo);
-        //            cmd.Parameters.AddWithValue("@FechaCambio", persona.FechaCambio);
+        public void AddPersona(Persona persona)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("spAddPersona", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Nombre", persona.Nombre);
+                    cmd.Parameters.AddWithValue("@Apellido", persona.Apellido);
+                    cmd.Parameters.AddWithValue("@FechaNacimiento", persona.FechaNacimiento);
+                    cmd.Parameters.AddWithValue("@Genero", persona.Genero);
+                    cmd.Parameters.AddWithValue("@Telefono", persona.Telefono);
+                    cmd.Parameters.AddWithValue("@Correo", persona.Correo);
+                    cmd.Parameters.AddWithValue("@FechaCambio", persona.FechaCambio);
 
-        //            conn.Open();
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Error al agregar la persona: " + ex.Message);
-        //    }
-        //}
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al agregar la persona: " + ex.Message);
+            }
+        }
 
         public List<Persona> GetPersonas()
         {
@@ -50,8 +50,8 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM Personas", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spGetPersonas", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -87,8 +87,8 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM Personas WHERE PersonaID = @PersonaID", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spGetPersonaById", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@PersonaID", personaID);
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -100,7 +100,7 @@ namespace gestion_de_permiso_de_usuario.Data
                             PersonaID = Convert.ToInt32(reader["PersonaID"]),
                             Nombre = reader["Nombre"].ToString(),
                             Apellido = reader["Apellido"].ToString(),
-                            FechaNacimiento = Convert.ToDateTime(reader["FechaNacimiento"]),
+                            FechaNacimiento2 = Convert.ToDateTime(reader["FechaNacimiento"]).ToString("yyyy-MM-dd"),
                             Genero = reader["Genero"].ToString(),
                             Telefono = reader["Telefono"].ToString(),
                             Correo = reader["Correo"].ToString(),
@@ -123,15 +123,15 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("UPDATE Personas SET Nombre = @Nombre, Apellido = @Apellido, FechaNacimiento = @FechaNacimiento, Genero = @Genero, Telefono = @Telefono, Correo = @Correo, FechaCambio = GETDATE() WHERE PersonaID = @PersonaID", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spUpdatePersona", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@PersonaID", persona.PersonaID);
                     cmd.Parameters.AddWithValue("@Nombre", persona.Nombre);
                     cmd.Parameters.AddWithValue("@Apellido", persona.Apellido);
                     cmd.Parameters.AddWithValue("@FechaNacimiento", persona.FechaNacimiento);
                     cmd.Parameters.AddWithValue("@Genero", persona.Genero);
                     cmd.Parameters.AddWithValue("@Telefono", persona.Telefono);
                     cmd.Parameters.AddWithValue("@Correo", persona.Correo);
-                    cmd.Parameters.AddWithValue("@PersonaID", persona.PersonaID);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

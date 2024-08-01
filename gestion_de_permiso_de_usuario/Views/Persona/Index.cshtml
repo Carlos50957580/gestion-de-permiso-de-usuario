@@ -4,9 +4,10 @@
     ViewData["Title"] = "Lista de Personas";
 }
 
-<p>
-    @* <a asp-action="Create" class="btn btn-primary">Crear Nueva Persona</a> *@
-</p>
+<div class="card-header">
+    <i class="bi bi-people me-1"></i> Lista de Personas
+</div>
+
 <div class="table-responsive">
     <table id="peopleTable" class="display" style="width:100%">
         <thead>
@@ -45,6 +46,7 @@
     
         </tbody>
     </table>
+</div>
 </div>
 <div class="modal" tabindex="-1" id="formodal">
     <div class="modal-dialog">
@@ -107,25 +109,30 @@
             </div>
         </div>
     </div>
-</div>
+
 
 @section Scripts {
     <script>
         var table; 
         var filaSeleccionada;
         let listarPersona = `@Url.Action("GetPersonas", "People")`;
-        let GuardarPersona = `@Url.Action("Edit", "Persona")`;
+        let GuardarPersona = `@Url.Action("Edit", "People")`;
 
         function abrirModal(Json) {
+            console.log(Json.fechaNacimiento2);
+            let fecha = new Date(Json.fechaNacimiento)
+            console.log(fecha)
+
             $("#txtId").val(Json.personaID);
             $("#txtNombre").val(Json.nombre);
             $("#txtApellido").val(Json.apellido);
-            $("#txtNac").val(Json.fechaNacimiento);
+            $("#txtNac").val(Json.fechaNacimiento2);
             $("#cboSexo").val(Json.genero === "Masculino" ? 1 : (Json.genero === "Femenino" ? 2 : 3));
             $("#txtTelefono").val(Json.telefono);
             $("#textCorreo").val(Json.correo);
 
             $("#formodal").modal("show");
+
         }
 
         function Guardar() {
