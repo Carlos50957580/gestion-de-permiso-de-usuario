@@ -5,17 +5,17 @@ namespace gestion_de_permiso_de_usuario.Clases
 {
     public class CN_Usuario
     {
-       
-            private readonly UserData _objUsuario;
 
-            public CN_Usuario(UserData objUsuario)
-            {
-                _objUsuario = objUsuario;
-            }
+        private readonly UserData _objUsuario;
 
-            public List<User> GetUser()
-            {
-                return _objUsuario.GetUser();
-            }
+        public CN_Usuario(UserData objUsuario)
+        {
+            _objUsuario = objUsuario;
         }
+
+        //public List<User> GetUser()
+        //{
+        //    return _objUsuario.GetUser();
+        //}
+    }
 }

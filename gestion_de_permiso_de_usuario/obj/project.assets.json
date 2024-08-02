@@ -10418,24 +10418,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\o99zz94\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\OneDrive - Universidad Autonoma de Santo Domingo\\Escritorio\\mvc4\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+      "projectUniqueName": "C:\\Users\\o99zz94\\Desktop\\Copia definitiva\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
       "projectName": "gestion_de_permiso_de_usuario",
-      "projectPath": "C:\\Users\\user\\OneDrive - Universidad Autonoma de Santo Domingo\\Escritorio\\mvc4\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\OneDrive - Universidad Autonoma de Santo Domingo\\Escritorio\\mvc4\\gestion_de_permiso_de_usuario\\obj\\",
+      "projectPath": "C:\\Users\\o99zz94\\Desktop\\Copia definitiva\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+      "packagesPath": "C:\\Users\\o99zz94\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\o99zz94\\Desktop\\Copia definitiva\\gestion_de_permiso_de_usuario\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\o99zz94\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
