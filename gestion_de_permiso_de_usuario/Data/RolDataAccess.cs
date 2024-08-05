@@ -188,6 +188,38 @@ namespace gestion_de_permiso_de_usuario.Data
 
             return permisos;
         }
+
+
+        public List<Rol> GetAllRoles()
+        {
+            var roles = new List<Rol>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var query = "SELECT RolID, NombreRol FROM Roles";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rol = new Rol
+                            {
+                                RolID = Convert.ToInt32(reader["RolID"]),
+                                NombreRol = reader["NombreRol"].ToString()
+                            };
+                            roles.Add(rol);
+                        }
+                    }
+                }
+            }
+
+            return roles;
+        }
+
+
+
     }
 }
 

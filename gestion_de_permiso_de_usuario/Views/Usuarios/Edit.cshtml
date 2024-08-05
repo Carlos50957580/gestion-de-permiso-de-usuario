@@ -1,0 +1,67 @@
+﻿@model gestion_de_permiso_de_usuario.Models.Usuario
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h4>Usuario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div class="form-group">
+                <label asp-for="NombreUsuario" class="control-label"></label>
+                <input asp-for="NombreUsuario" class="form-control" />
+                <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonaID" class="control-label">Persona</label>
+                <select asp-for="PersonaID" class="form-control">
+                    <option value="">Selecciona una Persona</option>
+                    @foreach (var persona in ViewBag.Personas as List<gestion_de_permiso_de_usuario.Models.Persona>)
+                    {
+                        <option value="@persona.PersonaID">@persona.Nombre @persona.Apellido</option>
+                    }
+                </select>
+                <span asp-validation-for="PersonaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RolID" class="control-label">Rol</label>
+                <select asp-for="RolID" class="form-control">
+                    <option value="">Selecciona un Rol</option>
+                    @foreach (var rol in ViewBag.Roles as List<gestion_de_permiso_de_usuario.Models.Rol>)
+                    {
+                        <option value="@rol.RolID">@rol.NombreRol</option>
+                    }
+                </select>
+                <span asp-validation-for="RolID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contraseña" class="control-label"></label>
+                <input asp-for="Contraseña" class="form-control" />
+                <span asp-validation-for="Contraseña" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label">Estado</label>
+                <select asp-for="Estado" asp-items="Html.GetEnumSelectList<gestion_de_permiso_de_usuario.Models.EstadoUsuario>()" class="form-control">
+                    <option value="">Selecciona el Estado</option>
+                </select>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreadoPor" class="control-label"></label>
+                <input asp-for="CreadoPor" class="form-control" />
+                <span asp-validation-for="CreadoPor" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="UsuarioID" />
+            <div class="form-group">
+                <br />
+                <br />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+            </div>
+        </form>
+    </div>
+</div>

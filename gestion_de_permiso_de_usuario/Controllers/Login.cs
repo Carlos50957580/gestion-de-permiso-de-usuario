@@ -7,7 +7,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
 {
     public class Login : Controller
     {
-        private string conexion = "Server=UASDDATADB;Database=Pasantes;User Id=pasante_user;Password=12345678;TrustServerCertificate=True;";
+        private string conexion = "Server=DESKTOP-4D18TH3\\SQLEXPRESS01;Database=Usuarios1;Trusted_Connection=True;Trusted_Connection=True;Integrated Security=True;TrustServerCertificate=True;";
 
         public IActionResult Registrar()
         {

@@ -142,6 +142,37 @@ namespace gestion_de_permiso_de_usuario.Data
                 throw new Exception("Error al actualizar la persona: " + ex.Message);
             }
         }
+
+
+        public List<Persona> GetAllPersonas()
+        {
+            var personas = new List<Persona>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var query = @"SELECT PersonaID, Nombre, Apellido FROM Personas";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var persona = new Persona
+                            {
+                                PersonaID = Convert.ToInt32(reader["PersonaID"]),
+                                Nombre = reader["Nombre"].ToString()
+                            };
+                            personas.Add(persona);
+                        }
+                    }
+                }
+            }
+
+            return personas;
+        }
+
     }
 }
 
