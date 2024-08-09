@@ -5,72 +5,89 @@
 }
 
 <div>
-    <h4>Usuario</h4>
+    <h4>Informacion vigente de @Html.DisplayFor(model => model.Nombre)</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Nombre de Usuario
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NombreUsuario)
-        </dd>
-        <dt class="col-sm-2">
-            Nombre
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class="col-sm-2">
-            Apellido
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Apellido)
-        </dd>
-        <dt class="col-sm-2">
-            Rol
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NombreRol)
-        </dd>
 
+    <table class="table table-borderless display">
+        <thead>
 
-        <dt class="col-sm-2">
-            Estado
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.Estado == 1)
-            {
-                <span>Activo</span>
-            }
-            else if (Model.Estado == 0)
-            {
-                <span>Desactivado</span>
-            }
-            else
-            {
-                <span>Estado no válido</span>
-            }
-        </dd>
-
-
-        <dt class="col-sm-2">
-            Rol
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NombreRol)
-        </dd>
-
-
-        <dt class="col-sm-2">
-            Contraseña
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Contraseña)
-        </dd>
-
-    </dl>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="Titulo">Nombre de Usuario:</th>
+                <th class="SinTitulo">@Html.DisplayFor(model => model.NombreUsuario)a</th>
+            </tr>
+            <tr>
+                <td class="Titulo">Nombre:</td>
+                <td>@Html.DisplayFor(model => model.Nombre)</td>
+            </tr>
+            <tr>
+                <td class="Titulo">Apellido:</td>
+                <td>@Html.DisplayFor(model => model.Apellido)</td>
+            </tr>
+            <tr>
+                <td class="Titulo">Rol:</td>
+                <td>@Html.DisplayFor(model => model.NombreRol)</td>
+            </tr>
+            <tr>
+                <td class="Titulo">Apellido:</td>
+                <td>@Html.DisplayFor(model => model.Apellido)</td>
+            </tr>
+            <tr>
+                <td class="Titulo">Estado:</td>
+                <td>
+                    @if (Model.Estado == 1)
+                    {
+                        <span>Activo</span>
+                    }
+                    else if (Model.Estado == 0)
+                    {
+                        <span>Desactivado</span>
+                    }
+                    else
+                    {
+                        <span>Estado no válido:</span>
+                    }
+                </td>
+                </tr>
+            <tr>
+                <td class="Titulo">Contraseña:</td>
+                <td>@Html.DisplayFor(model => model.Contraseña)</td>
+            </tr>
+            
+        </tbody>
+    </table>
 </div>
+    </div>
+</div>
+
+<style>
+    h4{
+        color: #5C6EF5;
+        font-weight: bold;
+    }
+    .table {
+        width: 30%;
+        font-family:sans-serif;
+        font-size: 15px;
+    }
+    .Titulo{
+        font-weight: bold;
+    }
+
+    .SinTitulo {
+        font-weight: normal;
+    }
+
+    .btn {
+        font-size: 15px;
+    }
+</style>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.UsuarioID" class="btn btn-primary">Editar</a>
-    <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Volver a la Lista</a>
 </div>
+
+
+  

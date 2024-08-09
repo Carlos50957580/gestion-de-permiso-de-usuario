@@ -21,22 +21,10 @@ namespace gestion_de_permiso_de_usuario.Data
 
             using (var connection = new SqlConnection(_connectionString))
             {
-                var query = @"SELECT 
-                                u.UsuarioID,
-                                u.NombreUsuario,
-                                p.Nombre,
-                                p.Apellido,
-                                r.NombreRol,
-                                u.Estado
-                              FROM 
-                                Usuarios u
-                              JOIN 
-                                Personas p ON u.PersonaID = p.PersonaID
-                              JOIN 
-                                Roles r ON u.RolID = r.RolID";
-
+                var query = "GetUsuariosConDetalles";
                 using (var command = new SqlCommand(query, connection))
                 {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
                     connection.Open();
                     using (var reader = command.ExecuteReader())
                     {
@@ -66,21 +54,10 @@ namespace gestion_de_permiso_de_usuario.Data
 
             using (var connection = new SqlConnection(_connectionString))
             {
-                var query = @"SELECT 
-                                UsuarioID, 
-                                NombreUsuario, 
-                                PersonaID, 
-                                RolID, 
-                                Contraseña, 
-                                FechaCambio, 
-                                Estado, 
-                                CreadoPor, 
-                                ActualizadoPor
-                              FROM Usuarios 
-                              WHERE UsuarioID = @UsuarioID";
-
+                var query = "GetUsuarioByID";
                 using (var command = new SqlCommand(query, connection))
                 {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@UsuarioID", id);
                     connection.Open();
                     using (var reader = command.ExecuteReader())
@@ -111,18 +88,10 @@ namespace gestion_de_permiso_de_usuario.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var query = @"UPDATE Usuarios 
-                              SET 
-                                NombreUsuario = @NombreUsuario,
-                                PersonaID = @PersonaID,
-                                RolID = @RolID,
-                                Contraseña = @Contraseña,
-                                Estado = @Estado,
-                                CreadoPor = @CreadoPor  
-                              WHERE UsuarioID = @UsuarioID";
-
+                var query = "UpdateUsuario";
                 using (var command = new SqlCommand(query, connection))
                 {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@UsuarioID", usuario.UsuarioID);
                     command.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
                     command.Parameters.AddWithValue("@PersonaID", usuario.PersonaID);
@@ -143,24 +112,10 @@ namespace gestion_de_permiso_de_usuario.Data
 
             using (var connection = new SqlConnection(_connectionString))
             {
-                var query = @"SELECT 
-                                u.UsuarioID,
-                                u.NombreUsuario,
-                                p.Nombre,
-                                p.Apellido,
-                                r.NombreRol,
-                                u.Estado,
-                                u.Contraseña
-                              FROM 
-                                Usuarios u
-                              JOIN 
-                                Personas p ON u.PersonaID = p.PersonaID
-                              JOIN 
-                                Roles r ON u.RolID = r.RolID
-                              WHERE u.UsuarioID = @UsuarioID";
-
+                var query = "GetUsuarioConDetallesByID";
                 using (var command = new SqlCommand(query, connection))
                 {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@UsuarioID", id);
                     connection.Open();
                     using (var reader = command.ExecuteReader())
@@ -189,13 +144,10 @@ namespace gestion_de_permiso_de_usuario.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var query = @"INSERT INTO Usuarios 
-                                (NombreUsuario, PersonaID, RolID, Contraseña, Estado, CreadoPor) 
-                              VALUES 
-                                (@NombreUsuario, @PersonaID, @RolID, @Contraseña, @Estado, @CreadoPor)";
-
+                var query = "InsertUsuario";
                 using (var command = new SqlCommand(query, connection))
                 {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
                     command.Parameters.AddWithValue("@PersonaID", usuario.PersonaID);
                     command.Parameters.AddWithValue("@RolID", usuario.RolID);

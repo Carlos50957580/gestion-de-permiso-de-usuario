@@ -35,8 +35,8 @@
                     <td>@Html.DisplayFor(modelItem => item.Correo)</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-warning btn-sm btn-editar"><i class="bi bi-pencil"></i></button>
-                            <button type="button" class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button>
+                            <button type="button" class="btn btn-warning btn-sm btn-editar m-auto"><i class="bi bi-pencil"></i></button>
+                           @*  <button type="button" class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button> *@
                            @*  <a asp-action="Edit" asp-route-id="@item.PersonaID" class="btn btn-warning" onclick="abrirModal(null)"><i class="bi bi-pencil"></i></a>
                             <a asp-action="Details" asp-route-id="@item.PersonaID" class="btn btn-info"><i class="bi bi-eye"></i></a> *@
                         </div>
@@ -52,7 +52,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Usuario</h5>
+                <h5 class="modal-title">Persona</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body g-2">
@@ -61,42 +61,48 @@
 
                 <div class="row">
 
-                    <form>
-                        @* @Html.AntiForgeryToken() *@
+                    <form method="post" class="needs-validation" novalidate>
 
                         <div class="mb-3">
                             <label for="txtNombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="txtNombre">
+                            <input type="text" class="form-control" id="txtNombre" required>
+                            <div class="invalid-feedback">Introduzca el nombre</div>
+                            
                         </div>
 
                         <div class="mb-3">
                             <label for="txtApellido" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="txtApellido">
+                            <input type="text" class="form-control" id="txtApellido" required>
+                            <div class="invalid-feedback">Introduzca el apellido</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtNac" class="form-label">Fecha de nacimiento</label>
-                            <input type="date" class="form-control" id="txtNac">
+                            <input type="date" class="form-control" id="txtNac" required>
+                            <div class="invalid-feedback">Introduzca la fecha de nacimiento</div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Sexo</label>
-                            <select class="form-select" id="cboSexo" aria-label="Default select example">
-                                <option selected>Selecciona tu sexo</option>
+                            <select class="form-select" id="cboSexo" aria-label="Default select example" required>
+                                <option value="">Selecciona tu sexo</option>
                                 <option value="1">Hombre</option>
                                 <option value="2">Mujer</option>
                                 <option value="3">Otro</option>
                             </select>
+                            <div class="invalid-feedback">Seleccione un género</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="txtTelefono" class="form-label">Numero de telefono</label>
-                            <input type="text" class="form-control" id="txtTelefono">
+                            <input type="text" class="form-control" id="txtTelefono" required>
+                            <div class="invalid-feedback">Introduzca el numero de telefono</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="textCorreo" class="form-label">Correo </label>
-                            <input type="text" class="form-control" id="textCorreo">
+                            <input type="text" class="form-control" id="textCorreo" required>
+                            <div class="invalid-feedback">Introduzca el correo</div>
                         </div>
 
                     </form>
@@ -110,12 +116,25 @@
         </div>
     </div>
 
-
 @section Scripts {
     <script>
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+
         var table; 
         var filaSeleccionada;
-        let listarPersona = `@Url.Action("GetPersonas", "People")`;
         let GuardarPersona = `@Url.Action("Edit", "People")`;
 
         function abrirModal(Json) {
@@ -161,25 +180,14 @@
                 })
                 .then(data => {
                     console.log(data.message);
-                    location.reload(); // Recargar la página para ver los cambios
+                    location.reload();
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert(error.message); // Mostrar el error en una alerta
+                    alert(error.message); 
                 });
         }
 
-
-        $.ajax({//Utilizando ajax para obtener los usuarios, recomiendo investigar mas.
-            url: listarPersona, //Llamamos al metodo desde el HomeController
-            type: "GET",
-            dataType: "Json",
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-
-                console.log(data)
-            }
-        })
 
         $(document).ready(function () {
             var table = $('#peopleTable').DataTable({
@@ -207,7 +215,7 @@
             $("#peopleTable").on("click", ".btn-editar", function () {
                 var fila = $(this).closest("tr");
                 var data = table.row(fila).data();
-                var personaId = data[0];  // Suponiendo que el ID está en la primera columna
+                var personaId = data[0]; 
 
                 $.ajax({
                     url: `/Persona/GetPersonaById/${personaId}`,

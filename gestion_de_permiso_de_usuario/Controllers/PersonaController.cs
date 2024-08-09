@@ -72,7 +72,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 try
                 {
                     _personaDataAccess.UpdatePersona(persona);
-                    return RedirectToAction(nameof(Index));
+                    return Json(persona);/*RedirectToAction(nameof(Index));*/
                 }
                 catch (Exception ex)
                 {

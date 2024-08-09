@@ -51,9 +51,9 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href=" @Url.Action("Index", "Home")" class="logo d-flex align-items-center">
                 <img src="~/assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">NiceAdmin</span>
+                <span class="d-none d-lg-block">ReyCompany</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -327,7 +327,7 @@
             </li><!-- End Usuario Page Nav -->
 
 
-            <li class="nav-item">
+ @*            <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
@@ -532,7 +532,7 @@
                     <i class="bi bi-file-earmark"></i>
                     <span>Blank</span>
                 </a>
-            </li><!-- End Blank Page Nav -->
+            </li><!-- End Blank Page Nav --> *@
 
         </ul>
 
@@ -543,7 +543,7 @@
             <h1>@ViewBag.Title</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href=" @Url.Action("Index", "Home")">Home</a></li>
                     <li class="breadcrumb-item active">@ViewBag.Title</li>
                 </ol>
             </nav>
@@ -557,7 +557,7 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>ReyCompany</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->
