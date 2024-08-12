@@ -18,4 +18,11 @@
         Activo = 1,
         Inactivo = 0
     }
+
+    public class Login
+    {
+        public string NombreUsuario { get; set; }
+
+        public string Contraseña { get; set; }
+    }
 }

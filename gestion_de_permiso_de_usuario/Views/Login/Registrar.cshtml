@@ -73,6 +73,22 @@
                                         <p class="text-center small">Introduzca los Datos para crear una cuenta</p>
                                     </div>
 
+                                    @{
+                                        if (ViewData["Completado"] != null)
+                                        {
+                                            <div class="alert alert-success">
+                                            @ViewData["Completado"]
+                                            </div>
+                                        }
+
+                                        else if (ViewData["Incompleto"] != null)
+                                        {
+                                            <div class="alert alert-danger">
+                                                @ViewData["Incompleto"]
+                                            </div>
+                                        }
+                                    }
+
                                     <form asp-action="Registrar" asp-controller="Login" method="post" class="row g-3 needs-validation" novalidate>
                                         <div class="col-12">
                                             <label for="yourName" class="form-label">Nombre</label>
@@ -118,7 +134,7 @@
                                             <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
                                         </div>
                                         <div class="col-12">
-                                            <p class="small mb-0">¿Listo para iniciar sesión en tu cuenta? <a href="@Url.Action("Acceder","Login")">Iniciar sesión</a></p>
+                                            <p class="small mb-0">¿Listo para iniciar sesión en tu cuenta? <a href="@Url.Action("Iniciar","Login")">Iniciar sesión</a></p>
                                         </div>
                                     </form>
 
