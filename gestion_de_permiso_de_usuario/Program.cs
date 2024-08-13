@@ -1,4 +1,4 @@
-using gestion_de_permiso_de_usuario.Clases;
+
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Services;
 using Microsoft.Extensions.Configuration;
@@ -10,8 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddTransient<DatabaseService>();
-builder.Services.AddTransient<UserData>();
-builder.Services.AddTransient<CN_Usuario>();
+
 
 var app = builder.Build();
 

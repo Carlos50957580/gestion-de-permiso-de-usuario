@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YpMjGhSNkGU=",
+  "dgSpecHash": "dcdvpsHIqqo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\OneDrive - Universidad Autonoma de Santo Domingo\\Escritorio\\mvc4\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+  "projectFilePath": "C:\\Users\\user\\OneDrive - Universidad Autonoma de Santo Domingo\\Escritorio\\MVC10\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\ado.net.client\\1.4.4\\ado.net.client.1.4.4.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\ado.net.client.annotations\\1.2.0\\ado.net.client.annotations.1.2.0.nupkg.sha512",

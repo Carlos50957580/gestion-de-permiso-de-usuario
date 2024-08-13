@@ -1,0 +1,501 @@
+﻿@using gestion_de_permiso_de_usuario.Models
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<head>
+    <link rel="stylesheet" href="@Url.Content("~/css/site.css")" />
+</head>
+
+@* INICIO DE TARJETAS *@
+<div class="container">
+    <div class="row">
+        <div class="col-xxl-3 col-md-6">
+            <div class="card info-card">
+                <div class="card-body">
+                    <h5 class="card-title">Usuarios <span>| Registrados</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-people-fill total-usuarios"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h2 class="card-text">@ViewBag.TotalUsuarios</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-3 col-md-6">
+            <div class="card info-card">
+                <div class="card-body">
+                    <h5 class="card-title">Personas <span>| Registradas</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-person total-personas"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h2 class="card-text">@ViewBag.TotalPersonas</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-3 col-md-6">
+            <div class="card info-card">
+                <div class="card-body">
+                    <h5 class="card-title">Roles <span>| Agregados</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-person-badge-fill total-roles"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h2 class="card-text">@ViewBag.TotalRoles</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-3 col-md-6">
+            <div class="card info-card">
+                <div class="card-body">
+                    <h5 class="card-title">Permisos <span>| Agregados</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-shield-lock-fill total-permisos"></i>
+                        </div>
+                        <div class="ps-3">
+                            <h2 class="card-text">@ViewBag.TotalPermisos</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* FIN DE TARJETAS *@
+
+@* TABLA PERSONAS *@
+<div class="card recent-sales overflow-auto mt-4">
+
+    <div class="card-body">
+        <h5 class="card-title">Personas <span>| Registradas</span></h5>
+
+        <table id="PersonaTable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Fecha de Nacimiento</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Correo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var persona in Model.Item2)
+                {
+                    <tr>
+                        <th scope="row">@persona.PersonaID</th>
+                        <td>@persona.Nombre</td>
+                        <td>@persona.Apellido</td>
+                        <td>@persona.FechaNacimiento.ToString("yyyy-MM-dd")</td>
+                        <td>@persona.Genero</td>
+                        <td>@persona.Telefono</td>
+                        <td>@persona.Correo</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@* USUARIOS *@
+<div class="container-fluid">
+    <div class="row d-flex align-items-stretch">
+        <div class="col-md-8 d-flex">
+            <!-- Tabla de Usuarios -->
+            <div class="card recent-sales overflow-auto flex-fill">
+                <div class="card-body">
+                    <h5 class="card-title">Usuarios <span>| Registrados</span></h5>
+                    <table id="UsuarioTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre de Usuario</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var usuario in Model.Item1)
+                            {
+                                <tr>
+                                    <th scope="row">@usuario.UsuarioID</th>
+                                    <td>@usuario.NombreUsuario</td>
+                                    <td>@usuario.Nombre</td>
+                                    <td>@usuario.Apellido</td>
+                                    <td>@usuario.NombreRol</td>
+                                    <td>
+                                        @if (usuario.Estado == 1)
+                                        {
+                                            <span class="badge bg-success">Activo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Inactivo</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex">
+            <!-- Gráfico de Usuarios -->
+            <div class="card flex-fill">
+                <div class="card-body pb-0">
+                    <h5 class="card-title">Usuarios</h5>
+                    <div id="usuariosChart" style="height: 100%;" class="echart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* ROLES *@
+<div class="container-fluid">
+    <div class="row d-flex align-items-stretch">
+        <div class="col-md-8 d-flex">
+            <!-- Tabla de Roles -->
+            <div class="card recent-sales overflow-auto flex-fill mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">Roles <span>| Agregados</span></h5>
+                    <table id="RolTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre de Rol</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var rol in ViewBag.Roles as IEnumerable<Rol>)
+                            {
+                                <tr>
+                                    <th scope="row">@rol.RolID</th>
+                                    <td>@rol.NombreRol</td>
+                                    <td>@rol.Descripcion</td>
+                                    <td>
+                                        @if (rol.Estado == 1)
+                                        {
+                                            <span class="badge bg-success">Activo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Inactivo</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex">
+            <!-- Gráfico de Roles -->
+            <div class="card flex-fill mt-4">
+                <div class="card-body pb-0">
+                    <h5 class="card-title">Roles</h5>
+                    <div id="rolesChart" style="height: 100%;" class="echart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* PERMISOS *@
+<div class="container-fluid">
+    <div class="row d-flex align-items-stretch">
+        <div class="col-md-8 d-flex">
+            <!-- Tabla de Permisos -->
+            <div class="card recent-sales overflow-auto flex-fill mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">Permisos <span>| Agregados</span></h5>
+                    <table id="PermisoTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre de Permiso</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var permiso in ViewBag.Permisos as IEnumerable<gestion_de_permiso_de_usuario.Models.Permiso>)
+                            {
+                                <tr>
+                                    <th scope="row">@permiso.PermisoID</th>
+                                    <td>@permiso.NombrePermiso</td>
+                                    <td>@permiso.Descripcion</td>
+                                    <td>
+                                        @if (permiso.Estado == 1)
+                                        {
+                                            <span class="badge bg-success">Activo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Inactivo</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-flex">
+            <!-- Gráfico de Permisos -->
+            <div class="card flex-fill mt-4">
+                <div class="card-body pb-0">
+                    <h5 class="card-title">Permisos</h5>
+                    <div id="permisosChart" style="height: 100%;" class="echart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="@Url.Content("~/js/Dashboard.js")"></script>
+<script src="@Url.Content("~/js/usuario.js")"></script>
+<script src="@Url.Content("~/js/persona.js")"></script>
+<script src="@Url.Content("~/js/roles.js")"></script>
+
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const usuariosChart = echarts.init(document.querySelector("#usuariosChart"));
+        usuariosChart.setOption({
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                top: '5%',
+                left: 'center'
+            },
+            series: [{
+                name: 'Usuarios',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '18',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {
+                        value: @ViewBag.ActivosUsuarios,
+                        name: 'Activos',
+                        itemStyle: {
+                            color: '#008959'  
+                        }
+                    },
+                    {
+                        value: @ViewBag.InactivosUsuarios,
+                        name: 'Inactivos',
+                        itemStyle: {
+                            color: '#F41B35' 
+                        }
+                    }
+                ]
+            }]
+        });
+
+        const rolesChart = echarts.init(document.querySelector("#rolesChart"));
+        rolesChart.setOption({
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                top: '5%',
+                left: 'center'
+            },
+            series: [{
+                name: 'Roles',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '18',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {
+                        value: @ViewBag.ActivosRoles,
+                        name: 'Activos',
+                        itemStyle: {
+                            color: '#008959'  
+                        }
+                    },
+                    {
+                        value: @ViewBag.InactivosRoles,
+                        name: 'Inactivos',
+                        itemStyle: {
+                            color: '#F41B35'  
+                        }
+                    }
+                ]
+            }]
+        });
+
+        const permisosChart = echarts.init(document.querySelector("#permisosChart"));
+        permisosChart.setOption({
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                top: '5%',
+                left: 'center'
+            },
+            series: [{
+                name: 'Permisos',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '18',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {
+                        value: @ViewBag.ActivosPermisos,
+                        name: 'Activos',
+                        itemStyle: {
+                            color: '#008959'  
+                        }
+                    },
+                    {
+                        value: @ViewBag.InactivosPermisos,
+                        name: 'Inactivos',
+                        itemStyle: {
+                            color: '#F41B35'  
+                        }
+                    }
+                ]
+            }]
+        });
+    });
+</script>
+
+@* GRAFICO DE BARRAS *@
+@model Tuple<IEnumerable<gestion_de_permiso_de_usuario.Models.UsuarioConDetalles>, IEnumerable<gestion_de_permiso_de_usuario.Models.Persona>>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Usuarios por Rol</h5>
+                    <canvas id="barChart" style="width: 100%; height: auto; max-height: 400px;"></canvas>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                            new Chart(document.querySelector('#barChart'), {
+                                type: 'bar',
+                                data: {
+                                    labels: [@Html.Raw(ViewBag.UsuariosPorRolLabels)], 
+                                    datasets: [{
+                                        label: 'Cantidad de Usuarios',
+                                        data: [@Html.Raw(ViewBag.UsuariosPorRolData)],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)',
+                                            'rgba(255, 205, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(201, 203, 207, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(255, 159, 64)',
+                                            'rgb(255, 205, 86)',
+                                            'rgb(75, 192, 192)',
+                                            'rgb(54, 162, 235)',
+                                            'rgb(153, 102, 255)',
+                                            'rgb(201, 203, 207)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true, 
+                                    maintainAspectRatio: false, 
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                stepSize: 1, 
+                                                callback: function (value) {
+                                                    if (Number.isInteger(value)) {
+                                                        return value; 
+                                                    }
+                                                    return ''; 
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<gestion_de_permiso_de_usuario.Models.UsuarioConDetalles>
+
+@{
+    ViewData["Title"] = "Lista de Usuarios";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Crear Nuevo Usuario</a>
+</p>
+<div class="table-responsive">
+    <table id="usuariosTable" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nombre de Usuario</th>
+                <th>Nombre Persona</th>
+                <th>Apellido Persona</th>
+                <th>Rol</th>
+                <th>estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.NombreUsuario)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Apellido)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NombreRol)</td>
+                   <td>
+                        @if (item.Estado == 1)
+                        {
+                            <span>Activo</span>
+                        }
+                        else if (item.Estado == 0)
+                        {
+                            <span>Desactivado</span>
+                        }
+                        else
+                        {
+                            <span>Estado no válido</span>
+                        }
+                   </td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a asp-action="Edit" asp-route-id="@item.UsuarioID" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+                            <a asp-action="Details" asp-route-id="@item.UsuarioID" class="btn btn-info"><i class="bi bi-eye"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#usuariosTable').DataTable({
+                "paging": true,
+                "searching": true,
+                "info": true,
+                "lengthChange": true, // Permitir al usuario cambiar el número de registros por página
+                "pageLength": 10, // Número de registros por página por defecto
+                "language": {
+                    "search": "Buscar:",
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros en total)",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
+}

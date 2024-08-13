@@ -22,8 +22,8 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("INSERT INTO Roles (NombreRol, Descripcion, Estado) VALUES (@NombreRol, @Descripcion, @Estado)", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spAddRol", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@NombreRol", rol.NombreRol);
                     cmd.Parameters.AddWithValue("@Descripcion", rol.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", rol.Estado);
@@ -46,8 +46,8 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM Roles", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spGetRoles", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -79,8 +79,8 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM Roles WHERE RolID = @RolID", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spGetRolById", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@RolID", rolID);
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -111,12 +111,12 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("UPDATE Roles SET NombreRol = @NombreRol, Descripcion = @Descripcion, Estado = @Estado WHERE RolID = @RolID", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spUpdateRol", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@RolID", rol.RolID);
                     cmd.Parameters.AddWithValue("@NombreRol", rol.NombreRol);
                     cmd.Parameters.AddWithValue("@Descripcion", rol.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", rol.Estado);
-                    cmd.Parameters.AddWithValue("@RolID", rol.RolID);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -134,16 +134,16 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("DELETE FROM RolPermisos WHERE RolID = @RolID", conn);
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@RolID", rolID);
+                    SqlCommand cmdDelete = new SqlCommand("spEliminarPermisosDeRol", conn);
+                    cmdDelete.CommandType = CommandType.StoredProcedure;
+                    cmdDelete.Parameters.AddWithValue("@RolID", rolID);
                     conn.Open();
-                    cmd.ExecuteNonQuery();
+                    cmdDelete.ExecuteNonQuery();
 
                     foreach (var permisoID in permisosSeleccionados)
                     {
-                        SqlCommand cmdInsert = new SqlCommand("INSERT INTO RolPermisos (RolID, PermisoID) VALUES (@RolID, @PermisoID)", conn);
-                        cmdInsert.CommandType = CommandType.Text;
+                        SqlCommand cmdInsert = new SqlCommand("spAsignarPermisosARol", conn);
+                        cmdInsert.CommandType = CommandType.StoredProcedure;
                         cmdInsert.Parameters.AddWithValue("@RolID", rolID);
                         cmdInsert.Parameters.AddWithValue("@PermisoID", permisoID);
                         cmdInsert.ExecuteNonQuery();
@@ -164,12 +164,8 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand(
-                        "SELECT p.PermisoID, p.NombrePermiso, p.Descripcion " +
-                        "FROM Permisos p " +
-                        "INNER JOIN RolPermisos rp ON p.PermisoID = rp.PermisoID " +
-                        "WHERE rp.RolID = @RolID", conn);
-                    cmd.CommandType = CommandType.Text;
+                    SqlCommand cmd = new SqlCommand("spGetPermisosAsignados", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@RolID", rolID);
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -192,6 +188,39 @@ namespace gestion_de_permiso_de_usuario.Data
 
             return permisos;
         }
-    }
 
+
+        public List<Rol> GetAllRoles()
+        {
+            var roles = new List<Rol>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var query = "SELECT RolID, NombreRol FROM Roles";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var rol = new Rol
+                            {
+                                RolID = Convert.ToInt32(reader["RolID"]),
+                                NombreRol = reader["NombreRol"].ToString()
+                            };
+                            roles.Add(rol);
+                        }
+                    }
+                }
+            }
+
+            return roles;
+        }
+
+
+
+    }
 }
+
+

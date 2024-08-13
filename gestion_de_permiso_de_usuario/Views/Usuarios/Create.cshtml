@@ -1,0 +1,58 @@
+﻿@model gestion_de_permiso_de_usuario.Models.Usuario
+
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="NombreUsuario">Nombre del Usuario</label>
+        <input asp-for="NombreUsuario" class="form-control" />
+        <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PersonaID">Persona</label>
+        <select asp-for="PersonaID" class="form-control" asp-items="@(new SelectList(ViewBag.Personas, "PersonaID", "Nombre"))">
+            <option value="">Seleccione una persona</option>
+        </select>
+        <span asp-validation-for="PersonaID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RolID">Rol</label>
+        <select asp-for="RolID" class="form-control" asp-items="@(new SelectList(ViewBag.Roles, "RolID", "NombreRol"))">
+            <option value="">Seleccione un rol</option>
+        </select>
+        <span asp-validation-for="RolID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Contraseña"></label>
+        <input asp-for="Contraseña" type="password" class="form-control" />
+        <span asp-validation-for="Contraseña" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Estado"></label>
+        <select asp-for="Estado" class="form-control">
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+        </select>
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="CreadoPor" value="Admin" />
+
+
+    <br />
+    <button type="submit" class="btn btn-primary">Crear</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
