@@ -15,6 +15,10 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
     <link href="~/assets/img/favicon.png" rel="icon">
     <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -65,59 +69,61 @@
                 <div class="card-body">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
-                    <p class="text-center small">Enter your username & password to login</p>
+                    <h5 class="card-title text-center pb-0 fs-4">Inicia con tu cuenta</h5>
+                    <p class="text-center small">Ingrese el usuario y la contreaseña</p>
                   </div>
+                                    <form class="row g-3 needs-validation" asp-action="Iniciar" asp-controller="Login" method="post">
 
-                  <form class="row g-3 needs-validation" asp-action="Iniciar" asp-controller="Login" method="post">
+                                        @{
+                                            if (ViewData["CompletadoInicio"] != null)
+                                            {
+                                                <div class="alert alert-success">
+                                                    @ViewData["CompletadoInicio"]
+                                                </div>
+                                            }
+                                            else if (ViewData["IncompletoInicio"] != null)
+                                            {
+                                                <div class="alert alert-danger">
+                                                    @ViewData["IncompletoInicio"]
+                                                </div>
+                                            }
+                                        }
 
-                      
-                      @{
-                       
-                       if(ViewData["CompletadoInicio"] != null)
-                       {
-                          <div class="alert alert-success">
-                              @ViewData["CompleadoInicio"]
-                          </div>
-                       }
+                                        <div class="col-12">
+                                            <label for="NombreUsuario" class="form-label">Usuario</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person"></i></span>
+                                                <input type="text" name="NombreUsuario" class="form-control" id="yourUsername" required>
+                                                <div class="invalid-feedback">Introduzca el nombre</div>
+                                            </div>
+                                        </div>
 
-                      
-                       else if (ViewData["IncompletoInicio"] != null)
-                       {
-                          <div class="alert alert-danger">
-                              @ViewData["IncompletoInicio"]
-                          </div>
-                       }
-                       
-                       }
-                    <div class="col-12">
-                      <label for="NombreUsuario" class="form-label">Usuario</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend"></span>
-                        <input type="text" name="NombreUsuario" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Introduzca el nombre</div>
-                      </div>
-                    </div>
+                                        <div class="col-12">
+                                            <label for="Constraseña" class="form-label">Contraseña</label>
+                                            <div class="input-group has-validation">
+                                                <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-lock"></i></span>
+                                                <input type="password" name="Contraseña" class="form-control" id="yourPassword" required>
+                                                <div class="invalid-feedback">Ingrese la contraseña</div>
+                                            </div>
+                                        </div>
 
-                    <div class="col-12">
-                      <label for="Constraseña" class="form-label">Constraseña</label>
-                      <input type="password" name="Contraseña" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Ingrese la contraseña</div>
-                    </div>
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
+                                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                                            </div>
+                                        </div>
 
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember me</label>
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Don't have account? <a href="@Url.Action("Registrar","Login")">Create an account</a></p>
-                    </div>
-                  </form>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" type="submit">Login</button>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <p class="small mb-0">No tienes una cuenta? <a href="@Url.Action("Registrar", "Login")">Crear una cuenta</a></p>
+                                        </div>
+                                    </form>
+
+
 
                 </div>
               </div>

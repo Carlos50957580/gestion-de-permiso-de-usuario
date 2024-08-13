@@ -3,6 +3,9 @@ using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
@@ -63,8 +66,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 SqlCommand command = new SqlCommand("ValidarUsuario", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
-              
-                command.Parameters.AddWithValue("@NombreUsuario",usuario.NombreUsuario);
+                command.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
                 command.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
 
                 // Parámetro de salida
@@ -74,18 +76,40 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 };
                 command.Parameters.Add(outputParameter);
 
-               
                 connection.Open();
                 command.ExecuteNonQuery();
 
-             
                 bool esValido = (bool)outputParameter.Value;
                 if (esValido)
                 {
-                    // Credenciales válidas
-                   // ViewData["CompletadoInicio"] = "Bienvenido";
+                    // Obtener el rol del usuario
+                    SqlCommand roleCommand = new SqlCommand("ObtenerRolUsuario", connection)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    roleCommand.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
+
+                    SqlParameter roleParameter = new SqlParameter("@NombreRol", SqlDbType.NVarChar, 15)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    roleCommand.Parameters.Add(roleParameter);
+
+                    roleCommand.ExecuteNonQuery();
+                    string rolUsuario = (string)roleParameter.Value;
+
+                    // Crear las claims
+                    var claims = new List<Claim>
+                     {
+                       new Claim(ClaimTypes.Name, usuario.NombreUsuario),
+                       new Claim(ClaimTypes.Role, rolUsuario)
+                     };
+
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
                     return RedirectToAction("Index", "Home");
-                    
                 }
                 else
                 {
@@ -95,6 +119,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 }
             }
         }
-       
+
+
     }
 }

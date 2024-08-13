@@ -2876,3 +2876,10 @@ C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_pe
 C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\obj\Debug\net8.0\gestion_de_permiso_de_usuario.pdb
 C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\obj\Debug\net8.0\gestion_de_permiso_de_usuario.genruntimeconfig.cache
 C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\obj\Debug\net8.0\ref\gestion_de_permiso_de_usuario.dll
+C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\bin\Debug\net8.0\FluentAssertions.dll
+C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Elvys Brito\Desktop\Prueba2\gestion-de-permiso-de-usuario\gestion_de_permiso_de_usuario\bin\Debug\net8.0\System.Text.Json.dll

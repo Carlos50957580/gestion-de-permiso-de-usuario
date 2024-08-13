@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EB6/y+iLuKXJcd58fDWzoOt/XeuDLBcQZEZwm3KBnDQ5yZ+C1Z9fRHxh9zFL8INweUQ0eydOlq3ut1Q0vRpYqg==",
+  "dgSpecHash": "JbFNJgzvyZKy/RFv70o7aDPeAc8egSNabpC3EHnrXi2vKyqWSKGgKjWspyYG4TX+K/XueQqEr/xDJHCoWSpIbQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\ado.net.client.implementation\\1.4.4\\ado.net.client.implementation.1.4.4.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\azure.identity\\1.11.3\\azure.identity.1.11.3.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\fluentassertions\\6.12.0\\fluentassertions.6.12.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\humanizer.core.af\\2.14.1\\humanizer.core.af.2.14.1.nupkg.sha512",
@@ -81,6 +82,15 @@
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.2.0\\microsoft.data.sqlclient.sni.runtime.5.2.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.diasymreader\\2.0.0\\microsoft.diasymreader.2.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.dotnet.scaffolding.shared\\8.0.3\\microsoft.dotnet.scaffolding.shared.8.0.3.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.7\\microsoft.entityframeworkcore.8.0.7.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\8.0.7\\microsoft.entityframeworkcore.abstractions.8.0.7.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\8.0.7\\microsoft.entityframeworkcore.analyzers.8.0.7.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.entityframeworkcore.design\\8.0.7\\microsoft.entityframeworkcore.design.8.0.7.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.7\\microsoft.entityframeworkcore.relational.8.0.7.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\8.0.7\\microsoft.entityframeworkcore.sqlserver.8.0.7.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.7\\microsoft.entityframeworkcore.tools.8.0.7.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.0\\microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.configuration.binder\\8.0.0\\microsoft.extensions.configuration.binder.8.0.0.nupkg.sha512",
@@ -91,7 +101,7 @@
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.configuration.usersecrets\\8.0.0\\microsoft.extensions.configuration.usersecrets.8.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.dependencymodel\\8.0.0\\microsoft.extensions.dependencymodel.8.0.0.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.dependencymodel\\8.0.1\\microsoft.extensions.dependencymodel.8.0.1.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\8.0.0\\microsoft.extensions.diagnostics.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\8.0.0\\microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\microsoft.extensions.fileproviders.composite\\8.0.0\\microsoft.extensions.fileproviders.composite.8.0.0.nupkg.sha512",
@@ -195,14 +205,14 @@
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
-    "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.text.json\\8.0.4\\system.text.json.8.0.4.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.threading.tasks.dataflow\\7.0.0\\system.threading.tasks.dataflow.7.0.0.nupkg.sha512",
     "C:\\Users\\Elvys Brito\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\Elvys Brito\\.nuget\\packages\\volo.abp.core\\8.2.0\\volo.abp.core.8.2.0.nupkg.sha512",
-    "C:\\Users\\Elvys Brito\\.nuget\\packages\\volo.abp.virtualfilesystem\\8.2.0\\volo.abp.virtualfilesystem.8.2.0.nupkg.sha512"
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\volo.abp.core\\8.2.1\\volo.abp.core.8.2.1.nupkg.sha512",
+    "C:\\Users\\Elvys Brito\\.nuget\\packages\\volo.abp.virtualfilesystem\\8.2.1\\volo.abp.virtualfilesystem.8.2.1.nupkg.sha512"
   ],
   "logs": []
 }
