@@ -20,3 +20,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+.info-card {
+    margin-bottom: 20px;
+}
+
+.card-icon {
+    font-size: 50px;
+}
+
+.total-usuarios, .total-personas, .total-roles, .total-permisos {
+    background-color: #D9F9EA;
+    color: #00CD72;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 auto;
+}
