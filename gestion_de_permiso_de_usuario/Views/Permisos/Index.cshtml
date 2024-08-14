@@ -1,17 +1,12 @@
 ﻿@model IEnumerable<gestion_de_permiso_de_usuario.Models.Permiso>
-@using Microsoft.AspNetCore.Identity;
 
 @{
     ViewData["Title"] = "Lista de Permisos";
 }
 
-@if(User.IsInRole("Administrador"))
-{
-    <p>
-        <a asp-action="Create" class="btn btn-primary">Crear Nuevo Permiso</a>
-    </p>
-}
-
+<p>
+    <a asp-action="Create" class="btn btn-primary">Crear Nuevo Permiso</a>
+</p>
 <div class="table-responsive">
     <table id="permissionsTable" class="display" style="width:100%">
         <thead>
@@ -44,13 +39,10 @@
                     </td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            @if (User.IsInRole("Administrador"))
-                            {
-                                <a asp-action="Edit" asp-route-id="@item.PermisoID" class="btn btn-warning">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                            }
-                            <a asp-action="Details" asp-route-id="@item.PermisoID" class="btn btn-info">
+                            <a asp-action="Edit" asp-route-id="@item.PermisoID" class="btn btn-warning">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.PermisoID" class="btn btn-info ms-2">
                                 <i class="bi bi-eye"></i>
                             </a>
                             @* <a asp-action="Delete" asp-route-id="@item.PermisoID" class="btn btn-danger">
@@ -75,11 +67,11 @@
                 "pageLength": 10, // Número de registros por página por defecto
                 "language": {
                     "search": "Buscar:",
-                    "lengthMenu": "Mostrar MENU registros por página",
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
                     "zeroRecords": "No se encontraron resultados",
-                    "info": "Mostrando página PAGE de PAGES",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
                     "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(filtrado de MAX registros en total)",
+                    "infoFiltered": "(filtrado de _MAX_ registros en total)",
                     "paginate": {
                         "first": "Primero",
                         "last": "Último",

@@ -19,7 +19,7 @@
                 <th>Género</th>
                 <th>Teléfono</th>
                 <th>Correo</th>
-                <th>Acciones</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -35,20 +35,20 @@
                     <td>@Html.DisplayFor(modelItem => item.Correo)</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-warning btn-sm btn-editar m-auto"><i class="bi bi-pencil"></i></button>
-                           @*  <button type="button" class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button> *@
-                           @*  <a asp-action="Edit" asp-route-id="@item.PersonaID" class="btn btn-warning" onclick="abrirModal(null)"><i class="bi bi-pencil"></i></a>
-                            <a asp-action="Details" asp-route-id="@item.PersonaID" class="btn btn-info"><i class="bi bi-eye"></i></a> *@
+                            <button type="button" class="btn btn-sm btn-editar m-auto"><i class="bi bi-pencil"></i></button>
+                            @*  <button type="button" class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button> *@
+                            @*  <a asp-action="Edit" asp-route-id="@item.PersonaID" class="btn btn-warning" onclick="abrirModal(null)"><i class="bi bi-pencil"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.PersonaID" class="btn btn-info"><i class="bi bi-eye"></i></a> *@
                         </div>
                     </td>
                 </tr>
             }
-    
+
         </tbody>
     </table>
 </div>
 </div>
-<div class="modal" tabindex="-1" id="formodal"> 
+<div class="modal" tabindex="-1" id="formodal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -67,7 +67,7 @@
                             <label for="txtNombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="txtNombre" required>
                             <div class="invalid-feedback">Introduzca el nombre</div>
-                            
+
                         </div>
 
                         <div class="mb-3">
@@ -116,119 +116,120 @@
         </div>
     </div>
 
-@section Scripts {
-    <script>
-        (() => {
-            'use strict'
-            const forms = document.querySelectorAll('.needs-validation')
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
+    @section Scripts {
+        <script>
+            (() => {
+                'use strict'
+                const forms = document.querySelectorAll('.needs-validation')
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-        })()
-
-        var table; 
-        var filaSeleccionada;
-        let GuardarPersona = `@Url.Action("Edit", "People")`;
-
-        function abrirModal(Json) {
-            console.log(Json.fechaNacimiento2);
-            let fecha = new Date(Json.fechaNacimiento)
-            console.log(fecha)
-
-            $("#txtId").val(Json.personaID);
-            $("#txtNombre").val(Json.nombre);
-            $("#txtApellido").val(Json.apellido);
-            $("#txtNac").val(Json.fechaNacimiento2);
-            $("#cboSexo").val(Json.genero === "Masculino" ? 1 : (Json.genero === "Femenino" ? 2 : 3));
-            $("#txtTelefono").val(Json.telefono);
-            $("#textCorreo").val(Json.correo);
-
-            $("#formodal").modal("show");
-
-        }
-
-        function Guardar() {
-            const persona = {
-                PersonaID: $("#txtId").val(),
-                Nombre: $("#txtNombre").val(),
-                Apellido: $("#txtApellido").val(),
-                FechaNacimiento: $("#txtNac").val(),
-                Genero: $("#cboSexo").val() === "1" ? "Masculino" : ($("#cboSexo").val() === "2" ? "Femenino" : "Otro"),
-                Telefono: $("#txtTelefono").val(),
-                Correo: $("#textCorreo").val()
-            };
-
-            fetch('/Persona/UpdatePersona', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(persona)
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.json().then(err => { throw new Error(err.message); });
-                    }
-                    return response.json();
+                        form.classList.add('was-validated')
+                    }, false)
                 })
-                .then(data => {
-                    console.log(data.message);
-                    location.reload();
+            })()
+
+            var table;
+            var filaSeleccionada;
+            let GuardarPersona = `@Url.Action("Edit", "People")`;
+
+            function abrirModal(Json) {
+                console.log(Json.fechaNacimiento2);
+                let fecha = new Date(Json.fechaNacimiento)
+                console.log(fecha)
+
+                $("#txtId").val(Json.personaID);
+                $("#txtNombre").val(Json.nombre);
+                $("#txtApellido").val(Json.apellido);
+                $("#txtNac").val(Json.fechaNacimiento2);
+                $("#cboSexo").val(Json.genero === "Masculino" ? 1 : (Json.genero === "Femenino" ? 2 : 3));
+                $("#txtTelefono").val(Json.telefono);
+                $("#textCorreo").val(Json.correo);
+
+                $("#formodal").modal("show");
+
+            }
+
+            function Guardar() {
+                const persona = {
+                    PersonaID: $("#txtId").val(),
+                    Nombre: $("#txtNombre").val(),
+                    Apellido: $("#txtApellido").val(),
+                    FechaNacimiento: $("#txtNac").val(),
+                    Genero: $("#cboSexo").val() === "1" ? "Masculino" : ($("#cboSexo").val() === "2" ? "Femenino" : "Otro"),
+                    Telefono: $("#txtTelefono").val(),
+                    Correo: $("#textCorreo").val()
+                };
+
+                fetch('/Persona/UpdatePersona', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(persona)
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert(error.message); 
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(err => { throw new Error(err.message); });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data.message);
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert(error.message);
+                    });
+            }
+
+
+            $(document).ready(function () {
+                var table = $('#peopleTable').DataTable({
+                    "paging": true,
+                    "searching": true,
+                    "info": true,
+                    "lengthChange": true,
+                    "pageLength": 10,
+                    "language": {
+                        "search": "Buscar:",
+                        "lengthMenu": "Mostrar _MENU_ registros por página",
+                        "zeroRecords": "No se encontraron resultados",
+                        "info": "Mostrando página _PAGE_ de _PAGES_",
+                        "infoEmpty": "No hay registros disponibles",
+                        "infoFiltered": "(filtrado de _MAX_ registros en total)",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Último",
+                            "next": "Siguiente",
+                            "previous": "Anterior"
+                        }
+                    }
                 });
-        }
 
+                $("#peopleTable").on("click", ".btn-editar", function () {
+                    var fila = $(this).closest("tr");
+                    var data = table.row(fila).data();
+                    var personaId = data[0];
 
-        $(document).ready(function () {
-            var table = $('#peopleTable').DataTable({
-                "paging": true,
-                "searching": true,
-                "info": true,
-                "lengthChange": true,
-                "pageLength": 10,
-                "language": {
-                    "search": "Buscar:",
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "No se encontraron resultados",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(filtrado de _MAX_ registros en total)",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Último",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
+                    $.ajax({
+                        url: `/Persona/GetPersonaById/${personaId}`,
+                        type: "GET",
+                        success: function (response) {
+                            abrirModal(response);
+                        },
+                        error: function () {
+                            alert("Error al obtener los datos de la persona.");
+                        }
+                    });
+                });
             });
 
-            $("#peopleTable").on("click", ".btn-editar", function () {
-                var fila = $(this).closest("tr");
-                var data = table.row(fila).data();
-                var personaId = data[0]; 
+        </script>
+    }
 
-                $.ajax({
-                    url: `/Persona/GetPersonaById/${personaId}`,
-                    type: "GET",
-                    success: function (response) {
-                        abrirModal(response);
-                    },
-                    error: function () {
-                        alert("Error al obtener los datos de la persona.");
-                    }
-                });
-        });
-       });
-        
-    </script>
-}
