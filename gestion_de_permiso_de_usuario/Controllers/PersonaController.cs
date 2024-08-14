@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador,Supervisor")]
     public class PersonaController : Controller
     {
 
