@@ -3,30 +3,24 @@
     ViewData["Title"] = "Asignar Permisos";
 }
 
-<style>
-    .permisos-div {
-        background-color: white;
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-</style>
+<form asp-action="Asignar" class="form-register">
+    <div class="form-group">
 
-<label>Permisos</label>
-<br />
-<form asp-action="Asignar">
-    <input type="hidden" name="rolId" value="@ViewBag.RolID" />
-    <div class="form-group permisos-div">
-        @foreach (var permiso in ViewBag.Permisos)
-        {
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="permiso-@permiso.PermisoID" name="permisosSeleccionados" value="@permiso.PermisoID">
-                <label class="form-check-label" for="permiso-@permiso.PermisoID">
-                    @permiso.NombrePermiso
-                </label>
-            </div>
-        }
+        <h4>Permisos</h4>
+
+        <input type="hidden" name="rolId" value="@ViewBag.RolID" class="form-control" />
+        <div class="form-group permisos-div">
+            @foreach (var permiso in ViewBag.Permisos)
+            {
+                <div class="form-check">
+                    <input class="form-check-input class=" form-control"" type="checkbox" id="permiso-@permiso.PermisoID" name="permisosSeleccionados" value="@permiso.PermisoID">
+                    <label class="form-check-label" for="permiso-@permiso.PermisoID">
+                        @permiso.NombrePermiso
+                    </label>
+                </div>
+            }
+        </div>
+
     </div>
-    <hr />
     <button type="submit" class="btn btn-primary">Asignar</button>
 </form>

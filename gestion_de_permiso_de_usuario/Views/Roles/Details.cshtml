@@ -5,51 +5,50 @@
 }
 
 <div>
+    <h4 class="DRol">Informacion vigente sobre el rol de @Html.DisplayFor(model => model.NombreRol)</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Nombre del Rol
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NombreRol)
-        </dd>
-        <dt class="col-sm-2">
-            Descripción
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-        <dt class="col-sm-2">
-            Estado
-        </dt>
-        <dd class="col-sm-10">
-            @if (Model.Estado == 1)
-            {
-                <span>Activo</span>
-            }
-            else
-            {
-                <span>Inactivo</span>
-            }
-        </dd>
 
-        <hr />
-        <dt class="col-sm-2">
-            Permisos Asignados
-        </dt>
-        <dd class="col-sm-10">
-            <ul>
-                @foreach (var permiso in ViewBag.PermisosAsignados as List<gestion_de_permiso_de_usuario.Models.Permiso>)
-                {
-                    <ul>
-                        <li>@permiso.NombrePermiso - @permiso.Descripcion</li>
-                    </ul>
+    <table class="table table-borderless display TRol">
+        <thead>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="Titulo">Nombre del Rol</th>
+                <th class="SinTitulo">@Html.DisplayFor(model => model.NombreRol)</th>
+            </tr>
+            <tr>
+                <td class="Titulo">Descripción</td>
+                <td>@Html.DisplayFor(model => model.Descripcion)</td>
+            </tr>
+            <tr>
+                <td class="Titulo">
+                    Estado
+                </td>
 
-                }
-            </ul>
-        </dd>
-    </dl>
+                <td>
+                    @if (Model.Estado == 1)
+                    {
+                        <span>Activo</span>
+                    }
+                    else
+                    {
+                        <span>Inactivo</span>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="Titulo">Permisos Asignados</td>
+                <td>
+                    @foreach (var permiso in ViewBag.PermisosAsignados as List<gestion_de_permiso_de_usuario.Models.Permiso>)
+                    {
+                        <p>@permiso.NombrePermiso - @permiso.Descripcion</p>
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.RolID" class="btn btn-primary">Editar</a> |
     <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>

@@ -4,10 +4,14 @@
     ViewData["Title"] = "Lista de Roles";
 }
 
+@if (User.IsInRole("Administrador"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Crear Nuevo Rol</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Crear Nuevo Rol</a>
-</p>
+
 <div class="table-responsive">
     <table id="rolesTable" class="display" style="width:100%">
         <thead>
@@ -44,7 +48,7 @@
                             <a asp-action="Edit" asp-route-id="@item.RolID" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
                             <a asp-action="Details" asp-route-id="@item.RolID" class="btn btn-info ms-2"><i class="bi bi-eye"></i></a>
                             <a asp-action="Asignar" asp-route-id="@item.RolID" class="btn btn-success ms-2"><i class="bi bi-person-badge"></i></a>
-                       
+
                         </div>
                     </td>
                 </tr>

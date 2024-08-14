@@ -30,7 +30,7 @@ builder.Services.AddAuthorization( opcion =>
     {
         opcion.AddPolicy("Administrador", policy => policy.RequireRole("Administrador"));
         opcion.AddPolicy("Supervisor", policy => policy.RequireRole("Supervisor"));
-        opcion.AddPolicy("UsuarioBasico", policy => policy.RequireRole("UsuarioBasico"));
+        //opcion.AddPolicy("UsuarioBasico", policy => policy.RequireRole("UsuarioBasico"));
         opcion.AddPolicy("Invitado", policy => policy.RequireRole("Invitado"));
     });
 

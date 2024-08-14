@@ -5,12 +5,11 @@
 }
 
 <div>
-    <h4>Informacion vigente de @Html.DisplayFor(model => model.Nombre)</h4>
+    <h4 class="DUser">Informacion vigente de @Html.DisplayFor(model => model.Nombre)</h4>
     <hr />
 
-    <table class="table table-borderless display">
+    <table class="table table-borderless display TUser">
         <thead>
-
         </thead>
         <tbody>
             <tr>
@@ -49,40 +48,15 @@
                         <span>Estado no válido:</span>
                     }
                 </td>
-                </tr>
+            </tr>
             <tr>
                 <td class="Titulo">Contraseña:</td>
                 <td>@Html.DisplayFor(model => model.Contraseña)</td>
             </tr>
-            
+
         </tbody>
     </table>
 </div>
-    </div>
-</div>
-
-<style>
-    h4{
-        color: #5C6EF5;
-        font-weight: bold;
-    }
-    .table {
-        width: 30%;
-        font-family:sans-serif;
-        font-size: 15px;
-    }
-    .Titulo{
-        font-weight: bold;
-    }
-
-    .SinTitulo {
-        font-weight: normal;
-    }
-
-    .btn {
-        font-size: 15px;
-    }
-</style>
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model.UsuarioID" class="btn btn-primary">Editar</a>
@@ -90,4 +64,5 @@
 </div>
 
 
-  
+
+
