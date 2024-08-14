@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using FluentAssertions.Common;
 using System.Security.Cryptography;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         opcion.LoginPath = "/Login/Iniciar";
         opcion.ExpireTimeSpan = TimeSpan.FromMinutes(3);
         opcion.AccessDeniedPath = "/Home/Index";
+        opcion.LogoutPath = "/Login/Logout";
+        opcion.AccessDeniedPath = "/Login/AccessDenied";
     });
 
 builder.Services.AddAuthorization( opcion =>

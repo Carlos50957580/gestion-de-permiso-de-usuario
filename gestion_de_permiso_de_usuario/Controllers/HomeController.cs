@@ -15,6 +15,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
             _logger = logger;
         }
 
+       
         public IActionResult Index()
         {
             if (!User.Identity.IsAuthenticated)

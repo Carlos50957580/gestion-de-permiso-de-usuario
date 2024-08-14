@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
+    [Authorize]
     public class RolesController : Controller
     {
         private readonly RolDataAccess _rolDataAccess;
@@ -25,6 +27,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // POST: Roles/Create
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("NombreRol,Descripcion")] Rol rol)

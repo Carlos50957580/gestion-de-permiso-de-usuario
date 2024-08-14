@@ -89,54 +89,73 @@
                                         }
                                     }
 
-                                    <form asp-action="Registrar" asp-controller="Login" method="post" class="row g-3 needs-validation" novalidate>
-                                        <div class="col-12">
-                                            <label for="yourName" class="form-label">Nombre</label>
-                                            <input type="text" name="Nombre" class="form-control" id="yourName" required>
-                                            <div class="invalid-feedback">Introduzca el nombre</div>
-                                        </div>
+                                    <!DOCTYPE html>
+                                    <html lang="es">
+                                    <head>
+                                        <meta charset="UTF-8">
+                                        <title>Formulario de Registro</title>
+                                        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+                                        <style>
+                                            .validacion {
+                                                color: red;
+                                                margin-top: 5px;
+                                            }
+                                        </style>
+                                    </head>
+                                    <body>
+                                        <form id="miFormulario" asp-action="Registrar" asp-controller="Login" method="post" class="row g-3 needs-validation" novalidate>
+                                            <div class="col-12">
+                                                <label for="Nombre" class="form-label">Nombre</label>
+                                                <input type="text" name="Nombre" class="form-control" id="Nombre" required>
+                                                <div id="validacionNombre" class="validacion"></div>
+                                            </div>
 
-                                        <div class="col-12">
-                                            <label for="yourLastName" class="form-label">Apellido</label>
-                                            <input type="text" name="Apellido" class="form-control" id="yourLastName" required>
-                                            <div class="invalid-feedback">Introduzca el nombre</div>
-                                        </div>
+                                            <div class="col-12">
+                                                <label for="Apellido" class="form-label">Apellido</label>
+                                                <input type="text" name="Apellido" class="form-control" id="Apellido" required>
+                                                <div id="validacionApellido" class="validacion"></div>
+                                            </div>
 
-                                        <div class="col-12">
-                                            <label for="yourEmail" class="form-label">Correo Electrónico</label>
-                                            <input type="email" name="Correo" class="form-control" id="yourEmail" required>
-                                            <div class="invalid-feedback">Introduzca la dirección de correo electrónico</div>
-                                        </div>
+                                            <div class="col-12">
+                                                <label for="Correo" class="form-label">Correo Electrónico</label>
+                                                <input type="email" name="Correo" class="form-control" id="Correo" required>
+                                                <div id="validacionCorreo" class="validacion"></div>
+                                            </div>
 
-                                        <div class="col-12">
-                                            <label for="yourFechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-                                            <input type="date" name="FechaNacimiento" class="form-control" id="yourFechaNacimiento" required>
-                                            <div class="invalid-feedback">Please enter your date of birth!</div>
-                                        </div>
+                                            <div class="col-12">
+                                                <label for="FechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+                                                <input type="date" name="FechaNacimiento" class="form-control" id="FechaNacimiento" required>
+                                                <div id="validacionFechaNacimiento" class="validacion"></div>
+                                            </div>
 
-                                        <div class="col-12">
-                                            <label for="yourTelefono" class="form-label">Telefono</label>
-                                            <input type="tel" name="Telefono" class="form-control" id="yourFechaNacimiento" required>
-                                            <div class="invalid-feedback">Introduzca el numero de telefono!</div>
-                                        </div>
+                                            <div class="col-12">
+                                                <label for="Telefono" class="form-label">Teléfono</label>
+                                                <input type="tel" name="Telefono" class="form-control" id="Telefono" required>
+                                                <div id="validacionTelefono" class="validacion"></div>
+                                            </div>
 
-                                        <div class="col-12">
-                                            <label for="yourGenero" class="form-label">Género</label>
-                                            <select name="Genero" class="form-select" id="yourGenero" required>
-                                                <option value="">Seleccione su género</option>
-                                                <option value="Masculino">Masculino</option>
-                                                <option value="Femenino">Femenino</option>
-                                            </select>
-                                            <div class="invalid-feedback">Seleccione un género</div>
-                                        </div>
+                                            <div class="col-12">
+                                                <label for="Genero" class="form-label">Género</label>
+                                                <select name="Genero" class="form-select" id="Genero" required>
+                                                    <option value="">Seleccione su género</option>
+                                                    <option value="Masculino">Masculino</option>
+                                                    <option value="Femenino">Femenino</option>
+                                                </select>
+                                                <div id="validacionGenero" class="validacion"></div>
+                                            </div>
 
-                                        <div class="col-12">
-                                            <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
-                                        </div>
-                                        <div class="col-12">
-                                            <p class="small mb-0">¿Listo para iniciar sesión en tu cuenta? <a href="@Url.Action("Iniciar","Login")">Iniciar sesión</a></p>
-                                        </div>
-                                    </form>
+                                            <div class="col-12">
+                                                <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
+                                            </div>
+                                            <div class="col-12">
+                                                <p class="small mb-0">¿Listo para iniciar sesión en tu cuenta? <a href="@Url.Action("Iniciar","Login")">Iniciar sesión</a></p>
+                                            </div>
+                                        </form>
+
+                                        <script src="script.js"></script>
+                                    </body>
+                                </html>
+
 
 
                                 </div>
@@ -147,7 +166,7 @@
                                 <!-- You can delete the links only if you purchased the pro version. -->
                                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                                Create by <a href="https://github.com/Brito13">Raidy</a>
                             </div>
 
                         </div>
@@ -172,6 +191,7 @@
     <script src="~/assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
+    <script src="/js/RegistroValidacion.js"></script>
     <script src="~/assets/js/main.js"></script>
 
 </body>

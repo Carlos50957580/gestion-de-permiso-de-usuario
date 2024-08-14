@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -277,57 +278,86 @@
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
+           
+           
 
+            @if (User.IsInRole("Administrador") || User.IsInRole("Supervisor"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Registrar","Login")">
+                        <i class="bi bi-card-list"></i>
+                        <span>Registro</span>
+                    </a>
+                </li>
+
+                <!-- End Register Page Nav -->
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Iniciar","Login")">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        <span>Login</span>
+                    </a>
+                </li>
+
+                <!-- End Login Page Nav -->
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index","Permisos")">
+                        <i class="bi bi-shield-lock-fill"></i>
+                        <span>Permisos</span>
+                    </a>
+
+                </li>
+
+                <!-- End permisos Page Nav -->
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index","Roles")">
+                        <i class="bi bi-person-badge-fill"></i>
+                        <span>Roles</span>
+                    </a>
+                </li>
+
+                <!-- End Roles Page Nav -->
+
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index","Persona")">
+                        <i class="bi bi-person"></i>
+                        <span>Personas</span>
+                    </a>
+                </li>
+
+                <!-- End Persona Page Nav -->
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index","Usuarios")">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Usuarios</span>
+                    </a>
+                </li>
+
+                <!-- End Usuario Page Nav -->
+            }
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Registrar","Login")">
-                    <i class="bi bi-card-list"></i>
-                    <span>Registro</span>
-                </a>
-            </li><!-- End Register Page Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Iniciar","Login")">
-                    <i class="bi bi-box-arrow-in-right"></i>
-                    <span>Login</span>
-                </a>
-            </li><!-- End Login Page Nav -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index","Permisos")">
-                    <i class="bi bi-shield-lock-fill"></i>
-                    <span>Permisos</span>
-                </a>
-
-            </li><!-- End permisos Page Nav -->
+                <form asp-controller="Login" asp-action="Logout" method="post" style="display: inline;">
+                    <button type="submit" class="nav-link collapsed">
+                        <i class="bi bi-box-arrow-right"></i> <!-- Cambia el icono aquí -->
+                        <span>Salir</span>
+                    </button>
+                </form>
+            </li>
 
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index","Roles")">
-                    <i class="bi bi-person-badge-fill"></i>
-                    <span>Roles</span>
-                </a>
-
-            </li><!-- End Roles Page Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index","Persona")">
-                    <i class="bi bi-person"></i>
-                    <span>Personas</span>
-                </a>
-
-            </li><!-- End Persona Page Nav -->
 
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index","Usuarios")">
-                    <i class="bi bi-people-fill"></i>
-                    <span>Usuarios</span>
-                </a>
-
-            </li><!-- End Usuario Page Nav -->
-
-
- @*            <li class="nav-item">
+            @*            <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>

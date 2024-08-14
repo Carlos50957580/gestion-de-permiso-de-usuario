@@ -35,4 +35,8 @@
     <Folder Include="Clases\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\RegistroValidacion.js" />
+  </ItemGroup>
+
 </Project>

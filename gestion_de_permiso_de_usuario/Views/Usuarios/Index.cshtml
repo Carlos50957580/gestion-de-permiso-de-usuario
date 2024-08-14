@@ -4,9 +4,15 @@
     ViewData["Title"] = "Lista de Usuarios";
 }
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Crear Nuevo Usuario</a>
-</p>
+
+@if (User.IsInRole("Administrador"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Crear Nuevo Usuario</a>
+    </p>
+}
+
+
 <div class="table-responsive">
     <table id="usuariosTable" class="display" style="width:100%">
         <thead>

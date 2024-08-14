@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
+    
+    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly UsuarioDataAccess _usuarioDataAccess;
@@ -27,6 +30,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Usuarios/Details/5
+
         public IActionResult Details(int id)
         {
             var usuario = _usuarioDataAccess.GetUsuarioConDetallesByID(id);

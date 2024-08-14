@@ -2005,6 +2005,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\wwwroot\\js\\RegistroValidacion.js",
+      "PackagePath": "staticwebassets\\js\\RegistroValidacion.js"
+    },
+    {
       "Id": "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

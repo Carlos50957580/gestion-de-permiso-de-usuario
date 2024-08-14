@@ -11,6 +11,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
 {
     public class Login(IConfiguration configuration) : Controller
     {
+
         string connectionString = configuration.GetConnectionString("DefaultConnection");
 
         public IActionResult Iniciar()
@@ -23,6 +24,12 @@ namespace gestion_de_permiso_de_usuario.Controllers
         {
             return View();
         }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         
@@ -119,6 +126,16 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 }
             }
         }
+
+        [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        // Cierra la sesión del usuario
+        await HttpContext.SignOutAsync();
+
+        // Redirige al usuario a la página de inicio o a cualquier otra página después del logout
+        return RedirectToAction("Iniciar", "Login");
+    }
 
 
     }

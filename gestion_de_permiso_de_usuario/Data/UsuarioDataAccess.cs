@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using gestion_de_permiso_de_usuario.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 
 namespace gestion_de_permiso_de_usuario.Data
 {
+    
     public class UsuarioDataAccess
     {
         private readonly string _connectionString;

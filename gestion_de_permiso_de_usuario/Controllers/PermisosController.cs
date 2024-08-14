@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization; // Importante para el uso del atributo
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
+    [Authorize(Roles = "Administrador,Supervisor")]
     public class PermisosController : Controller
     {
         private readonly PermisoDataAccess _permisoDataAccess;
@@ -17,11 +18,12 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Permisos/Create
-        [Authorize(Roles = "Administrador")] // Solo los administradores pueden crear permisos
+        [Authorize(Roles = "Administrador")]
         public IActionResult Create()
         {
             return View();
         }
+
 
         // POST: Permisos/Create
         [HttpPost]
@@ -38,6 +40,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Permisos/Index
+
         public IActionResult Index()
         {
             var permisos = _permisoDataAccess.GetPermisos();
@@ -45,7 +48,6 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Permisos/Edit
-        [Authorize(Roles = "Administrador")] // Solo los administradores pueden editar permisos
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -65,7 +67,6 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Permisos/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrador")] // Solo los administradores pueden editar permisos
         public IActionResult Edit(int id, [Bind("PermisoID,NombrePermiso,Descripcion,Estado,CreadoPor,ActualizadoPor")] Permiso permiso)
         {
             if (id != permiso.PermisoID)

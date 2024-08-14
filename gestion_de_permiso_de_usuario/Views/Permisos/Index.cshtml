@@ -1,12 +1,17 @@
 ﻿@model IEnumerable<gestion_de_permiso_de_usuario.Models.Permiso>
+@using Microsoft.AspNetCore.Identity;
 
 @{
     ViewData["Title"] = "Lista de Permisos";
 }
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Crear Nuevo Permiso</a>
-</p>
+@if(User.IsInRole("Administrador"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Crear Nuevo Permiso</a>
+    </p>
+}
+
 <div class="table-responsive">
     <table id="permissionsTable" class="display" style="width:100%">
         <thead>

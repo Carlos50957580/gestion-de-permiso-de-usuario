@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tM0CTWh/lYRDuXbDYY/Wk4vm1ncgVldco2Umznyp9Ew=",
+  "Hash": "ThYQ8JgJK4aVePimuJi63zh9hl+CZ9ef59DujoTGINo=",
   "Source": "gestion_de_permiso_de_usuario",
   "BasePath": "_content/gestion_de_permiso_de_usuario",
   "Mode": "Default",
@@ -9553,6 +9553,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\wwwroot\\js\\RegistroValidacion.js",
+      "SourceId": "gestion_de_permiso_de_usuario",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\wwwroot\\",
+      "BasePath": "_content/gestion_de_permiso_de_usuario",
+      "RelativePath": "js/RegistroValidacion.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\RegistroValidacion.js"
     },
     {
       "Identity": "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\wwwroot\\js\\site.js",
