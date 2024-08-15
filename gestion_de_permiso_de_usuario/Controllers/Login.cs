@@ -32,7 +32,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
 
 
         [HttpPost]
-        
+        [AutoValidateAntiforgeryToken]
         public IActionResult Registrar(Persona personas)
         {
             try
@@ -136,7 +136,5 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // Redirige al usuario a la página de inicio o a cualquier otra página después del logout
         return RedirectToAction("Iniciar", "Login");
     }
-
-
     }
 }

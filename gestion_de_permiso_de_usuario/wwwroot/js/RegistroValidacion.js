@@ -70,9 +70,7 @@
         if (entrar) {
             return; // No enviar el formulario si hay errores
         } else {
-            alert("Formulario enviado correctamente");
-            // Aquí puedes enviar el formulario o realizar otra acción
-            // Ejemplo: form.submit(); para enviar el formulario
+             form.submit();
         }
     });
 });
