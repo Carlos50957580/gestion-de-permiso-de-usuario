@@ -4,10 +4,10 @@ using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity; // Añadir para la autenticación
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
-
     [Authorize(Roles = "Administrador,Supervisor")]
     public class UsuariosController : Controller
     {
@@ -30,7 +30,6 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Usuarios/Details/5
-
         public IActionResult Details(int id)
         {
             var usuario = _usuarioDataAccess.GetUsuarioConDetallesByID(id);
@@ -42,6 +41,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Usuarios/Create
+        [Authorize(Roles = "Administrador")]
         public IActionResult Create()
         {
             ViewBag.Personas = _personaDataAccess.GetAllPersonas();
@@ -52,10 +52,11 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("NombreUsuario,PersonaID,RolID,Contraseña,Estado,CreadoPor")] Usuario usuario)
+        public IActionResult Create([Bind("NombreUsuario,PersonaID,RolID,Contraseña,Estado")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
+                usuario.CreadoPor = User.Identity.Name; // Asignar el usuario actual al campo CreadoPor
                 _usuarioDataAccess.InsertUsuario(usuario);
                 return RedirectToAction(nameof(Index));
             }
@@ -80,7 +81,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Usuarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("UsuarioID,NombreUsuario,PersonaID,RolID,Contraseña,Estado,CreadoPor")] Usuario usuario)
+        public IActionResult Edit(int id, [Bind("UsuarioID,NombreUsuario,PersonaID,RolID,Contraseña,Estado")] Usuario usuario)
         {
             if (id != usuario.UsuarioID)
             {
@@ -91,6 +92,15 @@ namespace gestion_de_permiso_de_usuario.Controllers
             {
                 try
                 {
+                    var existingUser = _usuarioDataAccess.GetUsuarioByID(usuario.UsuarioID);
+                    if (existingUser == null)
+                    {
+                        return NotFound();
+                    }
+
+                    usuario.CreadoPor = existingUser.CreadoPor; // Mantener el valor original para CreadoPor
+                    usuario.ActualizadoPor = User.Identity.Name; // Asignar el usuario actual al campo ActualizadoPor
+
                     _usuarioDataAccess.UpdateUsuario(usuario);
                 }
                 catch

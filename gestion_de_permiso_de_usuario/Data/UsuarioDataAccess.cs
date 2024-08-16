@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using gestion_de_permiso_de_usuario.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 
 namespace gestion_de_permiso_de_usuario.Data
 {
-    
     public class UsuarioDataAccess
     {
         private readonly string _connectionString;
@@ -52,7 +50,6 @@ namespace gestion_de_permiso_de_usuario.Data
             }
             catch (Exception ex)
             {
-                // Manejo de excepción: Registrar el error o lanzar una excepción
                 throw new Exception("Error al obtener usuarios con detalles.", ex);
             }
 
@@ -97,7 +94,6 @@ namespace gestion_de_permiso_de_usuario.Data
             }
             catch (Exception ex)
             {
-                // Manejo de excepción: Registrar el error o lanzar una excepción
                 throw new Exception("Error al obtener usuario por ID.", ex);
             }
 
@@ -121,7 +117,8 @@ namespace gestion_de_permiso_de_usuario.Data
                         command.Parameters.AddWithValue("@RolID", usuario.RolID);
                         command.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
                         command.Parameters.AddWithValue("@Estado", usuario.Estado);
-                        command.Parameters.AddWithValue("@CreadoPor", usuario.CreadoPor);
+                        command.Parameters.AddWithValue("@CreadoPor", usuario.CreadoPor); // Optional if needed
+                        command.Parameters.AddWithValue("@ActualizadoPor", usuario.ActualizadoPor); // New parameter
 
                         connection.Open();
                         command.ExecuteNonQuery();
@@ -130,7 +127,6 @@ namespace gestion_de_permiso_de_usuario.Data
             }
             catch (Exception ex)
             {
-                // Manejo de excepción: Registrar el error o lanzar una excepción
                 throw new Exception("Error al actualizar usuario.", ex);
             }
         }
@@ -171,7 +167,6 @@ namespace gestion_de_permiso_de_usuario.Data
             }
             catch (Exception ex)
             {
-                // Manejo de excepción: Registrar el error o lanzar una excepción
                 throw new Exception("Error al obtener detalles del usuario por ID.", ex);
             }
 
@@ -203,7 +198,6 @@ namespace gestion_de_permiso_de_usuario.Data
             }
             catch (Exception ex)
             {
-                // Manejo de excepción: Registrar el error o lanzar una excepción
                 throw new Exception("Error al insertar usuario.", ex);
             }
         }

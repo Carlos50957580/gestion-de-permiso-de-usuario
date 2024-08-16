@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
+    "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
+    "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "projectUniqueName": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
         "projectName": "gestion_de_permiso_de_usuario",
-        "projectPath": "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
-        "packagesPath": "C:\\Users\\Elvys Brito\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Elvys Brito\\Desktop\\Prueba2\\gestion-de-permiso-de-usuario\\gestion_de_permiso_de_usuario\\obj\\",
+        "projectPath": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "packagesPath": "C:\\Users\\PYC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Elvys Brito\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\PYC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -119,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using gestion_de_permiso_de_usuario.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 
 namespace gestion_de_permiso_de_usuario.Data
 {
-    
     public class RolDataAccess
     {
         private readonly string _connectionString;
@@ -18,7 +16,7 @@ namespace gestion_de_permiso_de_usuario.Data
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public void AddRol(Rol rol)
+        public void AddRol(Rol rol, string usuario)
         {
             try
             {
@@ -29,6 +27,7 @@ namespace gestion_de_permiso_de_usuario.Data
                     cmd.Parameters.AddWithValue("@NombreRol", rol.NombreRol);
                     cmd.Parameters.AddWithValue("@Descripcion", rol.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", rol.Estado);
+                    cmd.Parameters.AddWithValue("@CreadoPor", usuario);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -60,7 +59,9 @@ namespace gestion_de_permiso_de_usuario.Data
                             RolID = Convert.ToInt32(reader["RolID"]),
                             NombreRol = reader["NombreRol"].ToString(),
                             Descripcion = reader["Descripcion"].ToString(),
-                            Estado = Convert.ToInt32(reader["Estado"])
+                            Estado = Convert.ToInt32(reader["Estado"]),
+                            CreadoPor = reader["CreadoPor"].ToString(),
+                            ActualizadoPor = reader["ActualizadoPor"].ToString()
                         });
                     }
                 }
@@ -94,7 +95,9 @@ namespace gestion_de_permiso_de_usuario.Data
                             RolID = Convert.ToInt32(reader["RolID"]),
                             NombreRol = reader["NombreRol"].ToString(),
                             Descripcion = reader["Descripcion"].ToString(),
-                            Estado = Convert.ToInt32(reader["Estado"])
+                            Estado = Convert.ToInt32(reader["Estado"]),
+                            CreadoPor = reader["CreadoPor"].ToString(),
+                            ActualizadoPor = reader["ActualizadoPor"].ToString()
                         };
                     }
                 }
@@ -107,7 +110,7 @@ namespace gestion_de_permiso_de_usuario.Data
             return rol;
         }
 
-        public void UpdateRol(Rol rol)
+        public void UpdateRol(Rol rol, string usuario)
         {
             try
             {
@@ -119,6 +122,7 @@ namespace gestion_de_permiso_de_usuario.Data
                     cmd.Parameters.AddWithValue("@NombreRol", rol.NombreRol);
                     cmd.Parameters.AddWithValue("@Descripcion", rol.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", rol.Estado);
+                    cmd.Parameters.AddWithValue("@ActualizadoPor", usuario);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -191,7 +195,6 @@ namespace gestion_de_permiso_de_usuario.Data
             return permisos;
         }
 
-
         public List<Rol> GetAllRoles()
         {
             var roles = new List<Rol>();
@@ -219,10 +222,5 @@ namespace gestion_de_permiso_de_usuario.Data
 
             return roles;
         }
-
-
-
     }
 }
-
-

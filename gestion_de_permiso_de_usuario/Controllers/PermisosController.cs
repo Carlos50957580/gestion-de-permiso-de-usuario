@@ -24,15 +24,16 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View();
         }
 
-
         // POST: Permisos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrador")] // Solo los administradores pueden crear permisos
-        public IActionResult Create([Bind("NombrePermiso,Descripcion,CreadoPor")] Permiso permiso)
+        public IActionResult Create([Bind("NombrePermiso,Descripcion,Estado")] Permiso permiso)
         {
             if (ModelState.IsValid)
             {
+                permiso.CreadoPor = User.Identity.Name; // Asigna el usuario que crea el permiso
+                permiso.FechaCambio = DateTime.Now; // Asigna la fecha de creación
                 _permisoDataAccess.AddPermiso(permiso);
                 return RedirectToAction(nameof(Index));
             }
@@ -40,7 +41,6 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Permisos/Index
-
         public IActionResult Index()
         {
             var permisos = _permisoDataAccess.GetPermisos();
@@ -78,6 +78,9 @@ namespace gestion_de_permiso_de_usuario.Controllers
             {
                 try
                 {
+                    // Asigna el nombre del usuario que está realizando la actualización
+                    permiso.ActualizadoPor = User.Identity.Name;
+
                     _permisoDataAccess.UpdatePermiso(permiso);
                     return RedirectToAction(nameof(Index));
                 }
@@ -89,6 +92,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
             }
             return View(permiso);
         }
+
 
         // GET: Permisos/Details
         public IActionResult Details(int? id)

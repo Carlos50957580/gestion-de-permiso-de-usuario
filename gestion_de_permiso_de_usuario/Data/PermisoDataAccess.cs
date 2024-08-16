@@ -1,16 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authorization;
-using System.Runtime.InteropServices;
 
 namespace gestion_de_permiso_de_usuario.Data
 {
-   
     public class PermisoDataAccess
     {
         private readonly string _connectionString;
@@ -129,7 +125,7 @@ namespace gestion_de_permiso_de_usuario.Data
                     cmd.Parameters.AddWithValue("@NombrePermiso", permiso.NombrePermiso);
                     cmd.Parameters.AddWithValue("@Descripcion", permiso.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", permiso.Estado);
-                    cmd.Parameters.AddWithValue("@ActualizadoPor", permiso.ActualizadoPor);
+                    cmd.Parameters.AddWithValue("@ActualizadoPor", permiso.ActualizadoPor); // Asegúrate de incluir este parámetro
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -140,5 +136,7 @@ namespace gestion_de_permiso_de_usuario.Data
                 throw new Exception("Error al actualizar el permiso: " + ex.Message);
             }
         }
+
+
     }
 }

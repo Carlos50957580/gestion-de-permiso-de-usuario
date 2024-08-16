@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
-
     [Authorize(Roles = "Administrador,Supervisor")]
     public class RolesController : Controller
     {
@@ -22,20 +21,21 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Roles/Create
+        [Authorize(Roles = "Administrador")]
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: Roles/Create
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("NombreRol,Descripcion")] Rol rol)
+        public IActionResult Create([Bind("NombreRol,Descripcion,Estado")] Rol rol)
         {
             if (ModelState.IsValid)
             {
-                _rolDataAccess.AddRol(rol);
+                string usuario = User.Identity.Name;
+                _rolDataAccess.AddRol(rol, usuario);
                 return RedirectToAction(nameof(Index));
             }
             return View(rol);
@@ -79,7 +79,8 @@ namespace gestion_de_permiso_de_usuario.Controllers
             {
                 try
                 {
-                    _rolDataAccess.UpdateRol(rol);
+                    string usuario = User.Identity.Name;
+                    _rolDataAccess.UpdateRol(rol, usuario);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
