@@ -5,10 +5,10 @@ using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity; // Añadir para la autenticación
+using gestion_de_permiso_de_usuario.Filters;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
-    [Authorize(Roles = "Administrador,Supervisor")]
     public class UsuariosController : Controller
     {
         private readonly UsuarioDataAccess _usuarioDataAccess;
@@ -22,13 +22,16 @@ namespace gestion_de_permiso_de_usuario.Controllers
             _rolDataAccess = new RolDataAccess(configuration);
         }
 
+
+        [Permiso("Ver Usuarios")]
+
         // GET: Usuarios/Index
         public IActionResult Index()
         {
             var usuarios = _usuarioDataAccess.GetUsuariosConDetalles();
             return View(usuarios);
         }
-
+        [Permiso("Ver Detalles de Usuarios")]
         // GET: Usuarios/Details/5
         public IActionResult Details(int id)
         {
@@ -40,8 +43,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Create
-        [Authorize(Roles = "Administrador")]
+        [Permiso("Crear Usuario")]
         public IActionResult Create()
         {
             ViewBag.Personas = _personaDataAccess.GetAllPersonas();
@@ -66,6 +68,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Usuarios/Edit/5
+        [Permiso("Editar Usuarios")]
         public IActionResult Edit(int id)
         {
             var usuario = _usuarioDataAccess.GetUsuarioByID(id);
@@ -81,6 +84,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Usuarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Permiso("Editar Usuarios")]
         public IActionResult Edit(int id, [Bind("UsuarioID,NombreUsuario,PersonaID,RolID,Contraseña,Estado")] Usuario usuario)
         {
             if (id != usuario.UsuarioID)

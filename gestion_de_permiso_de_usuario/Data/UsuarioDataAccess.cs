@@ -201,5 +201,35 @@ namespace gestion_de_permiso_de_usuario.Data
                 throw new Exception("Error al insertar usuario.", ex);
             }
         }
+
+        public List<string> GetPermisosDeUsuario(string nombreUsuario)
+        {
+            // Consulta que obtiene los permisos del usuario basado en su nombre de usuario
+            string query = @"
+                SELECT P.NombrePermiso
+                FROM Permisos p
+                JOIN RolPermisos rp ON p.PermisoID = rp.PermisoID
+                JOIN Roles r ON rp.RolID = r.RolID
+                JOIN Usuarios u ON r.RolID = u.RolID
+                WHERE u.NombreUsuario = @NombreUsuario";
+
+            var permisos = new List<string>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    permisos.Add(reader["NombrePermiso"].ToString());
+                }
+                reader.Close();
+            }
+
+            return permisos;
+        }
     }
 }
+

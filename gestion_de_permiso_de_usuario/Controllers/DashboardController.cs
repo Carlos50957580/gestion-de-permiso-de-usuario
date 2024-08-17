@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
+using gestion_de_permiso_de_usuario.Filters;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
@@ -23,6 +24,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         [HttpGet("Index")]
+        [Permiso("Ver Dashboard")]
         public IActionResult Index()
         {
             var usuarios = _usuarioDataAccess.GetUsuariosConDetalles();

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using gestion_de_permiso_de_usuario.Filters;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
-    [Authorize(Roles = "Administrador,Supervisor")]
     public class RolesController : Controller
     {
         private readonly RolDataAccess _rolDataAccess;
@@ -21,7 +19,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Roles/Create
-        [Authorize(Roles = "Administrador")]
+        [Permiso("Crear Roles")]
         public IActionResult Create()
         {
             return View();
@@ -30,6 +28,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Roles/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Permiso("Crear Roles")]
         public IActionResult Create([Bind("NombreRol,Descripcion,Estado")] Rol rol)
         {
             if (ModelState.IsValid)
@@ -41,6 +40,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(rol);
         }
 
+        [Permiso("Ver Roles")]
         // GET: Roles/Index
         public IActionResult Index()
         {
@@ -48,7 +48,8 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(roles);
         }
 
-        // GET: Roles/Edit
+        // GET: Roles/Edit/5
+        [Permiso("Editar Roles")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -65,9 +66,10 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(rol);
         }
 
-        // POST: Roles/Edit
+        // POST: Roles/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Permiso("Editar Roles")]
         public IActionResult Edit(int id, [Bind("RolID,NombreRol,Descripcion,Estado")] Rol rol)
         {
             if (id != rol.RolID)
@@ -92,7 +94,8 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(rol);
         }
 
-        // GET: Roles/Details
+        [Permiso("Ver Detalles de roles")]
+        // GET: Roles/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -112,7 +115,8 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(rol);
         }
 
-        // GET: Roles/Asignar
+        // GET: Roles/Asignar/5
+        [Permiso("Asignar Permisos")] 
         public IActionResult Asignar(int? id)
         {
             if (id == null)
@@ -137,6 +141,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Roles/Asignar
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Permiso("Asignar Permisos")]
         public IActionResult Asignar(int rolId, int[] permisosSeleccionados)
         {
             try

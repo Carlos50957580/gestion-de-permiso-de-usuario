@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authorization; // Importante para el uso del atributo [Authorize]
+using Microsoft.AspNetCore.Authorization;
+using gestion_de_permiso_de_usuario.Filters;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
-    [Authorize(Roles = "Administrador,Supervisor")]
     public class PermisosController : Controller
     {
         private readonly PermisoDataAccess _permisoDataAccess;
@@ -16,9 +16,16 @@ namespace gestion_de_permiso_de_usuario.Controllers
         {
             _permisoDataAccess = new PermisoDataAccess(configuration);
         }
+        [Permiso("Ver Permisos")]
+        // GET: Permisos/Index
+        public IActionResult Index()
+        {
+            var permisos = _permisoDataAccess.GetPermisos();
+            return View(permisos);
+        }
 
         // GET: Permisos/Create
-        [Authorize(Roles = "Administrador")]
+        [Permiso("Crear Permisos")]
         public IActionResult Create()
         {
             return View();
@@ -27,7 +34,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Permisos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrador")] // Solo los administradores pueden crear permisos
+        [Permiso("Crear Permisos")]
         public IActionResult Create([Bind("NombrePermiso,Descripcion,Estado")] Permiso permiso)
         {
             if (ModelState.IsValid)
@@ -40,14 +47,8 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(permiso);
         }
 
-        // GET: Permisos/Index
-        public IActionResult Index()
-        {
-            var permisos = _permisoDataAccess.GetPermisos();
-            return View(permisos);
-        }
-
         // GET: Permisos/Edit
+        [Permiso("Editar Permisos")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -67,6 +68,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Permisos/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Permiso("Editar Permisos")]
         public IActionResult Edit(int id, [Bind("PermisoID,NombrePermiso,Descripcion,Estado,CreadoPor,ActualizadoPor")] Permiso permiso)
         {
             if (id != permiso.PermisoID)
@@ -93,8 +95,8 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(permiso);
         }
 
-
         // GET: Permisos/Details
+        [Permiso("Ver Detalles de Permisos")]
         public IActionResult Details(int? id)
         {
             if (id == null)

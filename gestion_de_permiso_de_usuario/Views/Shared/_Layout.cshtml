@@ -281,8 +281,7 @@
            
            
 
-            @if (User.IsInRole("Administrador") || User.IsInRole("Supervisor"))
-            {
+          
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="@Url.Action("Registrar","Login")">
                         <i class="bi bi-card-list"></i>
@@ -343,7 +342,7 @@
                 </li>
 
                 <!-- End Usuario Page Nav -->
-            }
+            
 
             <li class="nav-item">
                 <form asp-controller="Login" asp-action="Logout" method="post" style="display: inline;">

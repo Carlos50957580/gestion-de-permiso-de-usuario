@@ -4,12 +4,11 @@
     ViewData["Title"] = "Lista de Roles";
 }
 
-@if (User.IsInRole("Administrador"))
-{
+
     <p>
         <a asp-action="Create" class="btn btn-primary">Crear Nuevo Rol</a>
     </p>
-}
+
 
 
 <div class="table-responsive">

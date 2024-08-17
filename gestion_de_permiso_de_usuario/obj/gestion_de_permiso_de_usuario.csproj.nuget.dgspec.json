@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
+    "C:\\Users\\PYC\\Desktop\\final\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
+    "C:\\Users\\PYC\\Desktop\\final\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "projectUniqueName": "C:\\Users\\PYC\\Desktop\\final\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
         "projectName": "gestion_de_permiso_de_usuario",
-        "projectPath": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "projectPath": "C:\\Users\\PYC\\Desktop\\final\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
         "packagesPath": "C:\\Users\\PYC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PYC\\Desktop\\Nueva carpeta (2)\\gestion_de_permiso_de_usuario\\obj\\",
+        "outputPath": "C:\\Users\\PYC\\Desktop\\final\\gestion_de_permiso_de_usuario\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PYC\\AppData\\Roaming\\NuGet\\NuGet.Config",

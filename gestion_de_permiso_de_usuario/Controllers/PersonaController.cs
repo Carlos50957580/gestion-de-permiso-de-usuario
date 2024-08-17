@@ -3,14 +3,13 @@ using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
-
+using gestion_de_permiso_de_usuario.Filters;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
-    [Authorize(Roles = "Administrador,Supervisor")]
+    [Permiso("Ver y editar Personas")]
     public class PersonaController : Controller
     {
-
         private readonly PersonaDataAccess _personaDataAccess;
 
         public PersonaController(IConfiguration configuration)
@@ -18,26 +17,6 @@ namespace gestion_de_permiso_de_usuario.Controllers
             _personaDataAccess = new PersonaDataAccess(configuration);
         }
 
-        //// GET: Persona/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Persona/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create([Bind("Nombre,Apellido,FechaNacimiento,Genero,Telefono,Correo")] Persona persona)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _personaDataAccess.AddPersona(persona);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(persona);
-        //}
-
-        // GET: Persona/Index
         public IActionResult Index()
         {
             var personas = _personaDataAccess.GetPersonas();
@@ -76,7 +55,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 try
                 {
                     _personaDataAccess.UpdatePersona(persona);
-                    return Json(persona);/*RedirectToAction(nameof(Index));*/
+                    return Json(persona); /*RedirectToAction(nameof(Index));*/
                 }
                 catch (Exception ex)
                 {
@@ -87,22 +66,6 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(persona);
         }
 
-        // GET: Persona/Details
-        //public IActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var persona = _personaDataAccess.GetPersonaById(id.Value);
-        //    if (persona == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(persona);
-        //}
         [HttpGet]
         public IActionResult GetPersonaById(int id)
         {
@@ -113,26 +76,24 @@ namespace gestion_de_permiso_de_usuario.Controllers
             }
             return Json(persona);
         }
+
         [HttpPost]
-public IActionResult UpdatePersona([FromBody] Persona persona)
-{
-    if (persona.PersonaID == 0)
-    {
-        return BadRequest(new { message = "Datos inválidos para la actualización." });
-    }
+        public IActionResult UpdatePersona([FromBody] Persona persona)
+        {
+            if (persona.PersonaID == 0)
+            {
+                return BadRequest(new { message = "Datos inválidos para la actualización." });
+            }
 
-    try
-    {
-        _personaDataAccess.UpdatePersona(persona);
-        return Ok(new { message = "Persona actualizada correctamente." });
-    }
-    catch (Exception ex)
-    {
-        return StatusCode(500, new { message = "Error al actualizar la persona: " + ex.Message });
-    }
-}
-
-
+            try
+            {
+                _personaDataAccess.UpdatePersona(persona);
+                return Ok(new { message = "Persona actualizada correctamente." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error al actualizar la persona: " + ex.Message });
+            }
+        }
     }
 }
-
