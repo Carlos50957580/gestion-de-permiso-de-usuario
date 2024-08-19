@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Text;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.Extensions.Configuration;
+using System.Security.Cryptography;
 
 namespace gestion_de_permiso_de_usuario.Data
 {
@@ -81,7 +83,7 @@ namespace gestion_de_permiso_de_usuario.Data
                                     NombreUsuario = reader["NombreUsuario"].ToString(),
                                     PersonaID = Convert.ToInt32(reader["PersonaID"]),
                                     RolID = Convert.ToInt32(reader["RolID"]),
-                                    Contraseña = reader["Contraseña"].ToString(),
+                                    //Contraseña = reader["Contraseña"].ToString(),
                                     FechaCambio = Convert.ToDateTime(reader["FechaCambio"]),
                                     Estado = Convert.ToInt32(reader["Estado"]),
                                     CreadoPor = reader["CreadoPor"].ToString(),
@@ -100,8 +102,28 @@ namespace gestion_de_permiso_de_usuario.Data
             return usuario;
         }
 
-        // Actualiza los datos de un usuario
-        public void UpdateUsuario(Usuario usuario)
+
+
+        public static string EncryptPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Convert the password string to a byte array.
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                // Convert the byte array to a hexadecimal string.
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        } 
+
+
+    // Actualiza los datos de un usuario
+    public void UpdateUsuario(Usuario usuario)
         {
             try
             {
@@ -110,18 +132,21 @@ namespace gestion_de_permiso_de_usuario.Data
                     var query = "UpdateUsuario";
                     using (var command = new SqlCommand(query, connection))
                     {
+                        string encryptedPassword = EncryptPassword(usuario.Contraseña);
+
                         command.CommandType = System.Data.CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@UsuarioID", usuario.UsuarioID);
                         command.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
                         command.Parameters.AddWithValue("@PersonaID", usuario.PersonaID);
                         command.Parameters.AddWithValue("@RolID", usuario.RolID);
-                        command.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
+                        command.Parameters.AddWithValue("@Contraseña", encryptedPassword); // Contraseña encriptada
                         command.Parameters.AddWithValue("@Estado", usuario.Estado);
-                        command.Parameters.AddWithValue("@CreadoPor", usuario.CreadoPor); // Optional if needed
-                        command.Parameters.AddWithValue("@ActualizadoPor", usuario.ActualizadoPor); // New parameter
+                        command.Parameters.AddWithValue("@CreadoPor", usuario.CreadoPor); // Opcional
+                        command.Parameters.AddWithValue("@ActualizadoPor", usuario.ActualizadoPor); // Nuevo parámetro
 
                         connection.Open();
                         command.ExecuteNonQuery();
+
                     }
                 }
             }
@@ -183,11 +208,13 @@ namespace gestion_de_permiso_de_usuario.Data
                     var query = "InsertUsuario";
                     using (var command = new SqlCommand(query, connection))
                     {
+                        string encryptedPassword = EncryptPassword(usuario.Contraseña);
+
                         command.CommandType = System.Data.CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
                         command.Parameters.AddWithValue("@PersonaID", usuario.PersonaID);
                         command.Parameters.AddWithValue("@RolID", usuario.RolID);
-                        command.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
+                        command.Parameters.AddWithValue("@Contraseña", encryptedPassword);
                         command.Parameters.AddWithValue("@Estado", usuario.Estado);
                         command.Parameters.AddWithValue("@CreadoPor", usuario.CreadoPor);
 

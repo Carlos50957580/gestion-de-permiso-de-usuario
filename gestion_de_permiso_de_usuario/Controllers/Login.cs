@@ -6,11 +6,30 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
     public class Login(IConfiguration configuration) : Controller
     {
+
+        public static string EncryptPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Convert the password string to a byte array.
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                // Convert the byte array to a hexadecimal string.
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
 
         string connectionString = configuration.GetConnectionString("DefaultConnection");
 
@@ -70,11 +89,13 @@ namespace gestion_de_permiso_de_usuario.Controllers
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                string encryptedPassword = EncryptPassword(usuario.Contraseña);
+
                 SqlCommand command = new SqlCommand("ValidarUsuario", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
                 command.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
-                command.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
+                command.Parameters.AddWithValue("@Contraseña", encryptedPassword);
 
                 // Parámetro de salida
                 SqlParameter outputParameter = new SqlParameter("@Resultado", SqlDbType.Bit)
