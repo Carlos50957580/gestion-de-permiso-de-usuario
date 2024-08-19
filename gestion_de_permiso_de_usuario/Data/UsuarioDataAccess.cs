@@ -244,6 +244,7 @@ namespace gestion_de_permiso_de_usuario.Data
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
+
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@NombreUsuario", nombreUsuario);
                 connection.Open();

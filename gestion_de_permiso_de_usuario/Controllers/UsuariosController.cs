@@ -22,6 +22,8 @@ namespace gestion_de_permiso_de_usuario.Controllers
             _rolDataAccess = new RolDataAccess(configuration);
         }
 
+   
+
 
         [Permiso("Ver Usuarios")]
 
@@ -29,6 +31,12 @@ namespace gestion_de_permiso_de_usuario.Controllers
         public IActionResult Index()
         {
             var usuarios = _usuarioDataAccess.GetUsuariosConDetalles();
+
+            //Obtener el nombre del usuario autenticado
+            var userName = User.Identity.Name;
+
+            // Pasar el nombre del usuario a la vista a través del ViewBag
+            ViewBag.UserName = userName;
             return View(usuarios);
         }
         [Permiso("Ver Detalles de Usuarios")]

@@ -59,29 +59,29 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
+        @* <div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="#">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
-        </div><!-- End Search Bar -->
+        </div><!-- End Search Bar --> *@
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
                 <li class="nav-item d-block d-lg-none">
                     <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
+@*                         <i class="bi bi-search"></i>
+ *@                    </a>
                 </li><!-- End Search Icon-->
 
-                <li class="nav-item dropdown">
+             @*    <li class="nav-item dropdown">
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-bell"></i>
                         <span class="badge bg-primary badge-number">4</span>
                     </a><!-- End Notification Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+ *@
+                  @*   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                         <li class="dropdown-header">
                             You have 4 new notifications
                             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
@@ -142,14 +142,14 @@
                         </li>
 
                     </ul><!-- End Notification Dropdown Items -->
+ *@
+               @*  </li><!-- End Notification Nav --> *@
 
-                </li><!-- End Notification Nav -->
-
-                <li class="nav-item dropdown">
+               @*  <li class="nav-item dropdown">
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-chat-left-text"></i>
                         <span class="badge bg-success badge-number">3</span>
-                    </a><!-- End Messages Icon -->
+                    </a><!-- End Messages Icon --> *@
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                         <li class="dropdown-header">
@@ -160,9 +160,9 @@
                             <hr class="dropdown-divider">
                         </li>
 
-                        <li class="message-item">
+                       @*  <li class="message-item">
                             <a href="#">
-                                <img src="~/assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                                <img src="~/assets/img/messages-1.jpg" alt="" class="rounded-circle"> *
                                 <div>
                                     <h4>Maria Hudson</h4>
                                     <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -170,11 +170,11 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
+                        <li> *@
                             <hr class="dropdown-divider">
                         </li>
 
-                        <li class="message-item">
+                       @*  <li class="message-item">
                             <a href="#">
                                 <img src="~/assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                 <div>
@@ -186,7 +186,7 @@
                         </li>
                         <li>
                             <hr class="dropdown-divider">
-                        </li>
+                        </li> *@
 
                         <li class="message-item">
                             <a href="#">
@@ -212,20 +212,27 @@
 
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                        @* <img src="~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> *@
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                        </svg>
+                        <span class="">@ViewBag.UserName</span>
+
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Kevin Anderson</h6>
-                            <span>Web Designer</span>
+                            <h6></h6>
+                            <!--<span>Model.m</span>--> 
+
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
 
-                        <li>
+                       <li>
                             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                 <i class="bi bi-person"></i>
                                 <span>My Profile</span>
@@ -260,7 +267,7 @@
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
-                        </li>
+                        </li> 
 
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->

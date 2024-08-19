@@ -21,6 +21,12 @@ namespace gestion_de_permiso_de_usuario.Controllers
         public IActionResult Index()
         {
             var permisos = _permisoDataAccess.GetPermisos();
+
+            //Obtener el nombre del usuario autenticado
+            var userName = User.Identity.Name;
+
+            // Pasar el nombre del usuario a la vista a través del ViewBag
+            ViewBag.UserName = userName;
             return View(permisos);
         }
 
@@ -30,6 +36,8 @@ namespace gestion_de_permiso_de_usuario.Controllers
         {
             return View();
         }
+
+
 
         // POST: Permisos/Create
         [HttpPost]

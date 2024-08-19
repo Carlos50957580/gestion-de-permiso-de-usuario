@@ -22,6 +22,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         [Permiso("Crear Roles")]
         public IActionResult Create()
         {
+           
             return View();
         }
 
@@ -44,7 +45,13 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // GET: Roles/Index
         public IActionResult Index()
         {
+            //Obtener el nombre del usuario autenticado
+            var userName = User.Identity.Name;
+
+            // Pasar el nombre del usuario a la vista a través del ViewBag
+            ViewBag.UserName = userName;
             var roles = _rolDataAccess.GetRoles();
+
             return View(roles);
         }
 
