@@ -1,0 +1,35 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.form-register {
+    width: 400px;
+    background: #ECEEF2;
+    padding: 30px;
+    margin: auto;
+    /*         margin-top: 100px; */
+    border-radius: 4px;
+    font-family: sans-serif;
+    color: white;
+    box-shadow: 2px 3px 17px #212322;
+}
+
+    .form-register h4 {
+        font-weight: bold;
+        font-size: 22px;
+        margin-buttom: 20px;
+        color: #000;
+    }
+
+.form-control {
+    width: 100%;
+    /*         background: #24303c; */
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #C8C7F2;
+    font-family: sans-serif;
+    font-size: 18px;
+}

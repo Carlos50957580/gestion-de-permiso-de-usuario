@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using gestion_de_permiso_de_usuario.Models;
 using System.Data.SqlClient;
-using System.Text;
-using gestion_de_permiso_de_usuario.Models;
-using Microsoft.Extensions.Configuration;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace gestion_de_permiso_de_usuario.Data
 {
@@ -119,11 +116,11 @@ namespace gestion_de_permiso_de_usuario.Data
                 }
                 return builder.ToString();
             }
-        } 
+        }
 
 
-    // Actualiza los datos de un usuario
-    public void UpdateUsuario(Usuario usuario)
+        // Actualiza los datos de un usuario
+        public void UpdateUsuario(Usuario usuario)
         {
             try
             {

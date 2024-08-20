@@ -1,10 +1,7 @@
 ﻿namespace gestion_de_permiso_de_usuario.Services;
-using System;
-using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using gestion_de_permiso_de_usuario.Models;
-using Microsoft.Extensions.Configuration;
 
 public class DatabaseService
 {
@@ -16,14 +13,16 @@ public class DatabaseService
     }
 
 
-    public SqlConnection GetConnection() {
-    
+    public SqlConnection GetConnection()
+    {
+
         return conexion;
     }
 
     public void Conectar()
     {
-        if (conexion.State != ConnectionState.Open) {
+        if (conexion.State != ConnectionState.Open)
+        {
 
             conexion.Open();
         }

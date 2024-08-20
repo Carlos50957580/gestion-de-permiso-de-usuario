@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using gestion_de_permiso_de_usuario.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.DependencyInjection;
-using gestion_de_permiso_de_usuario.Data;
 
 namespace gestion_de_permiso_de_usuario.Filters
 {

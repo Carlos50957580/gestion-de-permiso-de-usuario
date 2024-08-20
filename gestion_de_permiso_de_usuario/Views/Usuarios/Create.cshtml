@@ -16,14 +16,14 @@
         </div>
 
         <select asp-for="PersonaID" class="form-control" asp-items="@(new SelectList(ViewBag.Personas, "PersonaID", "Nombre"))" id="Persona" required>
-            <option value="">Seleccione una persona</option>
+            <option value="" class="Seleccion">Seleccione una persona</option>
         </select>
         <div class="invalid-feedback">
             Por favor selecciona una persona
         </div>
 
         <select asp-for="RolID" class="form-control" asp-items="@(new SelectList(ViewBag.Roles, "RolID", "NombreRol"))" id="Rol" required>
-            <option value="">Seleccione un rol</option>
+            <option value="" class="Seleccion">Seleccione un rol</option>
         </select>
         <div class="invalid-feedback">
             Por favor selecciona un rol

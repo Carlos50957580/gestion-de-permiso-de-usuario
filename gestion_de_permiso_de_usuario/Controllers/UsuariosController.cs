@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using gestion_de_permiso_de_usuario.Data;
-using gestion_de_permiso_de_usuario.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity; // Añadir para la autenticación
+﻿using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Filters;
+using gestion_de_permiso_de_usuario.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
@@ -22,7 +18,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
             _rolDataAccess = new RolDataAccess(configuration);
         }
 
-   
+
 
 
         [Permiso("Ver Usuarios")]

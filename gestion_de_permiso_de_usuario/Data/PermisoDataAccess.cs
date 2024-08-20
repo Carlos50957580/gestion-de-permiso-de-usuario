@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using gestion_de_permiso_de_usuario.Models;
 using System.Data;
 using System.Data.SqlClient;
-using gestion_de_permiso_de_usuario.Models;
-using Microsoft.Extensions.Configuration;
 
 namespace gestion_de_permiso_de_usuario.Data
 {
@@ -125,7 +122,7 @@ namespace gestion_de_permiso_de_usuario.Data
                     cmd.Parameters.AddWithValue("@NombrePermiso", permiso.NombrePermiso);
                     cmd.Parameters.AddWithValue("@Descripcion", permiso.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", permiso.Estado);
-                    cmd.Parameters.AddWithValue("@ActualizadoPor", permiso.ActualizadoPor); // Asegúrate de incluir este parámetro
+                    cmd.Parameters.AddWithValue("@ActualizadoPor", permiso.ActualizadoPor);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

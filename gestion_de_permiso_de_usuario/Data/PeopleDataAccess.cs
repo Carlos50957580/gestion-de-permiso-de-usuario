@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using gestion_de_permiso_de_usuario.Models;
 using System.Data;
 using System.Data.SqlClient;
-using gestion_de_permiso_de_usuario.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authorization;
-using System.Runtime.InteropServices;
 
 namespace gestion_de_permiso_de_usuario.Data
 {
-   
+
     public class PersonaDataAccess
     {
         private readonly string _connectionString;

@@ -1,7 +1,5 @@
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Services;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);

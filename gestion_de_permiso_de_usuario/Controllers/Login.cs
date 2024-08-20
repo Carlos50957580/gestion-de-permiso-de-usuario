@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using gestion_de_permiso_de_usuario.Models;
+﻿using gestion_de_permiso_de_usuario.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Data;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
@@ -75,13 +74,13 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 ViewData["Completado"] = "Registro Completado";
                 return View();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 ViewData["Incompleto"] = "Registro no completado";
-               return View();
+                return View();
             }
-         
-    
+
+
         }
 
         [HttpPost]
@@ -149,13 +148,13 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         [HttpPost]
-    public async Task<IActionResult> Logout()
-    {
-        // Cierra la sesión del usuario
-        await HttpContext.SignOutAsync();
+        public async Task<IActionResult> Logout()
+        {
+            // Cierra la sesión del usuario
+            await HttpContext.SignOutAsync();
 
-        // Redirige al usuario a la página de inicio o a cualquier otra página después del logout
-        return RedirectToAction("Iniciar", "Login");
-    }
+            // Redirige al usuario a la página de inicio o a cualquier otra página después del logout
+            return RedirectToAction("Iniciar", "Login");
+        }
     }
 }

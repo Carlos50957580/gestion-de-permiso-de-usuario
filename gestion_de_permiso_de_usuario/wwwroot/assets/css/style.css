@@ -1270,15 +1270,18 @@ h6 {
     font-size: 18px;
 }
 
+/* Estilizar el select */
+
+
 input::placeholder {
     font-size: 15px;
     font-family: sans-serif;
 }
 
-/*select option {
+select option {
     font-size: 15px;
     font-family: sans-serif;
-}*/
+}
 
 .DUser, .DRol {
     color: #5C6EF5;

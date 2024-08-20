@@ -46,55 +46,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "ADO.Net.Client": {
-              "target": "Package",
-              "version": "[1.4.4, )"
-            },
-            "ADO.Net.Client.Core": {
-              "target": "Package",
-              "version": "[1.4.5, )"
-            },
-            "ADO.Net.Client.Implementation": {
-              "target": "Package",
-              "version": "[1.4.4, )"
-            },
-            "FluentAssertions": {
-              "target": "Package",
-              "version": "[6.12.0, )"
-            },
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[5.2.1, )"
             },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.7, )"
-            },
-            "Microsoft.Extensions.Options": {
-              "target": "Package",
-              "version": "[8.0.2, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "target": "Package",
-              "version": "[8.0.3, )"
-            },
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.6, )"
-            },
-            "Volo.Abp.VirtualFileSystem": {
-              "target": "Package",
-              "version": "[8.2.1, )"
             }
           },
           "imports": [
