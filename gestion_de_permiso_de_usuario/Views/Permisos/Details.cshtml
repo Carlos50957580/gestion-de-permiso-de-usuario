@@ -4,56 +4,48 @@
     ViewData["Title"] = "Detalles del Permiso";
 }
 
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Información de el permiso</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Nombre del Permiso:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.NombrePermiso)</dd>
 
-<div>
-    <h4 class="DRol">Informacion vigente sobre el permiso @Html.DisplayFor(model => model.NombrePermiso)</h4>
-    <hr />
+                <dt class="col-sm-3">Descripción:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Descripcion)</dd>
 
-    <table class="table table-borderless display TPermiso">
-        <thead>
-        </thead>
-        <tbody>
-            <tr>
-                <th class="Titulo">Nombre del Permiso</th>
-                <th class="SinTitulo">@Html.DisplayFor(model => model.NombrePermiso)</th>
-            </tr>
-            <tr>
-                <td class="Titulo">Descripción</td>
-                <td>@Html.DisplayFor(model => model.Descripcion)</td>
-            </tr>
-            <tr>
-                <td class="Titulo">Estado</td>
-                <td>
+                <dt class="col-sm-3">Estado:</dt>
+                <dd class="col-sm-9">
                     @if (Model.Estado == 1)
                     {
-                        <span>Activo</span>
+                        <span class="badge bg-success">Activo</span>
                     }
                     else if (Model.Estado == 0)
                     {
-                        <span>Desactivado</span>
+                        <span class="badge bg-danger">Desactivado</span>
                     }
                     else
                     {
-                        <span>Estado no válido</span>
+                        <span class="badge bg-warning">Estado no válido</span>
                     }
-                </td>
-            </tr>
-            <tr>
-                <td class="Titulo">Creado Por</td>
-                <td>@Html.DisplayFor(model => model.CreadoPor)</td>
-            </tr>
-            <tr>
-                <td class="Titulo">Fecha de Cambio</td>
-                <td>@Html.DisplayFor(model => model.FechaCambio)</td>
-            </tr>
-            <tr>
-                <td class="Titulo">Actualizado Por</td>
-                <td>@Html.DisplayFor(model => model.ActualizadoPor)</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.PermisoID" class="btn btn-primary">Editar</a> |
-    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                </dd>
+
+                <dt class="col-sm-3">Creado Por:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CreadoPor)</dd>
+
+                <dt class="col-sm-3">Fecha de Cambio:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.FechaCambio)</dd>
+
+                <dt class="col-sm-3">Actualizado Por:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ActualizadoPor)</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.PermisoID" class="btn btn-primary">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+        </div>
+    </div>
 </div>

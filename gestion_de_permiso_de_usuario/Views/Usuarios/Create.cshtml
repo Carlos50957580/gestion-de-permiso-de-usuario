@@ -4,90 +4,70 @@
     ViewData["Title"] = "Crear Usuario";
 }
 
-
-<form asp-action="Create" class="needs-validation form-register" novalidate>
-    <div class="form-group">
-
-        <h4>Formulario Usuario</h4>
-       
-        <input asp-for="NombreUsuario" type="text" id="UserName" class="form-control" placeholder="Ingresa tu nombre de usuario" required />
-        <div class="invalid-feedback">
-            Por favor ingresa un usuario
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h4>Formulario Usuario</h4>
         </div>
+        <div class="card-body">
+            <form asp-action="Create" class="needs-validation" novalidate>
+                <div class="form-group">
+                    <label for="UserName">Nombre de Usuario</label>
+                    <input asp-for="NombreUsuario" type="text" id="UserName" class="form-control" placeholder="Ingresa tu nombre de usuario" required />
+                    <div class="invalid-feedback">
+                        Por favor ingresa un usuario
+                    </div>
+                </div>
 
-        <select asp-for="PersonaID" class="form-control" asp-items="@(new SelectList(ViewBag.Personas, "PersonaID", "Nombre"))" id="Persona" required>
-            <option value="" class="Seleccion">Seleccione una persona</option>
-        </select>
-        <div class="invalid-feedback">
-            Por favor selecciona una persona
-        </div>
+                <div class="form-group">
+                    <label for="Persona">Persona</label>
+                    <select asp-for="PersonaID" class="form-control" asp-items="@(new SelectList(ViewBag.Personas, "PersonaID", "Nombre"))" id="Persona" required>
+                        <option value="" class="Seleccion">Seleccione una persona</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor selecciona una persona
+                    </div>
+                </div>
 
-        <select asp-for="RolID" class="form-control" asp-items="@(new SelectList(ViewBag.Roles, "RolID", "NombreRol"))" id="Rol" required>
-            <option value="" class="Seleccion">Seleccione un rol</option>
-        </select>
-        <div class="invalid-feedback">
-            Por favor selecciona un rol
-        </div>
+                <div class="form-group">
+                    <label for="Rol">Rol</label>
+                    <select asp-for="RolID" class="form-control" asp-items="@(new SelectList(ViewBag.Roles, "RolID", "NombreRol"))" id="Rol" required>
+                        <option value="" class="Seleccion">Seleccione un rol</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor selecciona un rol
+                    </div>
+                </div>
 
-        <input asp-for="Contraseña" type="password" class="form-control" id="Contraseña" placeholder="Ingresa tu contraseña" required />
-        <div class="invalid-feedback">
-            Por favor ingresa un usuario
-        </div>
+                <div class="form-group">
+                    <label for="Contraseña">Contraseña</label>
+                    <input asp-for="Contraseña" type="password" class="form-control" id="Contraseña" placeholder="Ingresa tu contraseña" required />
+                    <div class="invalid-feedback">
+                        Por favor ingresa una contraseña
+                    </div>
+                </div>
 
-        <select asp-for="Estado" class="form-control" id="Estado" required>
-            <option value="1">Activo</option>
-            <option value="0">Inactivo</option>
-        </select>
-        <div class="invalid-feedback">
-            Por favor selecciona un estado
+                <div class="form-group">
+                    <label for="Estado">Estado</label>
+                    <select asp-for="Estado" class="form-control" id="Estado" required>
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor selecciona un estado
+                    </div>
+                </div>
+
+                <input type="hidden" asp-for="CreadoPor" value="Admin" />
+
+                <br />
+                <button type="submit" class="btn btn-primary">Crear</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </form>
         </div>
     </div>
+</div>
 
-    <input type="hidden" asp-for="CreadoPor" value="Admin" />
-
-
-    <br />
-    <button type="submit" class="btn btn-primary">Crear</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-</form>
-
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    .form-register {
-        width: 400px;
-        background: #ECEEF2;
-        padding: 30px;
-        margin: auto;
-/*         margin-top: 100px; */
-        border-radius: 4px;
-        font-family:sans-serif;
-        color: white;
-        box-shadow: 7px 3px 17px #212322;
-    }
-
-    .form-register h4 {
-        font-weight: bold;
-        font-size: 22px;
-        margin-buttom: 20px;
-        color: #000;
-    }
-
-    .form-control {
-        width: 100%;
-/*         background: #24303c; */
-        padding: 10px;
-        border-radius: 4px;
-        margin-bottom: 16px;
-        border: 1px solid #C8C7F2;
-        font-family: sans-serif;
-        font-size: 18px;
-    }
-</style>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

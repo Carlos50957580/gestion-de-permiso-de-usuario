@@ -17,7 +17,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Roles/Create
-        //[Permiso("Crear Roles")]
+        [Permiso("Crear Roles")]
         public IActionResult Create()
         {
 
@@ -27,7 +27,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Roles/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Permiso("Crear Roles")]
+        [Permiso("Crear Roles")]
         public IActionResult Create([Bind("NombreRol,Descripcion,Estado")] Rol rol)
         {
             if (ModelState.IsValid)
@@ -39,7 +39,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(rol);
         }
 
-        //[Permiso("Ver Roles,Crear Roles,Editar Roles,Ver Detalles de roles,Asignar Permisos")]
+        [Permiso("Ver Roles,Crear Roles,Editar Roles,Ver Detalles de roles,Asignar Permisos")]
         // GET: Roles/Index
         public IActionResult Index()
         {
@@ -121,7 +121,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Roles/Asignar/5
-        //[Permiso("Asignar Permisos")]
+        [Permiso("Asignar Permisos")]
         public IActionResult Asignar(int? id)
         {
             if (id == null)
@@ -136,17 +136,22 @@ namespace gestion_de_permiso_de_usuario.Controllers
             }
 
             var permisos = _permisoDataAccess.GetPermisos();
-            ViewBag.Permisos = permisos;
-            ViewBag.RolID = rol.RolID;
-            ViewBag.NombreRol = rol.NombreRol;
+            var permisosAsignados = _rolDataAccess.GetPermisosAsignados(rol.RolID);
 
-            return View();
+            var viewModel = new AsignarPermisosViewModel
+            {
+                RolID = rol.RolID,
+                Permisos = permisos,
+                PermisosAsignados = permisosAsignados.Select(p => p.PermisoID).ToList()
+            };
+
+            return View(viewModel);
         }
 
         // POST: Roles/Asignar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Permiso("Asignar Permisos")]
+        [Permiso("Asignar Permisos")]
         public IActionResult Asignar(int rolId, int[] permisosSeleccionados)
         {
             try
@@ -160,5 +165,6 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 return View();
             }
         }
+
     }
 }

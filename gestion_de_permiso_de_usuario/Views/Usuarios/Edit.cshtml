@@ -4,77 +4,87 @@
     ViewData["Title"] = "Editar Usuario";
 }
 
-<form asp-action="Edit" class="needs-validation form-register" novalidate>
-    <div class="form-group">
-
-        <h4>Formulario Editar</h4>
-
-        <label asp-for="NombreUsuario" class="control-label">Nombre del usuario</label>
-        <input asp-for="NombreUsuario" class="form-control" required />
-        <div class="invalid-feedback">
-            Por favor ingresa un nombre para este usuario
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h4>Formulario Editar Usuario</h4>
         </div>
-        <span asp-validation-for="NombreUsuario" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="PersonaID" class="control-label">Persona</label>
-        <select asp-for="PersonaID" class="form-control" required>
-            <option value="">Selecciona una Persona</option>
-            @foreach (var persona in ViewBag.Personas as List<gestion_de_permiso_de_usuario.Models.Persona>)
-            {
-                <option value="@persona.PersonaID">@persona.Nombre @persona.Apellido</option>
-            }
-        </select>
-        <div class="invalid-feedback">
-            Por favor selecciona una persona
-        </div>
-        <span asp-validation-for="PersonaID" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="RolID" class="control-label">Rol</label>
-        <select asp-for="RolID" class="form-control" required>
-            <option value="">Selecciona un Rol</option>
-            @foreach (var rol in ViewBag.Roles as List<gestion_de_permiso_de_usuario.Models.Rol>)
-            {
-                <option value="@rol.RolID">@rol.NombreRol</option>
-            }
-        </select>
-        <div class="invalid-feedback">
-            Por favor selecciona un rol
-        </div>
-        <span asp-validation-for="RolID" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Contraseña" class="control-label"></label>
-        <input asp-for="Contraseña" class="form-control" required />
-        <div class="invalid-feedback">
-            Por favor selecciona una contraseña
-        </div>
-        <span asp-validation-for="Contraseña" class="text-danger"></span>
-    </div>
+        <div class="card-body">
+            <form asp-action="Edit" class="needs-validation" novalidate>
+                <div class="form-group">
+                    <label asp-for="NombreUsuario" class="control-label">Nombre del usuario</label>
+                    <input asp-for="NombreUsuario" class="form-control" required placeholder="Ingresa tu nombre de usuario" />
+                    <div class="invalid-feedback">
+                        Por favor ingresa un nombre para este usuario
+                    </div>
+                    <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+                </div>
 
-    <div class="form-group">
-        <label asp-for="Estado" class="control-label">Estado</label>
-        <select asp-for="Estado" asp-items="Html.GetEnumSelectList<gestion_de_permiso_de_usuario.Models.EstadoUsuario>()" class="form-control" required>
-            <option value="">Selecciona el Estado</option>
-        </select>
-        <div class="invalid-feedback">
-            Por favor selecciona un estado
+                <div class="form-group">
+                    <label asp-for="PersonaID" class="control-label">Persona</label>
+                    <select asp-for="PersonaID" class="form-control" required >
+                        <option value="">Selecciona una Persona</option>
+                        @foreach (var persona in ViewBag.Personas as List<gestion_de_permiso_de_usuario.Models.Persona>)
+                        {
+                            <option value="@persona.PersonaID">@persona.Nombre @persona.Apellido</option>
+                        }
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor selecciona una persona
+                    </div>
+                    <span asp-validation-for="PersonaID" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="RolID" class="control-label">Rol</label>
+                    <select asp-for="RolID" class="form-control" required>
+                        <option value="">Selecciona un Rol</option>
+                        @foreach (var rol in ViewBag.Roles as List<gestion_de_permiso_de_usuario.Models.Rol>)
+                        {
+                            <option value="@rol.RolID">@rol.NombreRol</option>
+                        }
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor selecciona un rol
+                    </div>
+                    <span asp-validation-for="RolID" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Contraseña" class="control-label">Contraseña</label>
+                    <input asp-for="Contraseña" type="password" class="form-control" required placeholder="Ingresa una nueva contraseña" />
+                    <div class="invalid-feedback">
+                        Por favor ingresa una contraseña
+                    </div>
+                    <span asp-validation-for="Contraseña" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Estado" class="control-label">Estado</label>
+                    <select asp-for="Estado" asp-items="Html.GetEnumSelectList<gestion_de_permiso_de_usuario.Models.EstadoUsuario>()" class="form-control" required>
+                        <option value="">Selecciona el Estado</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor selecciona un estado
+                    </div>
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" asp-for="UsuarioID" />
+
+                <div class="form-group">
+                    <br />
+                    <br />
+                    <input type="submit" value="Guardar" class="btn btn-primary" /> |
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
+                </div>
+            </form>
         </div>
-        <span asp-validation-for="Estado" class="text-danger"></span>
     </div>
-@*     <div class="form-group">
-        <label asp-for="CreadoPor" class="control-label"></label>
-        <input asp-for="CreadoPor" class="form-control" />
-        <span asp-validation-for="CreadoPor" class="text-danger"></span>
-    </div> *@
+</div>
 
-    <input type="hidden" asp-for="UsuarioID" />
-    <div class="form-group">
-        <br />
-        <br />
-        <input type="submit" value="Guardar" class="btn btn-primary" /> |
-        <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
-    </div>
-</form>
-
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

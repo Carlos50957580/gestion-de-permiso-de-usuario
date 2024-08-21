@@ -3,27 +3,40 @@
 @{
     ViewData["Title"] = "Crear Rol";
 }
-<form asp-action="Create" class="needs-validation form-register" novalidate>
-    <div class="form-group">
-        <br />
 
-        <h4>Formulario Rol</h4>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h4>Formulario Crear Rol</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" class="needs-validation" novalidate>
+                <div class="form-group">
+                    <label asp-for="NombreRol" class="control-label">Nombre del Rol</label>
+                    <input asp-for="NombreRol" class="form-control" required placeholder="Ingresa un nombre para el rol" />
+                    <div class="invalid-feedback">
+                        Introduzca el nombre del rol
+                    </div>
+                    <span asp-validation-for="NombreRol" class="text-danger"></span>
+                </div>
 
-        <label asp-for="NombreRol" class="control-label">Nombre del Rol</label>
-        <input asp-for="NombreRol" class="form-control" required />
-        <div class="invalid-feedback">Introduzca el nombre del rol</div>
+                <div class="form-group">
+                    <label asp-for="Descripcion" class="control-label">Descripción</label>
+                    <input asp-for="Descripcion" class="form-control" required placeholder="Ingresa una descripción para el rol" />
+                    <div class="invalid-feedback">
+                        Introduzca una descripción
+                    </div>
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Descripcion" class="control-label">Descripción</label>
-        <input asp-for="Descripcion" class="form-control" required />
-        <div class="invalid-feedback">Introduzca una descripcion</div>
-    </div>
-    <br />
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Crear</button> |
-        <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
-    </div>
-</form>
+</div>
 
 @section Scripts {
     @{

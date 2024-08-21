@@ -1,26 +1,58 @@
-﻿@model gestion_de_permiso_de_usuario.Models.Rol
+﻿@model gestion_de_permiso_de_usuario.Models.AsignarPermisosViewModel
+
 @{
     ViewData["Title"] = "Asignar Permisos";
 }
 
-<form asp-action="Asignar" class="form-register">
-    <div class="form-group">
+<div class="container mt-4">
+    <h2 class="mb-4">Asignar Permisos al Rol: <strong>@Model.NombreRol</strong></h2>
 
-        <h4>Permisos</h4>
+    <form asp-action="Asignar" method="post">
+        <input type="hidden" name="rolId" value="@Model.RolID" />
 
-        <input type="hidden" name="rolId" value="@ViewBag.RolID" class="form-control" />
-        <div class="form-group permisos-div">
-            @foreach (var permiso in ViewBag.Permisos)
-            {
-                <div class="form-check">
-                    <input class="form-check-input class=" form-control"" type="checkbox" id="permiso-@permiso.PermisoID" name="permisosSeleccionados" value="@permiso.PermisoID">
-                    <label class="form-check-label" for="permiso-@permiso.PermisoID">
-                        @permiso.NombrePermiso
-                    </label>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Selecciona los permisos para el rol</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Permiso</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var permiso in Model.Permisos)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="permiso-@permiso.PermisoID" name="permisosSeleccionados" value="@permiso.PermisoID"
+                                            @(Model.PermisosAsignados.Contains(permiso.PermisoID) ? "checked" : "") />
+                                            <label class="form-check-label" for="permiso-@permiso.PermisoID">
+                                                @permiso.NombrePermiso
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>@permiso.Descripcion</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
-            }
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Asignar Permisos</button>
+                <a asp-action="Index" class="btn btn-secondary ms-2">Volver a la lista</a>
+            </div>
         </div>
+    </form>
+</div>
 
-    </div>
-    <button type="submit" class="btn btn-primary">Asignar</button>
-</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

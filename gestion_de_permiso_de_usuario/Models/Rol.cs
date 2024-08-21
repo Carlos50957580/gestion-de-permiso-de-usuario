@@ -28,3 +28,15 @@ namespace gestion_de_permiso_de_usuario.Models
         Inactivo = 0
     }
 }
+
+
+namespace gestion_de_permiso_de_usuario.Models
+{
+    public class AsignarPermisosViewModel
+    {
+        public int RolID { get; set; }
+        public string NombreRol { get; set; }
+        public List<Permiso> Permisos { get; set; }
+        public List<int> PermisosAsignados { get; set; }
+    }
+}

@@ -21,7 +21,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
 
 
 
-        [Permiso("Ver Usuarios")]
+        [Permiso("Ver Usuarios,Ver Detalles de Usuarios,Crear Usuario,Editar Usuarios")]
 
         // GET: Usuarios/Index
         public IActionResult Index()

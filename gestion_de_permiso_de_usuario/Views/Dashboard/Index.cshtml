@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" />
 </head>
 
+
+
+
 @* INICIO DE TARJETAS *@
 <div class="container">
     <div class="row">
@@ -77,210 +80,40 @@
 </div>
 @* FIN DE TARJETAS *@
 
-@* TABLA PERSONAS *@
-<div class="card recent-sales overflow-auto mt-4">
 
-    <div class="card-body">
-        <h5 class="card-title">Personas <span>| Registradas</span></h5>
-
-        <table id="PersonaTable">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Fecha de Nacimiento</th>
-                    <th scope="col">Género</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Correo</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var persona in Model.Item2)
-                {
-                    <tr>
-                        <th scope="row">@persona.PersonaID</th>
-                        <td>@persona.Nombre</td>
-                        <td>@persona.Apellido</td>
-                        <td>@persona.FechaNacimiento.ToString("yyyy-MM-dd")</td>
-                        <td>@persona.Genero</td>
-                        <td>@persona.Telefono</td>
-                        <td>@persona.Correo</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
-
-@* USUARIOS *@
 <div class="container-fluid">
-    <div class="row d-flex align-items-stretch">
-        <div class="col-md-8 d-flex">
-            <!-- Tabla de Usuarios -->
-            <div class="card recent-sales overflow-auto flex-fill">
-                <div class="card-body">
-                    <h5 class="card-title">Usuarios <span>| Registrados</span></h5>
-                    <table id="UsuarioTable">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre de Usuario</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Rol</th>
-                                <th scope="col">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var usuario in Model.Item1)
-                            {
-                                <tr>
-                                    <th scope="row">@usuario.UsuarioID</th>
-                                    <td>@usuario.NombreUsuario</td>
-                                    <td>@usuario.Nombre</td>
-                                    <td>@usuario.Apellido</td>
-                                    <td>@usuario.NombreRol</td>
-                                    <td>
-                                        @if (usuario.Estado == 1)
-                                        {
-                                            <span class="badge bg-success">Activo</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge bg-danger">Inactivo</span>
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 d-flex">
-            <!-- Gráfico de Usuarios -->
+    <div class="row">
+        <!-- Gráfico de Usuarios -->
+        <div class="col-lg-4 d-flex">
             <div class="card flex-fill">
                 <div class="card-body pb-0">
                     <h5 class="card-title">Usuarios</h5>
-                    <div id="usuariosChart" style="height: 100%;" class="echart"></div>
+                    <div id="usuariosChart" style="height: 300px;" class="echart"></div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-@* ROLES *@
-<div class="container-fluid">
-    <div class="row d-flex align-items-stretch">
-        <div class="col-md-8 d-flex">
-            <!-- Tabla de Roles -->
-            <div class="card recent-sales overflow-auto flex-fill mt-4">
-                <div class="card-body">
-                    <h5 class="card-title">Roles <span>| Agregados</span></h5>
-                    <table id="RolTable">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre de Rol</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var rol in ViewBag.Roles as IEnumerable<Rol>)
-                            {
-                                <tr>
-                                    <th scope="row">@rol.RolID</th>
-                                    <td>@rol.NombreRol</td>
-                                    <td>@rol.Descripcion</td>
-                                    <td>
-                                        @if (rol.Estado == 1)
-                                        {
-                                            <span class="badge bg-success">Activo</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge bg-danger">Inactivo</span>
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 d-flex">
-            <!-- Gráfico de Roles -->
-            <div class="card flex-fill mt-4">
+        <!-- Gráfico de Roles -->
+        <div class="col-lg-4 d-flex">
+            <div class="card flex-fill">
                 <div class="card-body pb-0">
                     <h5 class="card-title">Roles</h5>
-                    <div id="rolesChart" style="height: 100%;" class="echart"></div>
+                    <div id="rolesChart" style="height: 300px;" class="echart"></div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-@* PERMISOS *@
-<div class="container-fluid">
-    <div class="row d-flex align-items-stretch">
-        <div class="col-md-8 d-flex">
-            <!-- Tabla de Permisos -->
-            <div class="card recent-sales overflow-auto flex-fill mt-4">
-                <div class="card-body">
-                    <h5 class="card-title">Permisos <span>| Agregados</span></h5>
-                    <table id="PermisoTable">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre de Permiso</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var permiso in ViewBag.Permisos as IEnumerable<gestion_de_permiso_de_usuario.Models.Permiso>)
-                            {
-                                <tr>
-                                    <th scope="row">@permiso.PermisoID</th>
-                                    <td>@permiso.NombrePermiso</td>
-                                    <td>@permiso.Descripcion</td>
-                                    <td>
-                                        @if (permiso.Estado == 1)
-                                        {
-                                            <span class="badge bg-success">Activo</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge bg-danger">Inactivo</span>
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 d-flex">
-            <!-- Gráfico de Permisos -->
-            <div class="card flex-fill mt-4">
+        <!-- Gráfico de Permisos -->
+        <div class="col-lg-4 d-flex">
+            <div class="card flex-fill">
                 <div class="card-body pb-0">
                     <h5 class="card-title">Permisos</h5>
-                    <div id="permisosChart" style="height: 100%;" class="echart"></div>
+                    <div id="permisosChart" style="height: 300px;" class="echart"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<script src="@Url.Content("~/js/Dashboard.js")"></script>
-<script src="@Url.Content("~/js/usuario.js")"></script>
-<script src="@Url.Content("~/js/persona.js")"></script>
-<script src="@Url.Content("~/js/roles.js")"></script>
 
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -432,7 +265,7 @@
         });
     });
 </script>
-
+</div>
 @* GRAFICO DE BARRAS *@
 @model Tuple<IEnumerable<gestion_de_permiso_de_usuario.Models.UsuarioConDetalles>, IEnumerable<gestion_de_permiso_de_usuario.Models.Persona>>
 

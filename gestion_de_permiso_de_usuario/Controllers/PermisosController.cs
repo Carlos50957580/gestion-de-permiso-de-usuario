@@ -13,7 +13,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         {
             _permisoDataAccess = new PermisoDataAccess(configuration);
         }
-        //[Permiso("Ver Permisos,Crear Permisos,Editar Permisos,Ver Detalles de Permisos")]
+        [Permiso("Ver Permisos,Crear Permisos,Editar Permisos,Ver Detalles de Permisos")]
         // GET: Permisos/Index
         public IActionResult Index()
         {
@@ -39,7 +39,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Permisos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Permiso("Crear Permisos")]
+        [Permiso("Crear Permisos")]
         public IActionResult Create([Bind("NombrePermiso,Descripcion,Estado")] Permiso permiso)
         {
             if (ModelState.IsValid)
