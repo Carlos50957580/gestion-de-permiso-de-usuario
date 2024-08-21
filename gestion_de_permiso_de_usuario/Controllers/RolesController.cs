@@ -17,7 +17,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Roles/Create
-        [Permiso("Crear Roles")]
+        //[Permiso("Crear Roles")]
         public IActionResult Create()
         {
 
@@ -27,7 +27,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Roles/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Permiso("Crear Roles")]
+        //[Permiso("Crear Roles")]
         public IActionResult Create([Bind("NombreRol,Descripcion,Estado")] Rol rol)
         {
             if (ModelState.IsValid)
@@ -39,7 +39,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(rol);
         }
 
-        [Permiso("Ver Roles")]
+        //[Permiso("Ver Roles,Crear Roles,Editar Roles,Ver Detalles de roles,Asignar Permisos")]
         // GET: Roles/Index
         public IActionResult Index()
         {
@@ -121,7 +121,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         // GET: Roles/Asignar/5
-        [Permiso("Asignar Permisos")]
+        //[Permiso("Asignar Permisos")]
         public IActionResult Asignar(int? id)
         {
             if (id == null)
@@ -146,7 +146,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Roles/Asignar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Permiso("Asignar Permisos")]
+        //[Permiso("Asignar Permisos")]
         public IActionResult Asignar(int rolId, int[] permisosSeleccionados)
         {
             try

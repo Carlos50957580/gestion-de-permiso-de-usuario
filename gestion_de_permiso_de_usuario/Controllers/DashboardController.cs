@@ -22,7 +22,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         [HttpGet("Index")]
-        [Permiso("Ver Dashboard")]
+        //[Permiso("Ver Dashboard")]
         public IActionResult Index()
         {
             var usuarios = _usuarioDataAccess.GetUsuariosConDetalles();
