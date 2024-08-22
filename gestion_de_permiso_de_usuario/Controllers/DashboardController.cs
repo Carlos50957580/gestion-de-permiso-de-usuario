@@ -2,10 +2,11 @@
 using gestion_de_permiso_de_usuario.Filters;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
-    [Route("Dashboard")]
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly UsuarioDataAccess _usuarioDataAccess;
@@ -21,10 +22,15 @@ namespace gestion_de_permiso_de_usuario.Controllers
             _permisoDataAccess = new PermisoDataAccess(configuration);
         }
 
-        [HttpGet("Index")]
         //[Permiso("Ver Dashboard")]
         public IActionResult Index()
         {
+            //Obtener el nombre del usuario autenticado
+            var userName = User.Identity.Name;
+
+            // Pasar el nombre del usuario a la vista a través del ViewBag
+            ViewBag.UserName = userName;
+
             var usuarios = _usuarioDataAccess.GetUsuariosConDetalles();
             var personas = _personaDataAccess.GetPersonas();
             var roles = _rolDataAccess.GetRoles();
