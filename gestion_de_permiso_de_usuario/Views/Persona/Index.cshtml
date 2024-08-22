@@ -19,7 +19,7 @@
                 <th>Género</th>
                 <th>Teléfono</th>
                 <th>Correo</th>
-                <th></th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -34,9 +34,8 @@
                     <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
                     <td>@Html.DisplayFor(modelItem => item.Correo)</td>
                     <td>
-                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <div class="btn-group" role="group" aria-label="Basic example" title="Editar Personas">
                             <button type="button" class="btn btn-sm btn-editar m-auto"><i class="bi bi-pencil"></i></button>
-                            
                         </div>
                     </td>
                 </tr>

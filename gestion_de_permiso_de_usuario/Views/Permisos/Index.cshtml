@@ -40,17 +40,20 @@
                         }
                     </td>
                     <td>
-                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <div class="btn-group" role="group" aria-label="Basic example" title="Editar Permisos">
                             <a asp-action="Edit" asp-route-id="@item.PermisoID" class="btn btn-warning">
                                 <i class="bi bi-pencil"></i>
                             </a>
+                        </div>
+
+                        <div class="btn-group" role="group" aria-label="Basic example" title="Ver Detalles">
                             <a asp-action="Details" asp-route-id="@item.PermisoID" class="btn btn-info ms-2">
                                 <i class="bi bi-eye"></i>
                             </a>
+                        </div>
                             @* <a asp-action="Delete" asp-route-id="@item.PermisoID" class="btn btn-danger">
                         <i class="bi bi-trash"></i>
                         </a> *@
-                        </div>
                     </td>
                 </tr>
             }

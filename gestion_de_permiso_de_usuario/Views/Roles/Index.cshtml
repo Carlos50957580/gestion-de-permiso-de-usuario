@@ -43,11 +43,16 @@
                     </td>
 
                     <td>
-                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <div class="btn-group" role="group" aria-label="Basic example" title="Editar Rol">
                             <a asp-action="Edit" asp-route-id="@item.RolID" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                            <a asp-action="Details" asp-route-id="@item.RolID" class="btn btn-info ms-2"><i class="bi bi-eye"></i></a>
-                            <a asp-action="Asignar" asp-route-id="@item.RolID" class="btn btn-success ms-2"><i class="bi bi-person-badge"></i></a>
+                        </div>
 
+                        <div class="btn-group" role="group" aria-label="Basic example" title="Ver detalles">
+                            <a asp-action="Details" asp-route-id="@item.RolID" class="btn btn-info ms-2"><i class="bi bi-eye"></i></a>
+                        </div>
+                            
+                        <div class="btn-group" role="group" aria-label="Basic example" title="Asignar Permisos">
+                            <a asp-action="Asignar" asp-route-id="@item.RolID" class="btn btn-success ms-2"><i class="bi bi-person-badge"></i></a>
                         </div>
                     </td>
                 </tr>
