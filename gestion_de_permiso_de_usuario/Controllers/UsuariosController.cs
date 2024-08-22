@@ -21,7 +21,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
 
 
 
-        [Permiso("Ver Usuarios,Ver Detalles de Usuarios,Crear Usuario,Editar Usuarios")]
+        [Permiso("Ver Usuarios,Ver Detalles de Usuarios,Crear Usuarios,Editar Usuarios")]
 
         // GET: Usuarios/Index
         public IActionResult Index()
@@ -47,7 +47,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
             return View(usuario);
         }
 
-        [Permiso("Crear Usuario")]
+        [Permiso("Crear Usuarios")]
         public IActionResult Create()
         {
             ViewBag.Personas = _personaDataAccess.GetAllPersonas();

@@ -14,23 +14,25 @@ builder.Services.AddScoped<UsuarioDataAccess>();
 builder.Services.AddScoped<PersonaDataAccess>();
 builder.Services.AddScoped<RolDataAccess>();
 
+// Registrar IHttpContextAccessor para acceso al contexto HTTP
+builder.Services.AddHttpContextAccessor();
+
 // Configuración de autenticación con cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(opcion =>
+    .AddCookie(options =>
     {
-        opcion.LoginPath = "/Login/Iniciar";
-        opcion.ExpireTimeSpan = TimeSpan.FromMinutes(3);
-        
-        opcion.LogoutPath = "/Login/Logout";
-        opcion.AccessDeniedPath = "/Login/AccessDenied";
+        options.LoginPath = "/Login/Iniciar";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Ajustar según sea necesario
+        options.LogoutPath = "/Login/Logout";
+        options.AccessDeniedPath = "/Login/AccessDenied";
     });
 
 // Configuración de autorización basada en roles
-builder.Services.AddAuthorization(opcion =>
+builder.Services.AddAuthorization(options =>
 {
-    opcion.AddPolicy("Administrador", policy => policy.RequireRole("Administrador"));
-    opcion.AddPolicy("Supervisor", policy => policy.RequireRole("Supervisor"));
-    opcion.AddPolicy("Invitado", policy => policy.RequireRole("Invitado"));
+    options.AddPolicy("Administrador", policy => policy.RequireRole("Administrador"));
+    options.AddPolicy("Supervisor", policy => policy.RequireRole("Supervisor"));
+    options.AddPolicy("Invitado", policy => policy.RequireRole("Invitado"));
 });
 
 // Configurar la canalización HTTP.
@@ -48,7 +50,6 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

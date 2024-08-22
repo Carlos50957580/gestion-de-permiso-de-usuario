@@ -1,13 +1,24 @@
 ﻿@model IEnumerable<gestion_de_permiso_de_usuario.Models.UsuarioConDetalles>
-
+@using gestion_de_permiso_de_usuario.Filters
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Lista de Usuarios";
 }
 
+
+@{
+    // Verificar permisos del usuario
+    var userHasCreateusuario = PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Crear Usuarios");
+    var userHasEditusuario = PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Editar Usuarios");
+    var userHasViewDetalleusuaio = PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Ver Detalles de Usuarios");
+}
+
+@if (userHasCreateusuario)
+     {
     <p>
         <a asp-action="Create" class="btn btn-primary">Crear Nuevo Usuario</a>
     </p>
-
+     }
 
 
 <div class="table-responsive">
@@ -45,13 +56,21 @@
                         }
                    </td>
                     <td>
-                        <div class="btn-group" role="group" aria-label="Basic example" title="Editar Usuarios">
-                            <a asp-action="Edit" asp-route-id="@item.UsuarioID" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
-                        </div>
+                        @if (userHasEditusuario)
+                        {
+                            <div class="btn-group" role="group" aria-label="Basic example" title="Editar Usuarios">
+                                <a asp-action="Edit" asp-route-id="@item.UsuarioID" class="btn btn-warning"><i class="bi bi-pencil"></i></a>
+                            </div>
+                        }
 
-                        <div class="btn-group" role="group" aria-label="Basic example" title="Ver Detalles">
-                            <a asp-action="Details" asp-route-id="@item.UsuarioID" class="btn btn-info ms-2"><i class="bi bi-eye"></i></a>
-                        </div>
+                        @if (userHasViewDetalleusuaio)
+                        {
+
+                            <div class="btn-group" role="group" aria-label="Basic example" title="Ver Detalles">
+                                <a asp-action="Details" asp-route-id="@item.UsuarioID" class="btn btn-info ms-2"><i class="bi bi-eye"></i></a>
+
+                            </div>
+                        }
                     </td>
                 </tr>
             }
