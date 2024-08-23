@@ -55,6 +55,10 @@
 
 <body>
 
+    <div id="contenedor_carga">
+        <div id="carga"></div>
+    </div>
+
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
@@ -303,9 +307,17 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
-
+   
+    <script>
+        window.onload = function () {
+            var contenedor = document.getElementById('contenedor_carga');
+            contenedor.style.visibility = 'hidden';
+            contenedor.style.opacity = '0';
+        }
+    </script>
 
 </body>
+
 
 </html>
 

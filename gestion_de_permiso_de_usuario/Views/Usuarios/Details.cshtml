@@ -1,4 +1,6 @@
 ﻿@model gestion_de_permiso_de_usuario.Models.UsuarioConDetalles
+@using gestion_de_permiso_de_usuario.Filters
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Detalles de Usuario";
@@ -41,7 +43,11 @@
             </dl>
         </div>
         <div class="card-footer text-end">
+
+            @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Editar Usuarios"))
+            {
             <a asp-action="Edit" asp-route-id="@Model.UsuarioID" class="btn btn-primary">Editar</a>
+            }
             <a asp-action="Index" class="btn btn-secondary ms-2">Volver a la Lista</a>
         </div>
     </div>

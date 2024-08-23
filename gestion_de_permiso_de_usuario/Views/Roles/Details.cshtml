@@ -1,5 +1,6 @@
 ﻿@model gestion_de_permiso_de_usuario.Models.Rol
-
+@using gestion_de_permiso_de_usuario.Filters
+@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Detalles del Rol";
 }
@@ -50,7 +51,10 @@
             </dl>
         </div>
         <div class="card-footer">
-            <a asp-action="Edit" asp-route-id="@Model.RolID" class="btn btn-primary">Editar</a>
+             @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Editar Roles"))
+            {
+                <a asp-action="Edit" asp-route-id="@Model.RolID" class="btn btn-primary">Editar</a>
+            }
             <a asp-action="Index" class="btn btn-secondary">Volver a la Lista</a>
         </div>
     </div>

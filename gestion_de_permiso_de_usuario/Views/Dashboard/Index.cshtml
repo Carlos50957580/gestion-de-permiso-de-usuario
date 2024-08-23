@@ -5,14 +5,16 @@
 
 <head>
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/css/style.css")" />
+
 </head>
 
-
-
-
 @* INICIO DE TARJETAS *@
+
+
 <div class="container">
     <div class="row">
+
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card">
                 <div class="card-body">
@@ -44,6 +46,8 @@
                 </div>
             </div>
         </div>
+
+      
 
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card">
@@ -326,9 +330,17 @@
                                 }
                             });
                         });
+
+                        window.onload = function(){
+                            var contenedor = document.getElementById('contenedor_carga');
+                            contenedor.style.visibility = 'hidden';
+                            contenedor.style.opacity = '0';
+                        }
                     </script>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+                                                    
