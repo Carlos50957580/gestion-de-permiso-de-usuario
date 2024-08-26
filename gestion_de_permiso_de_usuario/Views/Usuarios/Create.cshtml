@@ -15,50 +15,39 @@
                     <label for="UserName">Nombre de Usuario</label>
                     <input asp-for="NombreUsuario" type="text" id="UserName" class="form-control" placeholder="Ingresa tu nombre de usuario" required />
                     <div class="invalid-feedback">
-                        Por favor ingresa un usuario
+                        Por favor ingresa un nombre de usuario.
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="Persona">Persona</label>
                     <select asp-for="PersonaID" class="form-control" asp-items="@(new SelectList(ViewBag.Personas, "PersonaID", "Nombre"))" id="Persona" required>
-                        <option value="" class="Seleccion">Seleccione una persona</option>
+                        <option value="" selected>Seleccione una persona</option>
                     </select>
                     <div class="invalid-feedback">
-                        Por favor selecciona una persona
+                        Por favor selecciona una persona.
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="Rol">Rol</label>
-                    <select asp-for="RolID" class="form-control" asp-items="@(new SelectList(ViewBag.Roles, "RolID", "NombreRol"))" id="Rol" required>
-                        <option value="" class="Seleccion">Seleccione un rol</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Por favor selecciona un rol
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label for="Contraseña">Contraseña</label>
                     <input asp-for="Contraseña" type="password" class="form-control" id="Contraseña" placeholder="Ingresa tu contraseña" required />
                     <div class="invalid-feedback">
-                        Por favor ingresa una contraseña
+                        Por favor ingresa una contraseña.
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="Estado">Estado</label>
                     <select asp-for="Estado" class="form-control" id="Estado" required>
-                        <option value="1">Activo</option>
+                        <option value="1" selected>Activo</option>
                         <option value="0">Inactivo</option>
                     </select>
                     <div class="invalid-feedback">
-                        Por favor selecciona un estado
+                        Por favor selecciona un estado.
                     </div>
                 </div>
-
-                <input type="hidden" asp-for="CreadoPor" value="Admin" />
 
                 <br />
                 <button type="submit" class="btn btn-primary">Crear</button>

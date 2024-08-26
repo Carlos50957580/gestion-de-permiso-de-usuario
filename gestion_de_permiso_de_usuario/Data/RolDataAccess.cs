@@ -219,5 +219,6 @@ namespace gestion_de_permiso_de_usuario.Data
 
             return roles;
         }
+    
     }
 }

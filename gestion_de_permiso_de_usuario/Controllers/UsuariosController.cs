@@ -18,23 +18,20 @@ namespace gestion_de_permiso_de_usuario.Controllers
             _rolDataAccess = new RolDataAccess(configuration);
         }
 
-
-
-
         [Permiso("Ver Usuarios,Ver Detalles de Usuarios,Crear Usuarios,Editar Usuarios")]
-
         // GET: Usuarios/Index
         public IActionResult Index()
         {
             var usuarios = _usuarioDataAccess.GetUsuariosConDetalles();
 
-            //Obtener el nombre del usuario autenticado
+            // Obtener el nombre del usuario autenticado
             var userName = User.Identity.Name;
 
             // Pasar el nombre del usuario a la vista a través del ViewBag
             ViewBag.UserName = userName;
             return View(usuarios);
         }
+
         [Permiso("Ver Detalles de Usuarios")]
         // GET: Usuarios/Details/5
         public IActionResult Details(int id)
@@ -58,11 +55,16 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("NombreUsuario,PersonaID,RolID,Contraseña,Estado")] Usuario usuario)
+        public IActionResult Create([Bind("NombreUsuario,PersonaID,Contraseña,Estado")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 usuario.CreadoPor = User.Identity.Name; // Asignar el usuario actual al campo CreadoPor
+
+                // Obtener el ID del rol Base
+                int rolBaseId = _usuarioDataAccess.GetRolBaseId();
+                usuario.RolID = rolBaseId;
+
                 _usuarioDataAccess.InsertUsuario(usuario);
                 return RedirectToAction(nameof(Index));
             }

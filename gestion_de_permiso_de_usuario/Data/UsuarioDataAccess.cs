@@ -80,7 +80,6 @@ namespace gestion_de_permiso_de_usuario.Data
                                     NombreUsuario = reader["NombreUsuario"].ToString(),
                                     PersonaID = Convert.ToInt32(reader["PersonaID"]),
                                     RolID = Convert.ToInt32(reader["RolID"]),
-                                    //Contraseña = reader["Contraseña"].ToString(),
                                     FechaCambio = Convert.ToDateTime(reader["FechaCambio"]),
                                     Estado = Convert.ToInt32(reader["Estado"]),
                                     CreadoPor = reader["CreadoPor"].ToString(),
@@ -99,16 +98,11 @@ namespace gestion_de_permiso_de_usuario.Data
             return usuario;
         }
 
-
-
         public static string EncryptPassword(string password)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                // Convert the password string to a byte array.
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
-
-                // Convert the byte array to a hexadecimal string.
                 StringBuilder builder = new StringBuilder();
                 foreach (byte b in bytes)
                 {
@@ -117,7 +111,6 @@ namespace gestion_de_permiso_de_usuario.Data
                 return builder.ToString();
             }
         }
-
 
         // Actualiza los datos de un usuario
         public void UpdateUsuario(Usuario usuario)
@@ -136,14 +129,13 @@ namespace gestion_de_permiso_de_usuario.Data
                         command.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
                         command.Parameters.AddWithValue("@PersonaID", usuario.PersonaID);
                         command.Parameters.AddWithValue("@RolID", usuario.RolID);
-                        command.Parameters.AddWithValue("@Contraseña", encryptedPassword); // Contraseña encriptada
+                        command.Parameters.AddWithValue("@Contraseña", encryptedPassword);
                         command.Parameters.AddWithValue("@Estado", usuario.Estado);
                         command.Parameters.AddWithValue("@CreadoPor", usuario.CreadoPor); // Opcional
                         command.Parameters.AddWithValue("@ActualizadoPor", usuario.ActualizadoPor); // Nuevo parámetro
 
                         connection.Open();
                         command.ExecuteNonQuery();
-
                     }
                 }
             }
@@ -226,6 +218,31 @@ namespace gestion_de_permiso_de_usuario.Data
             }
         }
 
+        // Obtiene el ID del rol "Base"
+        public int GetRolBaseId()
+        {
+            int rolBaseId = 0;
+
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    var query = "SELECT RolID FROM Roles WHERE NombreRol = 'Base'";
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        rolBaseId = (int)command.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener el ID del rol Base.", ex);
+            }
+
+            return rolBaseId;
+       
+        }
         public List<string> GetPermisosDeUsuario(string nombreUsuario)
         {
             // Consulta que obtiene los permisos del usuario basado en su nombre de usuario
@@ -255,6 +272,7 @@ namespace gestion_de_permiso_de_usuario.Data
 
             return permisos;
         }
+
+
     }
 }
-
