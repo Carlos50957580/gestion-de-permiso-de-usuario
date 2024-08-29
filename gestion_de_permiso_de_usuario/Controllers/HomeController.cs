@@ -1,3 +1,4 @@
+using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -30,6 +32,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
             ViewBag.UserName = userName;
             return View();
         }
+
 
         public IActionResult Privacy()
         {

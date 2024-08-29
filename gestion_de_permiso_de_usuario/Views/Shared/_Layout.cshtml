@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Http
 @using gestion_de_permiso_de_usuario.Filters
+@model List<gestion_de_permiso_de_usuario.Models.Menu>
 @inject IHttpContextAccessor HttpContextAccessor
 <!DOCTYPE html>
 <html lang="en">
@@ -182,13 +183,15 @@
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
+             @foreach (var item in Model)
+    {
             <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Index","Dashboard")">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
+                <a class="nav-link collapsed" href="@Url.Content(item.URL)">
+                    <i class="@item.Icono"></i>
+                    <span>@item.Descripcion</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-           
+    }
            
 
           
