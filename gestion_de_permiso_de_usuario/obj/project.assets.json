@@ -2171,11 +2171,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\o99zz94\\Desktop\\VersionPrueba\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+      "projectUniqueName": "C:\\Users\\o99zz94\\Desktop\\Nav-Dinamica\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
       "projectName": "gestion_de_permiso_de_usuario",
-      "projectPath": "C:\\Users\\o99zz94\\Desktop\\VersionPrueba\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+      "projectPath": "C:\\Users\\o99zz94\\Desktop\\Nav-Dinamica\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
       "packagesPath": "C:\\Users\\o99zz94\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\o99zz94\\Desktop\\VersionPrueba\\gestion_de_permiso_de_usuario\\obj\\",
+      "outputPath": "C:\\Users\\o99zz94\\Desktop\\Nav-Dinamica\\gestion_de_permiso_de_usuario\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\o99zz94\\AppData\\Roaming\\NuGet\\NuGet.Config",

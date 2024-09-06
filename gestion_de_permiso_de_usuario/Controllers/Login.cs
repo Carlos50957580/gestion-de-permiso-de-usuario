@@ -109,34 +109,42 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 bool esValido = (bool)outputParameter.Value;
                 if (esValido)
                 {
-                    // Obtener el rol del usuario
-                    SqlCommand roleCommand = new SqlCommand("ObtenerRolUsuario", connection)
+                    // Obtener el ID del rol del usuario
+                    SqlCommand roleCommand = new SqlCommand("ObtenerRolIDUsuario", connection)
                     {
                         CommandType = CommandType.StoredProcedure
                     };
                     roleCommand.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
 
-                    SqlParameter roleParameter = new SqlParameter("@NombreRol", SqlDbType.NVarChar, 15)
+                    SqlParameter roleIdParameter = new SqlParameter("@RolID", SqlDbType.Int)
                     {
                         Direction = ParameterDirection.Output
                     };
-                    roleCommand.Parameters.Add(roleParameter);
+                    roleCommand.Parameters.Add(roleIdParameter);
 
                     roleCommand.ExecuteNonQuery();
-                    string rolUsuario = (string)roleParameter.Value;
+                    int rolIdUsuario = (int)roleIdParameter.Value;
 
                     // Crear las claims
                     var claims = new List<Claim>
-                     {
-                       new Claim(ClaimTypes.Name, usuario.NombreUsuario),
-                       new Claim(ClaimTypes.Role, rolUsuario)
-                     };
+            {
+                new Claim(ClaimTypes.Name, usuario.NombreUsuario),
+                new Claim(ClaimTypes.Role, rolIdUsuario.ToString())
+            };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    return RedirectToAction("Index", "Dashboard");
+                    // Redirigir según el rol ID
+                    if (rolIdUsuario == 9)
+                    {
+                        return RedirectToAction("Index", "Home"); // Redirige a la vista Index del controlador Home para rol Base
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Dashboard"); // Redirige a Dashboard para otros roles
+                    }
                 }
                 else
                 {
@@ -146,6 +154,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 }
             }
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Logout()

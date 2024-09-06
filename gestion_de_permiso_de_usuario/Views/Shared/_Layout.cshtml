@@ -1,7 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity;
+﻿﻿@using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Http
 @using gestion_de_permiso_de_usuario.Filters
-@model List<gestion_de_permiso_de_usuario.Models.Menu>
 @inject IHttpContextAccessor HttpContextAccessor
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +39,7 @@
     <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
 
- 
+
 
     <!-- Template Main CSS File -->
     <link href="~/assets/css/style.css" rel="stylesheet">
@@ -70,49 +69,49 @@
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
 
-     
+
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
                 <li class="nav-item d-block d-lg-none">
                     <a class="nav-link nav-icon search-bar-toggle " href="#">
-@*                         <i class="bi bi-search"></i>
- *@                    </a>
+                        @*                         <i class="bi bi-search"></i>
+                        *@
+                    </a>
                 </li><!-- End Search Icon-->
 
-          
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                        <li class="dropdown-header">
-                            You have 3 new messages
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
 
-                      
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="~/assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>David Muldon</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>8 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <li class="dropdown-header">
+                        You have 3 new messages
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
-                        <li class="dropdown-footer">
-                            <a href="#">Show all messages</a>
-                        </li>
 
-                    </ul><!-- End Messages Dropdown Items -->
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="~/assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                            <div>
+                                <h4>David Muldon</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>8 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
 
+                    <li class="dropdown-footer">
+                        <a href="#">Show all messages</a>
+                    </li>
+
+                </ul><!-- End Messages Dropdown Items -->
                 </li><!-- End Messages Nav -->
 
                 <li class="nav-item dropdown pe-3">
@@ -129,14 +128,14 @@
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <!--<span>Model.m</span>--> 
+                            <!--<span>Model.m</span>-->
 
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
 
-                       <li>
+                        <li>
                             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                 <i class="bi bi-person"></i>
                                 <span>My Profile</span>
@@ -171,7 +170,7 @@
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
-                        </li> 
+                        </li>
 
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
@@ -181,26 +180,28 @@
 
     </header><!-- End Header -->
     <!-- ======= Sidebar ======= -->
+
+
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
-             @foreach (var item in Model)
-    {
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Content(item.URL)">
-                    <i class="@item.Icono"></i>
-                    <span>@item.Descripcion</span>
+            @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Ver Dashboard"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="@Url.Action("Index","Dashboard")">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-    }
-           
 
-          
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="@Url.Action("Registrar","Login")">
-                        <i class="bi bi-card-list"></i>
-                        <span>Registro</span>
-                    </a>
-                </li>
+            }
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="@Url.Action("Registrar","Login")">
+                    <i class="bi bi-card-list"></i>
+                    <span>Registro</span>
+                </a>
+            </li>
 
 
 
@@ -215,7 +216,7 @@
 
                 </li>
             }
-                <!-- End permisos Page Nav -->
+            <!-- End permisos Page Nav -->
             @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Ver Roles", "Crear Roles", "Editar Roles", "Ver Detalles de roles", "Asignar Permisos"))
             {
                 <li class="nav-item">
@@ -224,8 +225,8 @@
                         <span>Roles</span>
                     </a>
                 </li>
-                }
-                <!-- End Roles Page Nav -->
+            }
+            <!-- End Roles Page Nav -->
             @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Ver y editar Personas"))
             {
 
@@ -237,9 +238,7 @@
                 </li>
             }
 
-                <!-- End Persona Page Nav -->
-
-                
+            <!-- End Persona Page Nav -->
             @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Editar Usuarios", "Crear Usuarios", "Ver Usuarios", "Ver Detalles de Usuarios"))
             {
                 <li class="nav-item">
@@ -251,8 +250,8 @@
 
             }
 
-                <!-- End Usuario Page Nav -->
-            
+            <!-- End Usuario Page Nav -->
+
 
             <li class="nav-item">
                 <form asp-controller="Login" asp-action="Logout" method="post" style="display: inline;">
@@ -266,7 +265,7 @@
 
 
 
-           
+
 
         </ul>
 
@@ -305,12 +304,12 @@
     <script src="~/assets/js/main.js"></script>
 
 
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
-   
+
     <script>
         window.onload = function () {
             var contenedor = document.getElementById('contenedor_carga');
@@ -323,6 +322,7 @@
 
 
 </html>
+
 
 
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DfqnSaCo+qQ=",
+  "dgSpecHash": "Vjdadia6EJ4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\o99zz94\\Desktop\\VersionPrueba\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+  "projectFilePath": "C:\\Users\\o99zz94\\Desktop\\Nav-Dinamica\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\o99zz94\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\o99zz94\\.nuget\\packages\\azure.identity\\1.11.3\\azure.identity.1.11.3.nupkg.sha512",

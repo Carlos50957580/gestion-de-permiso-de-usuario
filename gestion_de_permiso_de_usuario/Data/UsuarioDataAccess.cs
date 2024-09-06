@@ -241,7 +241,7 @@ namespace gestion_de_permiso_de_usuario.Data
             }
 
             return rolBaseId;
-       
+
         }
         public List<string> GetPermisosDeUsuario(string nombreUsuario)
         {
