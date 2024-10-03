@@ -1,4 +1,5 @@
 ﻿using gestion_de_permiso_de_usuario.Models;
+using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
@@ -8,10 +9,15 @@ namespace gestion_de_permiso_de_usuario.Data
     public class UsuarioDataAccess
     {
         private readonly string _connectionString;
+        private readonly IConfiguration _configuration;
+
+       
 
         public UsuarioDataAccess(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _configuration = configuration;
+
         }
 
         // Obtiene una lista de usuarios con detalles adicionales
@@ -274,5 +280,112 @@ namespace gestion_de_permiso_de_usuario.Data
         }
 
 
+
+        public int ObtenerTotalUsuarios()
+        {
+            int totalUsuarios = 0;
+            string query = "SELECT COUNT(*) FROM Usuarios";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
+                totalUsuarios = (int)cmd.ExecuteScalar();
+            }
+            return totalUsuarios;
+        }
+
+
+        //public int ObtenerUsuariosActivos()
+        //{
+        //    using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+        //    {
+        //        connection.Open();
+        //        string query = "SELECT COUNT(*) FROM Usuarios WHERE Estado = 1"; // Asumiendo que '1' representa activo
+        //        using (var command = new SqlCommand(query, connection))
+        //        {
+        //            return (int)command.ExecuteScalar();
+        //        }
+        //    }
+        //}
+
+        //// Método para obtener usuarios inactivos
+        //public int ObtenerUsuariosInactivos()
+        //{
+        //    using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+        //    {
+        //        connection.Open();
+        //        string query = "SELECT COUNT(*) FROM Usuarios WHERE Estado = 0"; // Asumiendo que '0' representa inactivo
+        //        using (var command = new SqlCommand(query, connection))
+        //        {
+        //            return (int)command.ExecuteScalar();
+        //        }
+        //    }
+        //}
+
+
+        public int ObtenerUsuariosActivos()
+        {
+            int usuariosActivos = 0;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM Usuarios WHERE Estado = 1";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                connection.Open();
+                usuariosActivos = (int)command.ExecuteScalar();
+            }
+
+            return usuariosActivos;
+        }
+
+        public int ObtenerUsuariosInactivos()
+        {
+            int usuariosInactivos = 0;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM Usuarios WHERE Estado = 0";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                connection.Open();
+                usuariosInactivos = (int)command.ExecuteScalar();
+            }
+
+            return usuariosInactivos;
+        }
+
+        public List<UsuarioPorRol> ObtenerCantidadUsuariosPorRol()
+        {
+            List<UsuarioPorRol> usuariosPorRol = new List<UsuarioPorRol>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = @"
+                SELECT R.NombreRol AS RolNombre, COUNT(U.UsuarioID) AS CantidadUsuarios
+                FROM Roles R
+                LEFT JOIN Usuarios U ON R.RolID = U.RolID
+                GROUP BY R.NombreRol";
+
+                SqlCommand command = new SqlCommand(query, connection);
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        usuariosPorRol.Add(new UsuarioPorRol
+                        {
+                            RolNombre = reader["RolNombre"].ToString(),
+                            CantidadUsuarios = Convert.ToInt32(reader["CantidadUsuarios"])
+                        });
+                    }
+                }
+            }
+
+            return usuariosPorRol;
+        }
     }
 }
+

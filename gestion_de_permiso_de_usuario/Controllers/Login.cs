@@ -84,6 +84,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         [HttpPost]
+     
         public async Task<IActionResult> IniciarAsync(Usuario usuario)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -125,6 +126,25 @@ namespace gestion_de_permiso_de_usuario.Controllers
                     roleCommand.ExecuteNonQuery();
                     int rolIdUsuario = (int)roleIdParameter.Value;
 
+                    // Obtener el ID del usuario
+                    SqlCommand userIdCommand = new SqlCommand("ObtenerUsuarioID", connection)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    userIdCommand.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
+
+                    SqlParameter userIdParameter = new SqlParameter("@UsuarioID", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    userIdCommand.Parameters.Add(userIdParameter);
+
+                    userIdCommand.ExecuteNonQuery();
+                    int userId = (int)userIdParameter.Value;
+
+                    // Guardar el UserID en la sesión
+                    HttpContext.Session.SetInt32("UserID", userId);
+
                     // Crear las claims
                     var claims = new List<Claim>
             {
@@ -154,7 +174,6 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 }
             }
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Logout()

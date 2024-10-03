@@ -1,79 +1,73 @@
 ﻿using gestion_de_permiso_de_usuario.Data;
-using gestion_de_permiso_de_usuario.Filters;
-using gestion_de_permiso_de_usuario.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace gestion_de_permiso_de_usuario.Controllers
+public class DashboardController : Controller
 {
-    [Authorize]
-    public class DashboardController : Controller
+    private readonly PermisoDataAccess _permisoDataAccess;
+    private readonly UsuarioDataAccess _usuarioDataAccess;
+    private readonly RolDataAccess _rolDataAccess;
+    private readonly PersonaDataAccess _personaDataAccess;
+    private readonly IConfiguration _configuration;
+
+    public DashboardController(IConfiguration configuration)
     {
-        private readonly UsuarioDataAccess _usuarioDataAccess;
-        private readonly PersonaDataAccess _personaDataAccess;
-        private readonly RolDataAccess _rolDataAccess;
-        private readonly PermisoDataAccess _permisoDataAccess;
+        _configuration = configuration;
+        _permisoDataAccess = new PermisoDataAccess(_configuration);
+        _usuarioDataAccess = new UsuarioDataAccess(_configuration);
+        _rolDataAccess = new RolDataAccess(_configuration);
+        _personaDataAccess = new PersonaDataAccess(_configuration);
+    }
 
-        public DashboardController(IConfiguration configuration)
+    public ActionResult Index()
+    {
+        int? userId = HttpContext.Session.GetInt32("UserID");
+
+        if (userId == null)
         {
-            _usuarioDataAccess = new UsuarioDataAccess(configuration);
-            _personaDataAccess = new PersonaDataAccess(configuration);
-            _rolDataAccess = new RolDataAccess(configuration);
-            _permisoDataAccess = new PermisoDataAccess(configuration);
+            return RedirectToAction("Iniciar", "Login");
         }
 
-        //[Permiso("Ver Dashboard")]
-        public IActionResult Index()
+        var permisos = _permisoDataAccess.ObtenerPermisosPorUsuario((int)userId);
+        var viewModel = new DashboardViewModel();
+
+        if (permisos.Contains("Ver Usuarios")) //
         {
-            //Obtener el nombre del usuario autenticado
-            var userName = User.Identity.Name;
+            viewModel.TotalUsuarios = _usuarioDataAccess.ObtenerTotalUsuarios();
+            viewModel.TotalUsuariosActivos = _usuarioDataAccess.ObtenerUsuariosActivos();
+            viewModel.TotalUsuariosInactivos = _usuarioDataAccess.ObtenerUsuariosInactivos();
 
-            // Pasar el nombre del usuario a la vista a través del ViewBag
-            ViewBag.UserName = userName;
-
-            var usuarios = _usuarioDataAccess.GetUsuariosConDetalles();
-            var personas = _personaDataAccess.GetPersonas();
-            var roles = _rolDataAccess.GetRoles();
-            var permisos = _permisoDataAccess.GetPermisos();
-
-            var model = new Tuple<IEnumerable<UsuarioConDetalles>, IEnumerable<Persona>>(usuarios, personas);
-
-            ViewBag.Roles = roles;
-            ViewBag.Permisos = permisos;
-
-            ViewBag.TotalUsuarios = usuarios.Count();
-            ViewBag.TotalPersonas = personas.Count();
-            ViewBag.TotalRoles = roles.Count();
-            ViewBag.TotalPermisos = permisos.Count();
-
-            var usuariosPorRol = roles.Select(rol => new
-            {
-                RolNombre = rol.NombreRol,
-                CantidadUsuarios = usuarios.Count(u => u.NombreRol == rol.NombreRol)
-            }).ToList();
-
-            ViewBag.UsuariosPorRolLabels = string.Join(",", usuariosPorRol.Select(ur => $"'{ur.RolNombre}'"));
-            ViewBag.UsuariosPorRolData = string.Join(",", usuariosPorRol.Select(ur => ur.CantidadUsuarios));
-
-            var activosUsuarios = usuarios.Count(u => u.Estado == (int)EstadoUsuario.Activo);
-            var inactivosUsuarios = usuarios.Count(u => u.Estado == (int)EstadoUsuario.Inactivo);
-
-            ViewBag.ActivosUsuarios = activosUsuarios;
-            ViewBag.InactivosUsuarios = inactivosUsuarios;
-
-            var activosRoles = roles.Count(r => r.Estado == (int)EstadoRol.Activo);
-            var inactivosRoles = roles.Count(r => r.Estado == (int)EstadoRol.Inactivo);
-
-            ViewBag.ActivosRoles = activosRoles;
-            ViewBag.InactivosRoles = inactivosRoles;
-
-            var activosPermisos = permisos.Count(p => p.Estado == (int)EstadoPermiso.Activo);
-            var inactivosPermisos = permisos.Count(p => p.Estado == (int)EstadoPermiso.Inactivo);
-
-            ViewBag.ActivosPermisos = activosPermisos;
-            ViewBag.InactivosPermisos = inactivosPermisos;
-
-            return View(model);
+            viewModel.UsuariosPorRol = _usuarioDataAccess.ObtenerCantidadUsuariosPorRol();
         }
+
+        if (permisos.Contains("Ver Roles")) //
+        {
+            viewModel.TotalRoles = _rolDataAccess.ObtenerTotalRoles();
+            viewModel.TotalRolesActivos = _rolDataAccess.ObtenerRolesActivos();
+            viewModel.TotalRolesInactivos = _rolDataAccess.ObtenerRolesInactivos();
+        }
+
+        if (permisos.Contains("Ver Permisos")) //
+        {
+            viewModel.TotalPermisos = _permisoDataAccess.ObtenerTotalPermisos();
+            viewModel.TotalPermisosActivos = _permisoDataAccess.ObtenerPermisosActivos();
+            viewModel.TotalPermisosInactivos = _permisoDataAccess.ObtenerPermisosInactivos();
+        }
+
+     
+        if (permisos.Contains("Ver y editar Personas"))
+        {
+            viewModel.Totalpersonas = _personaDataAccess.ObtenerTotalPersonas();
+        }
+
+        ////
+        //if (permisos.Contains("Ver Personas"))
+        //{
+        //    viewModel.Totalpersonas = _permisoDataAccess.ObtenerTotalPermisos();
+        //}
+
+        return View(viewModel);
     }
 }

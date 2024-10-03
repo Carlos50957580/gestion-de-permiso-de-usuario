@@ -171,6 +171,20 @@ namespace gestion_de_permiso_de_usuario.Data
             return personas;
         }
 
+
+        public int ObtenerTotalPersonas()
+        {
+            int totalPeresonas = 0;
+            string query = "SELECT COUNT(*) FROM Personas";
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
+                totalPeresonas = (int)cmd.ExecuteScalar();
+            }
+            return totalPeresonas;
+        }
     }
 }
 

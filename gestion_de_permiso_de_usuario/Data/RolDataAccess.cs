@@ -219,6 +219,55 @@ namespace gestion_de_permiso_de_usuario.Data
 
             return roles;
         }
-    
+
+
+        public int ObtenerTotalRoles()
+        {
+            int totalRoles = 0;
+            string query = "SELECT COUNT(*) FROM Roles";  
+
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
+                totalRoles = (int)cmd.ExecuteScalar();
+            }
+            return totalRoles;
+        }
+
+
+
+        public int ObtenerRolesActivos()
+        {
+            int rolesActivos = 0;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM Roles WHERE Estado = 1";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                connection.Open();
+                rolesActivos = (int)command.ExecuteScalar();
+            }
+
+            return rolesActivos;
+        }
+
+        public int ObtenerRolesInactivos()
+        {
+            int rolesInactivos = 0;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM Roles WHERE Estado = 0";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                connection.Open();
+                rolesInactivos = (int)command.ExecuteScalar();
+            }
+
+            return rolesInactivos;
+        }
     }
 }
+

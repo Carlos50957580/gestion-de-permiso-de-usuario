@@ -1,4 +1,4 @@
-﻿@using gestion_de_permiso_de_usuario.Models
+﻿@model DashboardViewModel
 @{
     ViewData["Title"] = "Dashboard";
 }
@@ -6,15 +6,12 @@
 <head>
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" />
     <link rel="stylesheet" href="@Url.Content("~/assets/css/style.css")" />
-
 </head>
-
-@* INICIO DE TARJETAS *@
-
 
 <div class="container">
     <div class="row">
 
+        <!-- Tarjeta para Total Usuarios -->
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card">
                 <div class="card-body">
@@ -24,31 +21,22 @@
                             <i class="bi bi-people-fill total-usuarios"></i>
                         </div>
                         <div class="ps-3">
-                            <h2 class="card-text">@ViewBag.TotalUsuarios</h2>
+                            @if (Model.TotalUsuarios == 0)
+                            {
+                                <span>Informacion no disponible</span>
+                            }
+                            else
+                            {
+                                <h2 class="card-text">@Model.TotalUsuarios</h2>
+                            }
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-xxl-3 col-md-6">
-            <div class="card info-card">
-                <div class="card-body">
-                    <h5 class="card-title">Personas <span>| Registradas</span></h5>
-                    <div class="d-flex align-items-center">
-                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                            <i class="bi bi-person total-personas"></i>
-                        </div>
-                        <div class="ps-3">
-                            <h2 class="card-text">@ViewBag.TotalPersonas</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-      
-
+        <!-- Tarjeta para Total Roles -->
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card">
                 <div class="card-body">
@@ -58,13 +46,23 @@
                             <i class="bi bi-person-badge-fill total-roles"></i>
                         </div>
                         <div class="ps-3">
-                            <h2 class="card-text">@ViewBag.TotalRoles</h2>
+
+                            @if (Model.TotalRoles == 0)
+                            {
+                                <span>Informacion no disponible</span>
+                            }
+
+                            else
+                            {
+                                <h2 class="card-text">@Model.TotalRoles</h2>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Tarjeta para Total Permisos -->
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card">
                 <div class="card-body">
@@ -74,273 +72,170 @@
                             <i class="bi bi-shield-lock-fill total-permisos"></i>
                         </div>
                         <div class="ps-3">
-                            <h2 class="card-text">@ViewBag.TotalPermisos</h2>
+
+                            @if (Model.TotalPermisos == 0)
+                            {
+                                <span>Informacion no disponible</span>
+                            }
+
+
+                            else
+                            {
+                                <h2 class="card-text">@Model.TotalPermisos</h2>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <!-- Tarjeta para Total personas -->
+        <div class="col-xxl-3 col-md-6">
+            <div class="card info-card">
+                <div class="card-body">
+                    <h5 class="card-title">Personas <span>| Registradas</span></h5>
+                    <div class="d-flex align-items-center">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-shield-lock-fill total-permisos"></i>
+                        </div>
+                        <div class="ps-3">
+
+                            @if (Model.Totalpersonas == 0)
+                            {
+                                <span>Informacion no disponible</span>
+                            }
+
+
+                            else
+                            {
+                                <h2 class="card-text">@Model.Totalpersonas</h2>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
-@* FIN DE TARJETAS *@
-
-
-<div class="container-fluid">
-    <div class="row">
-        <!-- Gráfico de Usuarios -->
-        <div class="col-lg-4 d-flex">
-            <div class="card flex-fill">
-                <div class="card-body pb-0">
-                    <h5 class="card-title">Usuarios</h5>
-                    <div id="usuariosChart" style="height: 300px;" class="echart"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gráfico de Roles -->
-        <div class="col-lg-4 d-flex">
-            <div class="card flex-fill">
-                <div class="card-body pb-0">
-                    <h5 class="card-title">Roles</h5>
-                    <div id="rolesChart" style="height: 300px;" class="echart"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gráfico de Permisos -->
-        <div class="col-lg-4 d-flex">
-            <div class="card flex-fill">
-                <div class="card-body pb-0">
-                    <h5 class="card-title">Permisos</h5>
-                    <div id="permisosChart" style="height: 300px;" class="echart"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 
 
-<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const usuariosChart = echarts.init(document.querySelector("#usuariosChart"));
-        usuariosChart.setOption({
-            tooltip: {
-                trigger: 'item'
-            },
-            legend: {
-                top: '5%',
-                left: 'center'
-            },
-            series: [{
-                name: 'Usuarios',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '18',
-                        fontWeight: 'bold'
-                    }
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [
-                    {
-                        value: @ViewBag.ActivosUsuarios,
-                        name: 'Activos',
-                        itemStyle: {
-                            color: '#008959'
-                        }
-                    },
-                    {
-                        value: @ViewBag.InactivosUsuarios,
-                        name: 'Inactivos',
-                        itemStyle: {
-                            color: '#F41B35'
-                        }
-                    }
-                ]
-            }]
-        });
-
-        const rolesChart = echarts.init(document.querySelector("#rolesChart"));
-        rolesChart.setOption({
-            tooltip: {
-                trigger: 'item'
-            },
-            legend: {
-                top: '5%',
-                left: 'center'
-            },
-            series: [{
-                name: 'Roles',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '18',
-                        fontWeight: 'bold'
-                    }
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [
-                    {
-                        value: @ViewBag.ActivosRoles,
-                        name: 'Activos',
-                        itemStyle: {
-                            color: '#008959'
-                        }
-                    },
-                    {
-                        value: @ViewBag.InactivosRoles,
-                        name: 'Inactivos',
-                        itemStyle: {
-                            color: '#F41B35'
-                        }
-                    }
-                ]
-            }]
-        });
-
-        const permisosChart = echarts.init(document.querySelector("#permisosChart"));
-        permisosChart.setOption({
-            tooltip: {
-                trigger: 'item'
-            },
-            legend: {
-                top: '5%',
-                left: 'center'
-            },
-            series: [{
-                name: 'Permisos',
-                type: 'pie',
-                radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
-                label: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    label: {
-                        show: true,
-                        fontSize: '18',
-                        fontWeight: 'bold'
-                    }
-                },
-                labelLine: {
-                    show: false
-                },
-                data: [
-                    {
-                        value: @ViewBag.ActivosPermisos,
-                        name: 'Activos',
-                        itemStyle: {
-                            color: '#008959'
-                        }
-                    },
-                    {
-                        value: @ViewBag.InactivosPermisos,
-                        name: 'Inactivos',
-                        itemStyle: {
-                            color: '#F41B35'
-                        }
-                    }
-                ]
-            }]
-        });
-    });
-</script>
-</div>
-@* GRAFICO DE BARRAS *@
-@model Tuple<IEnumerable<gestion_de_permiso_de_usuario.Models.UsuarioConDetalles>, IEnumerable<gestion_de_permiso_de_usuario.Models.Persona>>
-
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Usuarios por Rol</h5>
-                    <canvas id="barChart" style="width: 100%; height: auto; max-height: 400px;"></canvas>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", () => {
-                            new Chart(document.querySelector('#barChart'), {
-                                type: 'bar',
-                                data: {
-                                    labels: [@Html.Raw(ViewBag.UsuariosPorRolLabels)],
-                                    datasets: [{
-                                        label: 'Cantidad de Usuarios',
-                                        data: [@Html.Raw(ViewBag.UsuariosPorRolData)],
-                                        backgroundColor: [
-                                            'rgba(255, 99, 132, 0.2)',
-                                            'rgba(255, 159, 64, 0.2)',
-                                            'rgba(255, 205, 86, 0.2)',
-                                            'rgba(75, 192, 192, 0.2)',
-                                            'rgba(54, 162, 235, 0.2)',
-                                            'rgba(153, 102, 255, 0.2)',
-                                            'rgba(201, 203, 207, 0.2)'
-                                        ],
-                                        borderColor: [
-                                            'rgb(255, 99, 132)',
-                                            'rgb(255, 159, 64)',
-                                            'rgb(255, 205, 86)',
-                                            'rgb(75, 192, 192)',
-                                            'rgb(54, 162, 235)',
-                                            'rgb(153, 102, 255)',
-                                            'rgb(201, 203, 207)'
-                                        ],
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            ticks: {
-                                                stepSize: 1,
-                                                callback: function (value) {
-                                                    if (Number.isInteger(value)) {
-                                                        return value;
-                                                    }
-                                                    return '';
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                        });
 
-                        window.onload = function(){
-                            var contenedor = document.getElementById('contenedor_carga');
-                            contenedor.style.visibility = 'hidden';
-                            contenedor.style.opacity = '0';
-                        }
-                    </script>
-                </div>
+
+        @if (Model.TotalPermisos == 0)
+        {
+            //no hay nada xd
+        }
+
+        else
+        {
+            <!-- Gráfico de pastel: Permisos Activos vs Inactivos -->
+            <div class="col-lg-4">
+                <canvas id="permisosActivosInactivosChart"></canvas>
+                <h5 class="card-title text-center">Permisos activos e inactivos</h5>
             </div>
+        }
+
+
+        @if (Model.TotalUsuarios == 0)
+        {
+            //no hay nada xd
+        }
+        else
+        {
+           
+
+            <!-- Gráfico de pastel: Usuarios Activos vs Inactivos -->
+            <div class="col-lg-4">
+                <canvas id="usuariosActivosInactivosChart"></canvas>
+                <h5 class="card-title text-center">Usuarios activos e inactivos</h5>
+
+            </div>
+        }
+       
+
+
+        @if (Model.TotalRoles == 0)
+        {
+            //no hay nada xd
+
+        }
+
+        else
+        {
+            <!-- Gráfico de pastel: Roles Activos vs Inactivos -->
+            <div class="col-lg-4">
+                <canvas id="rolesActivosInactivosChart"></canvas>
+                <h5 class="card-title text-center">Roles activos e inactivos</h5>
+
+            </div>
+        }
+      
+
+    </div>
+
+    <!-- Gráfico de barras: Cantidad de usuarios por rol -->
+    <div class="row">
+        <div class="col-lg-12">
+            <canvas id="usuariosPorRolChart"></canvas>
         </div>
     </div>
 </div>
 
-                                                    
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Gráfico de pastel: Usuarios Activos vs Inactivos
+    var ctxUsuarios = document.getElementById('usuariosActivosInactivosChart').getContext('2d');
+    var usuariosActivosInactivosChart = new Chart(ctxUsuarios, {
+        type: 'pie',
+        data: {
+            labels: ['Activos', 'Inactivos'],
+            datasets: [{
+                data: [@Model.TotalUsuariosActivos, @Model.TotalUsuariosInactivos],
+                backgroundColor: ['#4CAF50', '#F44336'],
+                borderColor: ['#4CAF50', '#F44336'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+    // Gráfico de pastel: Roles Activos vs Inactivos
+    var ctxRoles = document.getElementById('rolesActivosInactivosChart').getContext('2d');
+    var rolesActivosInactivosChart = new Chart(ctxRoles, {
+        type: 'pie',
+        data: {
+            labels: ['Activos', 'Inactivos'],
+            datasets: [{
+                data: [@Model.TotalRolesActivos, @Model.TotalRolesInactivos],
+                backgroundColor: ['#2196F3', '#FFC107'],
+                borderColor: ['#2196F3', '#FFC107'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+    // Gráfico de pastel: Permisos Activos vs Inactivos
+
+    
+    var ctxPermisos = document.getElementById('permisosActivosInactivosChart').getContext('2d');
+    var permisosActivosInactivosChart = new Chart(ctxPermisos, {
+        type: 'pie',
+        data: {
+            labels: ['Activos', 'Inactivos'],
+            datasets: [{
+                data: [@Model.TotalPermisosActivos, @Model.TotalPermisosInactivos],
+                backgroundColor: ['#FF5722', '#9C27B0'],
+                borderColor: ['#FF5722', '#9C27B0'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+</script>
+

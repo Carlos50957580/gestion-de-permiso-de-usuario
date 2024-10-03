@@ -17,6 +17,14 @@ builder.Services.AddScoped<RolDataAccess>();
 // Registrar IHttpContextAccessor para acceso al contexto HTTP
 builder.Services.AddHttpContextAccessor();
 
+// Agregar soporte para la sesión
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Tiempo de expiración de la sesión
+    options.Cookie.HttpOnly = true; // Aumenta la seguridad
+    options.Cookie.IsEssential = true; // Necesario para el funcionamiento de la sesión
+});
+
 // Configuración de autenticación con cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -49,8 +57,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Agregar middleware de autenticación y autorización
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Activar el middleware de sesiones
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
