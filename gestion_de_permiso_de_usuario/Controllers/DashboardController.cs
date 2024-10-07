@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
+using gestion_de_permiso_de_usuario.Models;
 
 public class DashboardController : Controller
 {
@@ -42,31 +43,46 @@ public class DashboardController : Controller
             viewModel.UsuariosPorRol = _usuarioDataAccess.ObtenerCantidadUsuariosPorRol();
         }
 
-        if (permisos.Contains("Ver Roles")) //
+        // Lista de permisos 
+        var permisosVerRoles = new List<string> { "Ver Roles", "Crear Roles", "Editar Roles", "Ver Detalles de roles" };
+
+        var permisosVerPermisos = new List<string> { "Ver Permisos", "Asignar Permisos", "Crear Permisos", "Ver Detalles de Permisos", "Editar Permisos" };
+
+        var permisosVerPersonas = new List<string> { "Ver y editar Personas" };
+        //
+        var permisosVerUsuarios = new List<string> { "Ver Usuarios", "Editar Usuarios", "Crear Usuarios", "Ver Detalles de Usuarios" };
+
+
+        if (permisosVerRoles.Any(permiso => permisos.Contains(permiso)))
         {
             viewModel.TotalRoles = _rolDataAccess.ObtenerTotalRoles();
             viewModel.TotalRolesActivos = _rolDataAccess.ObtenerRolesActivos();
             viewModel.TotalRolesInactivos = _rolDataAccess.ObtenerRolesInactivos();
         }
 
-        if (permisos.Contains("Ver Permisos")) //
+        // Verificar si el usuario tiene permisos para ver permisos
+        if (permisosVerPermisos.Any(permiso => permisos.Contains(permiso)))
         {
             viewModel.TotalPermisos = _permisoDataAccess.ObtenerTotalPermisos();
             viewModel.TotalPermisosActivos = _permisoDataAccess.ObtenerPermisosActivos();
             viewModel.TotalPermisosInactivos = _permisoDataAccess.ObtenerPermisosInactivos();
         }
 
-     
-        if (permisos.Contains("Ver y editar Personas"))
+        // Verificar si el usuario tiene permisos para ver Usuarios
+        if (permisosVerUsuarios.Any(permiso => permisos.Contains(permiso)))
+        {
+            viewModel.TotalUsuarios = _usuarioDataAccess.ObtenerTotalUsuarios();
+            viewModel.TotalUsuariosActivos = _usuarioDataAccess.ObtenerUsuariosActivos();
+            viewModel.TotalUsuariosInactivos = _usuarioDataAccess.ObtenerUsuariosInactivos();
+        }
+
+        // Verificar si el usuario tiene permisos para ver personas
+        if (permisosVerPersonas.Any(permiso => permisos.Contains(permiso)))
         {
             viewModel.Totalpersonas = _personaDataAccess.ObtenerTotalPersonas();
         }
 
-        ////
-        //if (permisos.Contains("Ver Personas"))
-        //{
-        //    viewModel.Totalpersonas = _permisoDataAccess.ObtenerTotalPermisos();
-        //}
+
 
         return View(viewModel);
     }

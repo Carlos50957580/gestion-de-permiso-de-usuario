@@ -224,7 +224,7 @@ namespace gestion_de_permiso_de_usuario.Data
         public int ObtenerTotalRoles()
         {
             int totalRoles = 0;
-            string query = "SELECT COUNT(*) FROM Roles";  
+            string query = "SELECT COUNT(*) FROM Roles";
 
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
@@ -270,4 +270,3 @@ namespace gestion_de_permiso_de_usuario.Data
         }
     }
 }
-

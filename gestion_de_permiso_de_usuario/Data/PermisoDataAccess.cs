@@ -10,7 +10,7 @@ namespace gestion_de_permiso_de_usuario.Data
         private readonly string _connectionString;
         private readonly IConfiguration _configuration;
 
-    
+
 
         public PermisoDataAccess(IConfiguration configuration)
         {
@@ -175,21 +175,21 @@ namespace gestion_de_permiso_de_usuario.Data
 
 
         public int ObtenerTotalPermisos()
+        {
+            int totalPermisos = 0;
+
+            using (SqlConnection con = new SqlConnection(_connectionString))
             {
-                int totalPermisos = 0;
-
-                using (SqlConnection con = new SqlConnection(_connectionString))
+                string query = "SELECT COUNT(*) FROM Permisos";
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    string query = "SELECT COUNT(*) FROM Permisos"; 
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        con.Open();
-                        totalPermisos = (int)cmd.ExecuteScalar();
-                    }
+                    con.Open();
+                    totalPermisos = (int)cmd.ExecuteScalar();
                 }
-
-                return totalPermisos;
             }
+
+            return totalPermisos;
+        }
 
 
         public int ObtenerPermisosActivos()
@@ -226,6 +226,5 @@ namespace gestion_de_permiso_de_usuario.Data
     }
 }
 
-    
 
 

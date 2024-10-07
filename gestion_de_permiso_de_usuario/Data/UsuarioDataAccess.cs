@@ -11,7 +11,7 @@ namespace gestion_de_permiso_de_usuario.Data
         private readonly string _connectionString;
         private readonly IConfiguration _configuration;
 
-       
+
 
         public UsuarioDataAccess(IConfiguration configuration)
         {
@@ -388,4 +388,5 @@ namespace gestion_de_permiso_de_usuario.Data
         }
     }
 }
+
 
