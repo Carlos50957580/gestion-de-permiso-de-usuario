@@ -1,0 +1,13 @@
+﻿@model IEnumerable<MenuItem>
+
+<ul class="sidebar-nav" id="sidebar-nav">
+    @foreach (var item in Model)
+    {
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="@Url.Action(item.Accion, item.Controlador)">
+                <i class="@item.Icono"></i>
+                <span>@item.Descripcion</span>
+            </a>
+        </li>
+    }
+</ul>

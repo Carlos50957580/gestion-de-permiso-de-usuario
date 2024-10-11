@@ -14,6 +14,9 @@ builder.Services.AddScoped<UsuarioDataAccess>();
 builder.Services.AddScoped<PersonaDataAccess>();
 builder.Services.AddScoped<RolDataAccess>();
 
+// Registrar MenuItemDataAccess en el contenedor de dependencias
+builder.Services.AddScoped<MenuItemDataAccess>(); // Agregar esta línea para resolver la inyección de dependencia
+
 // Registrar IHttpContextAccessor para acceso al contexto HTTP
 builder.Services.AddHttpContextAccessor();
 

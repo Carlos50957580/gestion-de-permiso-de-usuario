@@ -5,9 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
-
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -37,9 +34,6 @@
     <link href="~/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-
-
 
     <!-- Template Main CSS File -->
     <link href="~/assets/css/style.css" rel="stylesheet">
@@ -183,93 +177,11 @@
 
 
     <aside id="sidebar" class="sidebar">
-        <ul class="sidebar-nav" id="sidebar-nav">
-            @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Ver Dashboard"))
-            {
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="@Url.Action("Index","Dashboard")">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li><!-- End Dashboard Nav -->
-
-            }
+        @await Component.InvokeAsync("Menu")
 
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="@Url.Action("Registrar","Login")">
-                    <i class="bi bi-card-list"></i>
-                    <span>Registro</span>
-                </a>
-            </li>
-
-
-
-            @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Ver Permisos", "Crear Permisos", "Editar Permisos", "Ver Detalles de Permisos"))
-            {
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="@Url.Action("Index","Permisos")">
-                        <i class="bi bi-shield-lock-fill"></i>
-                        <span>Permisos</span>
-                    </a>
-
-                </li>
-            }
-            <!-- End permisos Page Nav -->
-            @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Ver Roles", "Crear Roles", "Editar Roles", "Ver Detalles de roles", "Asignar Permisos"))
-            {
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="@Url.Action("Index","Roles")">
-                        <i class="bi bi-person-badge-fill"></i>
-                        <span>Roles</span>
-                    </a>
-                </li>
-            }
-            <!-- End Roles Page Nav -->
-            @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Ver y editar Personas"))
-            {
-
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="@Url.Action("Index","Persona")">
-                        <i class="bi bi-person"></i>
-                        <span>Personas</span>
-                    </a>
-                </li>
-            }
-
-            <!-- End Persona Page Nav -->
-            @if (PermissionHelper.HasAnyPermission(HttpContextAccessor.HttpContext, "Editar Usuarios", "Crear Usuarios", "Ver Usuarios", "Ver Detalles de Usuarios"))
-            {
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="@Url.Action("Index","Usuarios")">
-                        <i class="bi bi-people-fill"></i>
-                        <span>Usuarios</span>
-                    </a>
-                </li>
-
-            }
-
-            <!-- End Usuario Page Nav -->
-
-
-            <li class="nav-item">
-                <form asp-controller="Login" asp-action="Logout" method="post" style="display: inline;">
-                    <button type="submit" class="nav-link collapsed">
-                        <i class="bi bi-box-arrow-right"></i> <!-- Cambia el icono aquí -->
-                        <span>Salir</span>
-                    </button>
-                </form>
-            </li>
-
-
-
-
-
-
-        </ul>
-
-    </aside><!-- End Sidebar-->
+    </aside>
+    <!-- End Sidebar-->
 
     <main id="main" class="main">
         <div class="pagetitle">
@@ -322,7 +234,3 @@
 
 
 </html>
-
-
-
-

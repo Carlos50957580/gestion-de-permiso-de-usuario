@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MenuItem>
+
+<ul class="sidebar-nav" id="sidebar-nav">
+    @foreach (var parentItem in Model)
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action(parentItem.Accion, parentItem.Controlador)">
+                <i class="nav-icon @parentItem.Icono"></i>
+                <span>@parentItem.Descripcion</span>
+            </a>
+
+        
+
+            @if (parentItem.SubMenuItems != null && parentItem.SubMenuItems.Any())
+            {
+                <ul class="nav nav-treeview">
+                    @foreach (var subItem in parentItem.SubMenuItems)
+                    {
+                        <li class="nav-item">
+                            <a href="@Url.Action(subItem.Accion, subItem.Controlador)" class="nav-link">
+                                <i class="@subItem.Icono"></i>
+                                <span>@subItem.Descripcion</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+        </li>
+
+
+    }
+
+    <form asp-controller="Login" asp-action="Logout" method="post" style="display: inline;">
+        <button type="submit" class="nav-link collapsed">
+            <i class="bi bi-box-arrow-right"></i> <!-- Cambia el icono aquí -->
+            <span>Salir</span>
+        </button>
+    </form>
+
+</ul>
