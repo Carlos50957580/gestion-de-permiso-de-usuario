@@ -60,11 +60,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// Agregar middleware de autenticación y autorización
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Activar el middleware de sesiones
 app.UseSession();
 
 app.MapControllerRoute(
@@ -72,3 +70,4 @@ app.MapControllerRoute(
     pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 app.Run();
+

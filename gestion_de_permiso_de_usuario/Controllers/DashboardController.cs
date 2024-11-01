@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Linq;
 using gestion_de_permiso_de_usuario.Models;
+using System.Security.Claims;
 
 public class DashboardController : Controller
 {
@@ -24,7 +25,15 @@ public class DashboardController : Controller
 
     public ActionResult Index()
     {
-        int? userId = HttpContext.Session.GetInt32("UserID");
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdClaim == null)
+        {
+            return RedirectToAction("Iniciar", "Login");
+        }
+
+        int userId = int.Parse(userIdClaim); // Convierte el ID a int
+
+
 
         if (userId == null)
         {

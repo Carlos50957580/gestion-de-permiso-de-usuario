@@ -34,9 +34,6 @@ namespace gestion_de_permiso_de_usuario.Controllers
         {
             return View();
         }
-
-
-
         // POST: Permisos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

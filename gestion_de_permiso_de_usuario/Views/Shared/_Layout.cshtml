@@ -49,9 +49,9 @@
 
 <body>
 
-    <div id="contenedor_carga">
+   @*  <div id="contenedor_carga">
         <div id="carga"></div>
-    </div>
+    </div> *@
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -222,13 +222,13 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 
-    <script>
+    @* <script>
         window.onload = function () {
             var contenedor = document.getElementById('contenedor_carga');
             contenedor.style.visibility = 'hidden';
             contenedor.style.opacity = '0';
         }
-    </script>
+    </script> *@
 
 </body>
 

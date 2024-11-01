@@ -84,20 +84,22 @@ namespace gestion_de_permiso_de_usuario.Controllers
         }
 
         [HttpPost]
-     
         public async Task<IActionResult> IniciarAsync(Usuario usuario)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string encryptedPassword = EncryptPassword(usuario.Contraseña);
 
-                SqlCommand command = new SqlCommand("ValidarUsuario", connection);
-                command.CommandType = CommandType.StoredProcedure;
+                // Comando para validar el usuario
+                SqlCommand command = new SqlCommand("ValidarUsuario", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
 
                 command.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
                 command.Parameters.AddWithValue("@Contraseña", encryptedPassword);
 
-                // Parámetro de salida
+                // Parámetro de salida para la validación
                 SqlParameter outputParameter = new SqlParameter("@Resultado", SqlDbType.Bit)
                 {
                     Direction = ParameterDirection.Output
@@ -110,29 +112,16 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 bool esValido = (bool)outputParameter.Value;
                 if (esValido)
                 {
-                    // Obtener el ID del rol del usuario
-                    SqlCommand roleCommand = new SqlCommand("ObtenerRolIDUsuario", connection)
-                    {
-                        CommandType = CommandType.StoredProcedure
-                    };
-                    roleCommand.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
-
-                    SqlParameter roleIdParameter = new SqlParameter("@RolID", SqlDbType.Int)
-                    {
-                        Direction = ParameterDirection.Output
-                    };
-                    roleCommand.Parameters.Add(roleIdParameter);
-
-                    roleCommand.ExecuteNonQuery();
-                    int rolIdUsuario = (int)roleIdParameter.Value;
-
-                    // Obtener el ID del usuario
+                    // Comando para obtener el ID del usuario
                     SqlCommand userIdCommand = new SqlCommand("ObtenerUsuarioID", connection)
                     {
                         CommandType = CommandType.StoredProcedure
                     };
+
+                    // Este parámetro de entrada es necesario para identificar al usuario en la base de datos
                     userIdCommand.Parameters.AddWithValue("@NombreUsuario", usuario.NombreUsuario);
 
+                    // Parámetro de salida para obtener el ID del usuario
                     SqlParameter userIdParameter = new SqlParameter("@UsuarioID", SqlDbType.Int)
                     {
                         Direction = ParameterDirection.Output
@@ -140,31 +129,24 @@ namespace gestion_de_permiso_de_usuario.Controllers
                     userIdCommand.Parameters.Add(userIdParameter);
 
                     userIdCommand.ExecuteNonQuery();
+
+                    // Obtener el valor del ID del usuario
                     int userId = (int)userIdParameter.Value;
 
-                    // Guardar el UserID en la sesión
-                    HttpContext.Session.SetInt32("UserID", userId);
-
-                    // Crear las claims
+                    // Guardar el UserID en las claims
                     var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, usuario.NombreUsuario),
-                new Claim(ClaimTypes.Role, rolIdUsuario.ToString())
-            };
+        {
+            new Claim(ClaimTypes.Name, usuario.NombreUsuario),
+            new Claim(ClaimTypes.NameIdentifier, userId.ToString()), // Aquí almacenamos el UserID
+            // Agregar más claims si es necesario
+        };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    // Redirigir según el rol ID
-                    if (rolIdUsuario == 9)
-                    {
-                        return RedirectToAction("Index", "Home"); // Redirige a la vista Index del controlador Home para rol Base
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Dashboard"); // Redirige a Dashboard para otros roles
-                    }
+                    // Redirigir según el rol ID u otra lógica
+                    return RedirectToAction("Index", "Dashboard");
                 }
                 else
                 {
@@ -173,6 +155,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
                     return View();
                 }
             }
+
         }
 
         [HttpPost]
