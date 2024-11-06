@@ -158,14 +158,12 @@ namespace gestion_de_permiso_de_usuario.Controllers
 
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            // Cierra la sesión del usuario
             await HttpContext.SignOutAsync();
-
-            // Redirige al usuario a la página de inicio o a cualquier otra página después del logout
             return RedirectToAction("Iniciar", "Login");
         }
+
     }
 }
