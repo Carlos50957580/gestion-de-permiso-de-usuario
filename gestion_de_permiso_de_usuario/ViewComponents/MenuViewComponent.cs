@@ -1,31 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using gestion_de_permiso_de_usuario.Data;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
-public class MenuViewComponent : ViewComponent
+namespace gestion_de_permiso_de_usuario.ViewComponents
 {
-    private readonly MenuItemDataAccess _menuItemDataAccess;
-
-    public MenuViewComponent(MenuItemDataAccess menuItemDataAccess)
+    public class MenuViewComponent : ViewComponent
     {
-        _menuItemDataAccess = menuItemDataAccess;
-    }
+        private readonly MenuItemDataAccess _menuItemDataAccess;
 
-    public async Task<IViewComponentResult> InvokeAsync()
-    {
-        // Obtener todos los ítems del menú desde la base de datos
-        var menuItems = await Task.Run(() => _menuItemDataAccess.GetMenuItems());
-
-        // Separar los ítems que no tienen ParentID (los ítems principales)
-        var parentItems = menuItems.Where(x => x.ParentID == null).ToList();
-
-        // Para cada ítem principal, encontrar sus submenús (hijos)
-        foreach (var parent in parentItems)
+        public MenuViewComponent(IConfiguration configuration)
         {
-            parent.SubMenuItems = menuItems.Where(x => x.ParentID == parent.MenuItemID).ToList();
+            _menuItemDataAccess = new MenuItemDataAccess(configuration);
         }
 
-        return View(parentItems); // Pasar los ítems del menú a la vista
+        public IViewComponentResult Invoke()
+        {
+            // Obtener el userId del usuario autenticado
+            int userId = int.Parse(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+
+            // Llamar a GetMenuItems pasando el userId
+            var menuItems = _menuItemDataAccess.GetMenuItems(userId);
+            return View(menuItems);
+        }
     }
 }

@@ -13,13 +13,25 @@ public class MenuItemDataAccess
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 
-    public List<MenuItem> GetMenuItems()
+    public List<MenuItem> GetMenuItems(int userId)
     {
         List<MenuItem> menuItems = new List<MenuItem>();
 
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("SELECT MenuItemID, Descripcion, Controlador, Accion, Icono, ParentID FROM MenuItemsNew", conn);
+            string query = @"
+                SELECT DISTINCT mi.MenuItemID, mi.Descripcion, mi.Controlador, mi.Accion, mi.Icono, mi.ParentID
+                FROM MenuItemsNew mi
+                LEFT JOIN MenuItemPermisos mip ON mi.MenuItemID = mip.MenuItemID
+                LEFT JOIN Permisos p ON mip.PermisoID = p.PermisoID
+                LEFT JOIN RolPermisos rp ON p.PermisoID = rp.PermisoID
+                LEFT JOIN Roles r ON rp.RolID = r.RolID
+                LEFT JOIN Usuarios u ON u.RolID = r.RolID AND u.UsuarioID = @UserId
+                WHERE mi.Descripcion IN ('Registrar', 'Salir') OR u.UsuarioID = @UserId;
+                ";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@UserId", userId);
             cmd.CommandType = CommandType.Text;
 
             conn.Open();
@@ -41,4 +53,5 @@ public class MenuItemDataAccess
 
         return menuItems;
     }
+
 }

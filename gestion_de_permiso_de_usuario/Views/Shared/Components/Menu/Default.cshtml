@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MenuItem>
 
 <ul class="sidebar-nav" id="sidebar-nav">
-    @foreach (var parentItem in Model)
+    @foreach (var parentItem in Model.Where(m => m.ParentID == null))
     {
         <li class="nav-item">
             <a class="nav-link" href="@Url.Action(parentItem.Accion, parentItem.Controlador)">
@@ -9,12 +9,15 @@
                 <span>@parentItem.Descripcion</span>
             </a>
 
-        
+            @* Filtra los submenús para el item actual *@
+            @{
+                var subItems = Model.Where(m => m.ParentID == parentItem.MenuItemID);
+            }
 
-            @if (parentItem.SubMenuItems != null && parentItem.SubMenuItems.Any())
+            @if (subItems.Any())
             {
                 <ul class="nav nav-treeview">
-                    @foreach (var subItem in parentItem.SubMenuItems)
+                    @foreach (var subItem in subItems)
                     {
                         <li class="nav-item">
                             <a href="@Url.Action(subItem.Accion, subItem.Controlador)" class="nav-link">
@@ -26,8 +29,5 @@
                 </ul>
             }
         </li>
-
-
     }
- 
 </ul>
