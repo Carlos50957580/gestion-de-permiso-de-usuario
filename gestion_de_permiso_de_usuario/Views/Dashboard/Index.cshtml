@@ -6,6 +6,7 @@
 <head>
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" />
     <link rel="stylesheet" href="@Url.Content("~/assets/css/style.css")" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <div class="container">
@@ -23,13 +24,12 @@
                         <div class="ps-3">
                             @if (Model.TotalUsuarios == 0)
                             {
-                                <span>Informacion no disponible</span>
+                                <span>Información no disponible</span>
                             }
                             else
                             {
                                 <h2 class="card-text">@Model.TotalUsuarios</h2>
                             }
-
                         </div>
                     </div>
                 </div>
@@ -46,12 +46,10 @@
                             <i class="bi bi-person-badge-fill total-roles"></i>
                         </div>
                         <div class="ps-3">
-
                             @if (Model.TotalRoles == 0)
                             {
-                                <span>Informacion no disponible</span>
+                                <span>Información no disponible</span>
                             }
-
                             else
                             {
                                 <h2 class="card-text">@Model.TotalRoles</h2>
@@ -72,13 +70,10 @@
                             <i class="bi bi-shield-lock-fill total-permisos"></i>
                         </div>
                         <div class="ps-3">
-
                             @if (Model.TotalPermisos == 0)
                             {
-                                <span>Informacion no disponible</span>
+                                <span>Información no disponible</span>
                             }
-
-
                             else
                             {
                                 <h2 class="card-text">@Model.TotalPermisos</h2>
@@ -89,24 +84,20 @@
             </div>
         </div>
 
-
-        <!-- Tarjeta para Total personas -->
+        <!-- Tarjeta para Total Personas -->
         <div class="col-xxl-3 col-md-6">
             <div class="card info-card">
                 <div class="card-body">
                     <h5 class="card-title">Personas <span>| Registradas</span></h5>
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                            <i class="bi bi-shield-lock-fill total-permisos"></i>
+                            <i class="bi bi-person-fill total-personas"></i>
                         </div>
                         <div class="ps-3">
-
                             @if (Model.Totalpersonas == 0)
                             {
-                                <span>Informacion no disponible</span>
+                                <span>Información no disponible</span>
                             }
-
-
                             else
                             {
                                 <h2 class="card-text">@Model.Totalpersonas</h2>
@@ -120,127 +111,102 @@
     </div>
 </div>
 
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-
-
 <div class="container">
     <div class="row">
-
-
-        @if (Model.TotalPermisos == 0)
+        @if (Model.TotalPermisos > 0)
         {
-            //no hay nada xd
-        }
-
-        else
-        {
-            <!-- Gráfico de pastel: Permisos Activos vs Inactivos -->
+            <!-- Gráfico de Permisos Activos vs Inactivos -->
             <div class="col-lg-4">
-                <canvas id="permisosActivosInactivosChart"></canvas>
-                <h5 class="card-title text-center">Permisos activos e inactivos</h5>
+                <div id="permisosChart"></div>
             </div>
         }
 
-
-        @if (Model.TotalUsuarios == 0)
+        @if (Model.TotalUsuarios > 0)
         {
-            //no hay nada xd
-        }
-        else
-        {
-
-
-            <!-- Gráfico de pastel: Usuarios Activos vs Inactivos -->
+            <!-- Gráfico de Usuarios Activos vs Inactivos -->
             <div class="col-lg-4">
-                <canvas id="usuariosActivosInactivosChart"></canvas>
-                <h5 class="card-title text-center">Usuarios activos e inactivos</h5>
-
+                <div id="usuariosChart"></div>
             </div>
         }
 
-
-
-        @if (Model.TotalRoles == 0)
+        @if (Model.TotalRoles > 0)
         {
-            //no hay nada xd
-
-        }
-
-        else
-        {
-            <!-- Gráfico de pastel: Roles Activos vs Inactivos -->
+            <!-- Gráfico de Roles Activos vs Inactivos -->
             <div class="col-lg-4">
-                <canvas id="rolesActivosInactivosChart"></canvas>
-                <h5 class="card-title text-center">Roles activos e inactivos</h5>
-
+                <div id="rolesChart"></div>
             </div>
         }
-
-
     </div>
-    @*
-    <!-- Gráfico de barras: Cantidad de usuarios por rol -->
-    <div class="row">
-    <div class="col-lg-12">
-    <canvas id="usuariosPorRolChart"></canvas>
-    </div>
-    </div>
-    </div> *@
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    <script>
-        // Gráfico de pastel: Usuarios Activos vs Inactivos
-        var ctxUsuarios = document.getElementById('usuariosActivosInactivosChart').getContext('2d');
-        var usuariosActivosInactivosChart = new Chart(ctxUsuarios, {
-            type: 'pie',
-            data: {
-                labels: ['Activos', 'Inactivos'],
-                datasets: [{
-                    data: [@Model.TotalUsuariosActivos, @Model.TotalUsuariosInactivos],
-                    backgroundColor: ['#4CAF50', '#F44336'],
-                    borderColor: ['#4CAF50', '#F44336'],
-                    borderWidth: 1
-                }]
+<script>
+    // Función para inicializar los gráficos
+    function renderCharts() {
+        var permisosOptions = {
+            series: [@Model.TotalPermisosActivos, @Model.TotalPermisosInactivos],
+            chart: {
+                type: 'pie',
+                height: 500,
+                width: '100%',
+                redrawOnParentResize: true, // Se asegura que el gráfico se redibuje al cambiar el tamaño del contenedor
+            },
+            labels: ['Permisos Activos', 'Permisos Inactivos'],
+            colors: ['#FF5722', '#9C27B0'],
+            legend: {
+                show: false // Esto desactiva la leyenda junto al gráfico
             }
-        });
+        };
+        var permisosChart = new ApexCharts(document.querySelector("#permisosChart"), permisosOptions);
+        permisosChart.render();
 
-    </script>
-
-
-    <script>
-        // Gráfico de pastel: Roles Activos vs Inactivos
-        var ctxRoles = document.getElementById('rolesActivosInactivosChart').getContext('2d');
-        var rolesActivosInactivosChart = new Chart(ctxRoles, {
-            type: 'pie',
-            data: {
-                labels: ['Activos', 'Inactivos'],
-                datasets: [{
-                    data: [@Model.TotalRolesActivos, @Model.TotalRolesInactivos],
-                    backgroundColor: ['#2196F3', '#FFC107'],
-                    borderColor: ['#2196F3', '#FFC107'],
-                    borderWidth: 1
-                }]
+        var usuariosOptions = {
+            series: [@Model.TotalUsuariosActivos, @Model.TotalUsuariosInactivos],
+            chart: {
+                type: 'pie',
+                height: 500,
+                width: '100%',
+                redrawOnParentResize: true, // Se asegura que el gráfico se redibuje al cambiar el tamaño del contenedor
+            },
+            labels: ['Usuarios Activos', 'Usuarios Inactivos'],
+            colors: ['#4CAF50', '#F44336'],
+            legend: {
+                show: false // Esto desactiva la leyenda junto al gráfico
             }
-        });
+        };
+        var usuariosChart = new ApexCharts(document.querySelector("#usuariosChart"), usuariosOptions);
+        usuariosChart.render();
 
-    </script>
-
-
-    <script>
-        // Gráfico de pastel: Permisos Activos vs Inactivos
-        var ctxPermisos = document.getElementById('permisosActivosInactivosChart').getContext('2d');
-        var permisosActivosInactivosChart = new Chart(ctxPermisos, {
-            type: 'pie',
-            data: {
-                labels: ['Activos', 'Inactivos'],
-                datasets: [{
-                    data: [@Model.TotalPermisosActivos, @Model.TotalPermisosInactivos],
-                    backgroundColor: ['#FF5722', '#9C27B0'],
-                    borderColor: ['#FF5722', '#9C27B0'],
-                    borderWidth: 1
-                }]
+        var rolesOptions = {
+            series: [@Model.TotalRolesActivos, @Model.TotalRolesInactivos],
+            chart: {
+                type: 'pie',
+                height: 500,
+                width: '100%',
+                redrawOnParentResize: true, // Se asegura que el gráfico se redibuje al cambiar el tamaño del contenedor
+            },
+            labels: ['Roles Activos', 'Roles Inactivos'],
+            colors: ['#2196F3', '#FFC107'],
+            legend: {
+                show: false // Esto desactiva la leyenda junto al gráfico
             }
-        });
+        };
+        var rolesChart = new ApexCharts(document.querySelector("#rolesChart"), rolesOptions);
+        rolesChart.render();
 
-    </script>
+        // Devolver los gráficos para actualización
+        return { permisosChart, usuariosChart, rolesChart };
+    }
+
+    // Inicializar gráficos
+    var charts = renderCharts();
+
+    // Evento para redibujar los gráficos al cambiar el tamaño de la pantalla
+    window.addEventListener('resize', function () {
+        // Llamar a la función `resize` de cada gráfico para ajustarlo
+        charts.permisosChart.resize();
+        charts.usuariosChart.resize();
+        charts.rolesChart.resize();
+    });
+</script>
