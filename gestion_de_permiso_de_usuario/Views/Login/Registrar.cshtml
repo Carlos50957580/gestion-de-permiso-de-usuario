@@ -104,6 +104,8 @@
                                     </head>
                                     <body>
                                         <form id="miFormulario" asp-action="Registrar" asp-controller="Login" method="post" class="row g-3 needs-validation" novalidate>
+                                          
+
                                             <div class="col-12">
                                                 <label for="Nombre" class="form-label">Nombre</label>
                                                 <input type="text" name="Nombre" class="form-control" id="Nombre" placeholder="Nombre" required autocomplete="off">
@@ -116,21 +118,27 @@
                                                 <div id="validacionApellido" class="validacion"></div>
                                             </div>
 
+                                              <div class="col-12">
+                                                <label for="Cedula" class="form-label">Cédula</label>
+                                                <input type="text" name="Cedula" class="form-control" id="Cedula" placeholder="Cédula" required autocomplete="off">
+                                                <div id="validacionCedula" class="validacion"></div>
+                                            </div>
+
                                             <div class="col-12">
                                                 <label for="Correo" class="form-label">Correo Electrónico</label>
-                                                <input type="email" name="Correo" class="form-control" id="Correo" placeholder="Correo Electronico" required autocomplete="off">
+                                                <input type="email" name="Correo" class="form-control" id="Correo" placeholder="Correo Electrónico" required autocomplete="off">
                                                 <div id="validacionCorreo" class="validacion"></div>
                                             </div>
 
                                             <div class="col-12">
                                                 <label for="FechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-                                                <input type="date" name="FechaNacimiento" class="form-control" id="FechaNacimiento"  required>
+                                                <input type="date" name="FechaNacimiento" class="form-control" id="FechaNacimiento" required>
                                                 <div id="validacionFechaNacimiento" class="validacion"></div>
                                             </div>
 
                                             <div class="col-12">
                                                 <label for="Telefono" class="form-label">Teléfono</label>
-                                                <input type="tel" name="Telefono" class="form-control" id="Telefono" placeholder="Numero Telefonico" required autocomplete="off">
+                                                <input type="tel" name="Telefono" class="form-control" id="Telefono" placeholder="Número Telefónico" required autocomplete="off">
                                                 <div id="validacionTelefono" class="validacion"></div>
                                             </div>
 
@@ -148,7 +156,7 @@
                                                 <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
                                             </div>
                                             <div class="col-12">
-                                                <p class="small mb-0">¿Listo para iniciar sesión en tu cuenta? <a href="@Url.Action("Iniciar","Login")">Iniciar sesión</a></p>
+                                                <p class="small mb-0">¿Listo para iniciar sesión en tu cuenta? <a href="@Url.Action("Iniciar", "Login")">Iniciar sesión</a></p>
                                             </div>
                                         </form>
 

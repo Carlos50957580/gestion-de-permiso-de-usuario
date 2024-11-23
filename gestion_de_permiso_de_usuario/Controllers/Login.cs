@@ -55,7 +55,34 @@ namespace gestion_de_permiso_de_usuario.Controllers
         {
             try
             {
-                using SqlConnection con = new SqlConnection(connectionString);
+                // Conectar a la base de datos para verificar si el correo o la cédula ya existen
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    con.Open();
+
+                    // Verificar si el correo ya existe
+                    SqlCommand checkCorreoCmd = new SqlCommand("SELECT COUNT(1) FROM Personas WHERE Correo = @Correo", con);
+                    checkCorreoCmd.Parameters.AddWithValue("@Correo", personas.Correo);
+                    int correoExists = (int)checkCorreoCmd.ExecuteScalar();
+                    if (correoExists > 0)
+                    {
+                        ViewData["Incompleto"] = "El correo electrónico ya está registrado.";
+                        return View();
+                    }
+
+                    // Verificar si la cédula ya existe
+                    SqlCommand checkCedulaCmd = new SqlCommand("SELECT COUNT(1) FROM Personas WHERE Cedula = @Cedula", con);
+                    checkCedulaCmd.Parameters.AddWithValue("@Cedula", personas.Cedula);
+                    int cedulaExists = (int)checkCedulaCmd.ExecuteScalar();
+                    if (cedulaExists > 0)
+                    {
+                        ViewData["Incompleto"] = "La cédula ya está registrada.";
+                        return View();
+                    }
+                }
+
+                // Si no hay duplicados, proceder con la inserción
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     SqlCommand cmd = new SqlCommand("spAddPersona", con);
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -65,23 +92,25 @@ namespace gestion_de_permiso_de_usuario.Controllers
                     cmd.Parameters.AddWithValue("@Genero", personas.Genero);
                     cmd.Parameters.AddWithValue("@Telefono", personas.Telefono);
                     cmd.Parameters.AddWithValue("@Correo", personas.Correo);
+                    cmd.Parameters.AddWithValue("@Cedula", personas.Cedula);
                     cmd.Parameters.AddWithValue("@FechaCambio", DateTime.Now);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
+
+                    ViewData["Completado"] = "Registro Completado";
+                    return View();
                 }
-                ViewData["Completado"] = "Registro Completado";
-                return View();
             }
             catch (Exception ex)
             {
-                ViewData["Incompleto"] = "Registro no completado";
+                ViewData["Incompleto"] = $"Registro no completado: {ex.Message}";
                 return View();
             }
-
-
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> IniciarAsync(Usuario usuario)

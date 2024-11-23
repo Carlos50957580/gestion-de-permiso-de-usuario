@@ -46,7 +46,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Persona/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PersonaID,Nombre,Apellido,FechaNacimiento,Genero,Telefono,Correo,FechaCambio")] Persona persona)
+        public IActionResult Edit(int id, [Bind("PersonaID,Nombre,Cedula,Apellido,FechaNacimiento,Genero,Telefono,Correo,FechaCambio")] Persona persona)
         {
             if (id != persona.PersonaID)
             {

@@ -6,7 +6,11 @@
 <head>
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" />
     <link rel="stylesheet" href="@Url.Content("~/assets/css/style.css")" />
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.10.0/dist/plotly.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 </head>
 
 <div class="container">
@@ -111,102 +115,126 @@
     </div>
 </div>
 
+
+
 <div class="container">
     <div class="row">
-        @if (Model.TotalPermisos > 0)
-        {
-            <!-- Gráfico de Permisos Activos vs Inactivos -->
-            <div class="col-lg-4">
-                <div id="permisosChart"></div>
-            </div>
-        }
 
-        @if (Model.TotalUsuarios > 0)
-        {
-            <!-- Gráfico de Usuarios Activos vs Inactivos -->
-            <div class="col-lg-4">
-                <div id="usuariosChart"></div>
-            </div>
-        }
+        <!-- Gráfico de Permisos -->
+        <div class="col-xxl-4 col-md-6">
+            
+                    <canvas id="permisosChart"></canvas>
+           
+        </div>
 
-        @if (Model.TotalRoles > 0)
-        {
-            <!-- Gráfico de Roles Activos vs Inactivos -->
-            <div class="col-lg-4">
-                <div id="rolesChart"></div>
-            </div>
-        }
-    </div>
+        <!-- Gráfico de Usuarios -->
+        <div class="col-xxl-4 col-md-6">
+           
+                    <canvas id="usuariosChart"></canvas>
+            
+        </div>
+
+        <!-- Gráfico de Roles -->
+        <div class="col-xxl-4 col-md-6">
+          
+                    <canvas id="rolesChart"></canvas>
+                </div>
+    
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+    <style>
+        /* Estilo general para los contenedores */
+        .container {
+            padding: 15px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-xxl-4, .col-md-6 {
+            box-sizing: border-box;
+        }
+
+        canvas {
+            width: 100% !important; /* Fuerza a que el gráfico ocupe el 100% del contenedor */
+            height: auto !important; /* Mantiene la proporción del gráfico */
+            display: block; /* Elimina el espacio adicional debajo del canvas */
+        }
+    </style>
+<!-- permisosChart.js -->
 <script>
-    // Función para inicializar los gráficos
-    function renderCharts() {
-        var permisosOptions = {
-            series: [@Model.TotalPermisosActivos, @Model.TotalPermisosInactivos],
-            chart: {
-                type: 'pie',
-                height: 500,
-                width: '100%',
-                redrawOnParentResize: true, // Se asegura que el gráfico se redibuje al cambiar el tamaño del contenedor
-            },
+    var ctx1 = document.getElementById('permisosChart').getContext('2d');
+    var permisosChart = new Chart(ctx1, {
+        type: 'pie',
+        data: {
             labels: ['Permisos Activos', 'Permisos Inactivos'],
-            colors: ['#FF5722', '#9C27B0'],
-            legend: {
-                show: false // Esto desactiva la leyenda junto al gráfico
+            datasets: [{
+                data: [@Model.TotalPermisosActivos, @Model.TotalPermisosInactivos],
+                backgroundColor: ['#FF5722', '#9C27B0']
+            }]
+        },
+        options: {
+            responsive: true, // Responsivo
+            plugins: {
+                legend: {
+                  
+                }
             }
-        };
-        var permisosChart = new ApexCharts(document.querySelector("#permisosChart"), permisosOptions);
-        permisosChart.render();
-
-        var usuariosOptions = {
-            series: [@Model.TotalUsuariosActivos, @Model.TotalUsuariosInactivos],
-            chart: {
-                type: 'pie',
-                height: 500,
-                width: '100%',
-                redrawOnParentResize: true, // Se asegura que el gráfico se redibuje al cambiar el tamaño del contenedor
-            },
-            labels: ['Usuarios Activos', 'Usuarios Inactivos'],
-            colors: ['#4CAF50', '#F44336'],
-            legend: {
-                show: false // Esto desactiva la leyenda junto al gráfico
-            }
-        };
-        var usuariosChart = new ApexCharts(document.querySelector("#usuariosChart"), usuariosOptions);
-        usuariosChart.render();
-
-        var rolesOptions = {
-            series: [@Model.TotalRolesActivos, @Model.TotalRolesInactivos],
-            chart: {
-                type: 'pie',
-                height: 500,
-                width: '100%',
-                redrawOnParentResize: true, // Se asegura que el gráfico se redibuje al cambiar el tamaño del contenedor
-            },
-            labels: ['Roles Activos', 'Roles Inactivos'],
-            colors: ['#2196F3', '#FFC107'],
-            legend: {
-                show: false // Esto desactiva la leyenda junto al gráfico
-            }
-        };
-        var rolesChart = new ApexCharts(document.querySelector("#rolesChart"), rolesOptions);
-        rolesChart.render();
-
-        // Devolver los gráficos para actualización
-        return { permisosChart, usuariosChart, rolesChart };
-    }
-
-    // Inicializar gráficos
-    var charts = renderCharts();
-
-    // Evento para redibujar los gráficos al cambiar el tamaño de la pantalla
-    window.addEventListener('resize', function () {
-        // Llamar a la función `resize` de cada gráfico para ajustarlo
-        charts.permisosChart.resize();
-        charts.usuariosChart.resize();
-        charts.rolesChart.resize();
+        }
     });
 </script>
+
+
+   
+
+<!-- usuariosChart.js -->
+<script>
+    var ctx2 = document.getElementById('usuariosChart').getContext('2d');
+    var usuariosChart = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ['Usuarios Activos', 'Usuarios Inactivos'],
+            datasets: [{
+                data: [@Model.TotalUsuariosActivos, @Model.TotalUsuariosInactivos],
+                backgroundColor: ['#4CAF50', '#F44336']
+            }]
+        },
+        options: {
+            responsive: true, // Responsivo
+            plugins: {
+                legend: {
+                   
+                }
+            }
+        }
+    });
+</script>
+
+
+<!-- rolesChart.js -->
+<script>
+    var ctx3 = document.getElementById('rolesChart').getContext('2d');
+    var rolesChart = new Chart(ctx3, {
+        type: 'pie',
+        data: {
+            labels: ['Roles Activos', 'Roles Inactivos'],
+            datasets: [{
+                data: [@Model.TotalRolesActivos, @Model.TotalRolesInactivos],
+                backgroundColor: ['#2196F3', '#FFC107']
+            }]
+        },
+        options: {
+            responsive: true, // Responsivo
+            plugins: {
+                legend: {
+                   
+                }
+            }
+        }
+    });
+</script>
+
+   

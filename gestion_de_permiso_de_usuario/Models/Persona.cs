@@ -18,7 +18,9 @@ namespace gestion_de_permiso_de_usuario.Models
         [Required]
         [StringLength(50)]
         public string Correo { get; set; }
-        [Required]
         public DateTime FechaCambio { get; set; } = DateTime.Now;
+        [Required]
+        public string Cedula { get; set; }  
+
     }
 }

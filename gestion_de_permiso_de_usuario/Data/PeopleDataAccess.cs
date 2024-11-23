@@ -14,31 +14,7 @@ namespace gestion_de_permiso_de_usuario.Data
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public void AddPersona(Persona persona)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(_connectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("spAddPersona", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Nombre", persona.Nombre);
-                    cmd.Parameters.AddWithValue("@Apellido", persona.Apellido);
-                    cmd.Parameters.AddWithValue("@FechaNacimiento", persona.FechaNacimiento);
-                    cmd.Parameters.AddWithValue("@Genero", persona.Genero);
-                    cmd.Parameters.AddWithValue("@Telefono", persona.Telefono);
-                    cmd.Parameters.AddWithValue("@Correo", persona.Correo);
-                    cmd.Parameters.AddWithValue("@FechaCambio", persona.FechaCambio);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al agregar la persona: " + ex.Message);
-            }
-        }
+       
 
         public List<Persona> GetPersonas()
         {
@@ -60,6 +36,7 @@ namespace gestion_de_permiso_de_usuario.Data
                             PersonaID = Convert.ToInt32(reader["PersonaID"]),
                             Nombre = reader["Nombre"].ToString(),
                             Apellido = reader["Apellido"].ToString(),
+                            Cedula = reader["Cedula"].ToString(),
                             FechaNacimiento = Convert.ToDateTime(reader["FechaNacimiento"]),
                             Genero = reader["Genero"].ToString(),
                             Telefono = reader["Telefono"].ToString(),
@@ -98,6 +75,7 @@ namespace gestion_de_permiso_de_usuario.Data
                             PersonaID = Convert.ToInt32(reader["PersonaID"]),
                             Nombre = reader["Nombre"].ToString(),
                             Apellido = reader["Apellido"].ToString(),
+                            Cedula = reader["Cedula"].ToString(),
                             FechaNacimiento2 = Convert.ToDateTime(reader["FechaNacimiento"]).ToString("yyyy-MM-dd"),
                             Genero = reader["Genero"].ToString(),
                             Telefono = reader["Telefono"].ToString(),
@@ -124,6 +102,7 @@ namespace gestion_de_permiso_de_usuario.Data
                     SqlCommand cmd = new SqlCommand("spUpdatePersona", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@PersonaID", persona.PersonaID);
+                    cmd.Parameters.AddWithValue("@Cedula", persona.Cedula);
                     cmd.Parameters.AddWithValue("@Nombre", persona.Nombre);
                     cmd.Parameters.AddWithValue("@Apellido", persona.Apellido);
                     cmd.Parameters.AddWithValue("@FechaNacimiento", persona.FechaNacimiento);
@@ -137,7 +116,7 @@ namespace gestion_de_permiso_de_usuario.Data
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al actualizar la persona: " + ex.Message);
+                throw new Exception(ex.Message);
             }
         }
 
