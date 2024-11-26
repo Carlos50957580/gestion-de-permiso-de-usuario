@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HoE4Ikq1glQ=",
+  "dgSpecHash": "jdyI00UQUFs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\PYC\\Desktop\\mvc\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+  "projectFilePath": "C:\\Users\\PYC\\Desktop\\proce almacenados\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PYC\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\PYC\\.nuget\\packages\\azure.identity\\1.11.3\\azure.identity.1.11.3.nupkg.sha512",

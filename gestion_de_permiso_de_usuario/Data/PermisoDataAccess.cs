@@ -14,17 +14,18 @@ namespace gestion_de_permiso_de_usuario.Data
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
             _configuration = configuration;
-
         }
 
+        // Método para agregar un permiso
         public void AddPermiso(Permiso permiso)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("spAddPermiso", conn);
+                    SqlCommand cmd = new SqlCommand("spGestionarPermiso", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Accion", "A"); // Acción para agregar
                     cmd.Parameters.AddWithValue("@NombrePermiso", permiso.NombrePermiso);
                     cmd.Parameters.AddWithValue("@Descripcion", permiso.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", permiso.Estado);
@@ -41,6 +42,7 @@ namespace gestion_de_permiso_de_usuario.Data
             }
         }
 
+        // Método para obtener todos los permisos
         public List<Permiso> GetPermisos()
         {
             List<Permiso> permisos = new List<Permiso>();
@@ -49,8 +51,9 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("spGetPermisos", conn);
+                    SqlCommand cmd = new SqlCommand("spGestionarPermiso", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Accion", "L"); // Acción para listar todos los permisos
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -77,6 +80,7 @@ namespace gestion_de_permiso_de_usuario.Data
             return permisos;
         }
 
+        // Método para obtener un permiso por su ID
         public Permiso GetPermisoById(int permisoID)
         {
             Permiso permiso = null;
@@ -85,8 +89,9 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("spGetPermisoById", conn);
+                    SqlCommand cmd = new SqlCommand("spGestionarPermiso", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Accion", "S"); // Acción para obtener permiso por ID
                     cmd.Parameters.AddWithValue("@PermisoID", permisoID);
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -114,19 +119,22 @@ namespace gestion_de_permiso_de_usuario.Data
             return permiso;
         }
 
+        // Método para actualizar un permiso
         public void UpdatePermiso(Permiso permiso)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("spUpdatePermiso", conn);
+                    SqlCommand cmd = new SqlCommand("spGestionarPermiso", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Accion", "U"); // Acción para actualizar
                     cmd.Parameters.AddWithValue("@PermisoID", permiso.PermisoID);
                     cmd.Parameters.AddWithValue("@NombrePermiso", permiso.NombrePermiso);
                     cmd.Parameters.AddWithValue("@Descripcion", permiso.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", permiso.Estado);
                     cmd.Parameters.AddWithValue("@ActualizadoPor", permiso.ActualizadoPor);
+                    cmd.Parameters.AddWithValue("@FechaCambio", permiso.FechaCambio);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -137,6 +145,8 @@ namespace gestion_de_permiso_de_usuario.Data
                 throw new Exception("Error al actualizar el permiso: " + ex.Message);
             }
         }
+
+        
 
         public List<string> ObtenerPermisosPorUsuario(int userId)
         {
@@ -220,8 +230,17 @@ namespace gestion_de_permiso_de_usuario.Data
             }
 
             return permisosInactivos;
+       
+        
+        
+        
         }
+
+
     }
+
+
+
 }
 
 

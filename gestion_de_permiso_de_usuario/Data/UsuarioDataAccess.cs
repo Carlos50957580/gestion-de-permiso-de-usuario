@@ -296,32 +296,7 @@ namespace gestion_de_permiso_de_usuario.Data
         }
 
 
-        //public int ObtenerUsuariosActivos()
-        //{
-        //    using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-        //    {
-        //        connection.Open();
-        //        string query = "SELECT COUNT(*) FROM Usuarios WHERE Estado = 1"; // Asumiendo que '1' representa activo
-        //        using (var command = new SqlCommand(query, connection))
-        //        {
-        //            return (int)command.ExecuteScalar();
-        //        }
-        //    }
-        //}
-
-        //// Método para obtener usuarios inactivos
-        //public int ObtenerUsuariosInactivos()
-        //{
-        //    using (var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-        //    {
-        //        connection.Open();
-        //        string query = "SELECT COUNT(*) FROM Usuarios WHERE Estado = 0"; // Asumiendo que '0' representa inactivo
-        //        using (var command = new SqlCommand(query, connection))
-        //        {
-        //            return (int)command.ExecuteScalar();
-        //        }
-        //    }
-        //}
+   
 
 
         public int ObtenerUsuariosActivos()

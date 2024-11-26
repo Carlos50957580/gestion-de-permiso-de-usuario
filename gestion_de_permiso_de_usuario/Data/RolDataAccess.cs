@@ -19,8 +19,10 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("spAddRol", conn);
+                    SqlCommand cmd = new SqlCommand("spGestionarRol", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Accion", "A");
                     cmd.Parameters.AddWithValue("@NombreRol", rol.NombreRol);
                     cmd.Parameters.AddWithValue("@Descripcion", rol.Descripcion);
                     cmd.Parameters.AddWithValue("@Estado", rol.Estado);
@@ -44,8 +46,9 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("spGetRoles", conn);
+                    SqlCommand cmd = new SqlCommand("spGestionarRol", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Accion", "L");  // 'L' para listar
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -68,6 +71,7 @@ namespace gestion_de_permiso_de_usuario.Data
                 throw new Exception("Error al obtener los roles: " + ex.Message);
             }
 
+
             return roles;
         }
 
@@ -79,8 +83,9 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("spGetRolById", conn);
+                    SqlCommand cmd = new SqlCommand("spGestionarRol", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Accion", "S");  // 'S' para seleccionar por ID
                     cmd.Parameters.AddWithValue("@RolID", rolID);
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -113,8 +118,10 @@ namespace gestion_de_permiso_de_usuario.Data
             {
                 using (SqlConnection conn = new SqlConnection(_connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand("spUpdateRol", conn);
+                    SqlCommand cmd = new SqlCommand("spGestionarRol", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Accion", "U");
                     cmd.Parameters.AddWithValue("@RolID", rol.RolID);
                     cmd.Parameters.AddWithValue("@NombreRol", rol.NombreRol);
                     cmd.Parameters.AddWithValue("@Descripcion", rol.Descripcion);
