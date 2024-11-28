@@ -1,6 +1,8 @@
 using gestion_de_permiso_de_usuario.Data;
 using gestion_de_permiso_de_usuario.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,9 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("Invitado", policy => policy.RequireRole("Invitado"));
 });
 
+// Registrar EmailService en el contenedor de dependencias
+builder.Services.AddScoped<EmailService>(); // Registrar el servicio de correo
+
 // Configurar la canalización HTTP.
 var app = builder.Build();
 
@@ -70,4 +75,3 @@ app.MapControllerRoute(
     pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 app.Run();
-

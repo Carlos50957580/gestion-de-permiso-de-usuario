@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PYC\\Desktop\\proce almacenados\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
+    "C:\\Users\\o99zz94\\Desktop\\27 - copia\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PYC\\Desktop\\proce almacenados\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
+    "C:\\Users\\o99zz94\\Desktop\\27 - copia\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PYC\\Desktop\\proce almacenados\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "projectUniqueName": "C:\\Users\\o99zz94\\Desktop\\27 - copia\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
         "projectName": "gestion_de_permiso_de_usuario",
-        "projectPath": "C:\\Users\\PYC\\Desktop\\proce almacenados\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
-        "packagesPath": "C:\\Users\\PYC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PYC\\Desktop\\proce almacenados\\gestion_de_permiso_de_usuario\\obj\\",
+        "projectPath": "C:\\Users\\o99zz94\\Desktop\\27 - copia\\gestion_de_permiso_de_usuario\\gestion_de_permiso_de_usuario.csproj",
+        "packagesPath": "C:\\Users\\o99zz94\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\o99zz94\\Desktop\\27 - copia\\gestion_de_permiso_de_usuario\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\PYC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\o99zz94\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

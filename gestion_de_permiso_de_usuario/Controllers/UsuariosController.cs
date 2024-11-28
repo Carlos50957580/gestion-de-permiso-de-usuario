@@ -2,6 +2,7 @@
 using gestion_de_permiso_de_usuario.Filters;
 using gestion_de_permiso_de_usuario.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace gestion_de_permiso_de_usuario.Controllers
 {
@@ -10,12 +11,14 @@ namespace gestion_de_permiso_de_usuario.Controllers
         private readonly UsuarioDataAccess _usuarioDataAccess;
         private readonly PersonaDataAccess _personaDataAccess;
         private readonly RolDataAccess _rolDataAccess;
+        private readonly EmailService _emailService; // Servicio de correo
 
-        public UsuariosController(IConfiguration configuration)
+        public UsuariosController(IConfiguration configuration, EmailService emailService)
         {
             _usuarioDataAccess = new UsuarioDataAccess(configuration);
             _personaDataAccess = new PersonaDataAccess(configuration);
             _rolDataAccess = new RolDataAccess(configuration);
+            _emailService = emailService; // Inyectar el servicio de correo
         }
 
         [Permiso("Ver Usuarios,Ver Detalles de Usuarios,Crear Usuarios,Editar Usuarios")]
@@ -55,7 +58,7 @@ namespace gestion_de_permiso_de_usuario.Controllers
         // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("NombreUsuario,PersonaID,Contraseña,Estado")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("NombreUsuario,PersonaID,Contraseña,Estado")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -65,9 +68,96 @@ namespace gestion_de_permiso_de_usuario.Controllers
                 int rolBaseId = _usuarioDataAccess.GetRolBaseId();
                 usuario.RolID = rolBaseId;
 
+                // Insertar el usuario en la base de datos
                 _usuarioDataAccess.InsertUsuario(usuario);
+
+                // Obtener la persona asociada al usuario
+                var persona = _personaDataAccess.GetPersonaById(usuario.PersonaID);
+
+                // Crear el contenido del correo
+                string subject = "Confirmación de Creación de Usuario";
+                string body = $@"
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Confirmación de Creación de Usuario</title>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }}
+        h1 {{
+            color: #4CAF50;
+            text-align: center;
+        }}
+        .content {{
+            font-size: 16px;
+            line-height: 1.6;
+        }}
+        .content strong {{
+            color: #333;
+        }}
+        .footer {{
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 20px;
+        }}
+        .button {{
+            display: inline-block;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }}
+        .button:hover {{
+            background-color: #45a049;
+        }}
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1>¡Bienvenido a ReyCompany!</h1>
+        <div class='content'>
+            <p>Hola <strong>{persona.Nombre}</strong>,</p>
+            <p>Tu cuenta ha sido creada exitosamente. A continuación, los detalles de tu acceso:</p>
+            <p><strong>Usuario:</strong> {usuario.NombreUsuario}</p>
+            <p><strong>Contraseña:</strong> {usuario.Contraseña}</p>
+            <p>Por favor, asegúrate de cambiar tu contraseña después de iniciar sesión por primera vez.</p>
+        </div>
+        <div class='footer'>
+            <p>Saludos,<br>El equipo de soporte de <strong>ReyCompany</strong></p>
+        </div>
+    </div>
+</body>
+</html>
+";
+
+
+
+
+
+                // Enviar correo de confirmación con usuario y contraseña
+                await _emailService.SendEmailAsync(persona.Correo, subject, body);
+
                 return RedirectToAction(nameof(Index));
             }
+
             ViewBag.Personas = _personaDataAccess.GetAllPersonas();
             ViewBag.Roles = _rolDataAccess.GetAllRoles();
             return View(usuario);
