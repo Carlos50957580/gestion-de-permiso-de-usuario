@@ -1,0 +1,215 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb mb-4 mt-4">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="breadcrumb-item">Resumen</li>
+    <li class="breadcrumb-item active">Usuarios</li>
+</ol>
+
+<div class="card">
+    <div class="card-header">
+        <i class="bi bi-people me-1"></i> Lista de Usuarios
+    </div>
+
+    <div class="card-body">
+
+        <input id="txtId" type="hidden" value="0" />
+
+        <div class="row">
+            <div class="col-12">
+                <button type="button" class="btn btn-success mb-3 mt-3" onclick="abrirModal(null)">Nuevo</button>
+            </div>
+
+            <hr />
+            <table id="tabla" class="display cell-border" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Nombre</th>
+                        <th>Rol</th>
+                        <th>Ultimo cambio</th>
+                        <th>Estado</th>
+                        <th>Autor</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" id="formodal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body g-2">
+                <div class="row">
+
+                    <form>
+                        <div class="mb-3">
+                            <label for="txtUser" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="txtUser">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="txtNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="txtNombre">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Rol</label>
+                            <select class="form-select" id="cboRol" aria-label="Default select example">
+                                <option selected>Selecciona el rol</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Admin de admins</option>
+                                <option value="3">El master admin</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="txtFecha" class="form-label">Ultimo Cambio</label>
+                            <input type="text" class="form-control" id="txtFecha">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Estado</label>
+                            <select class="form-select" id="cboEstado" aria-label="Default select example">
+                                <option selected>Selecciona un estado</option>
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>
+                                <option value="3">Mitad/Mitad</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Autor</label>
+                            <input type="text" class="form-control" id="txtAutor">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="Guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var table;
+        var filaSeleccionada;
+
+        function abrirModal(Json) {
+
+            $("#txtId").val(0);
+            $("#txtUser").val("");
+            $("#txtNombre").val("");
+            $("#cboRol").val("");
+            $("#txtFecha").val("");
+            $("#cboEstado").val(1);
+            $("#txtAutor").val("");
+
+            if (Json != null) {
+                $("#txtId").val(Json.usuarioID);
+                $("#txtUser").val(Json.nombreUsuario);
+                $("#txtNombre").val(Json.personaID);
+                $("#cboRol").val(Json.rolID);
+                $("#txtFecha").val(Json.fechaCambio);
+                $("#cboEstado").val(Json.estado == true ? 1 : 0);
+                $("#txtAutor").val(Json.creadoPor);
+            }
+            $("#formodal").modal("show");
+        }
+
+        let listarUsuario = `@Url.Action("ListaUsuarios", "Home")`;
+
+        // $.ajax({
+        //     url: listarUsuario,
+        //     type: "GET",
+        //     dataType: "Json",
+        //     contentType: "application/json; charset=utf-8",
+        //     success: function (data) {
+        //         console.log(data)
+        //     }
+        // })
+
+        $(document).ready(function () {
+                table = $("#tabla").DataTable({
+                responsive: true,
+                ordering: true,
+                paging: true,
+                info: true,
+                lengthChange: true,
+                ajax: {
+                    url: listarUsuario,
+                    type: "GET",
+                    dataType: "json"
+                },
+                columns: [
+                    { data: "nombreUsuario" },
+                    { data: "personaID" },
+                    { data: "rolID" },
+                    { data: "fechaCambio" },
+                    {
+                        data: "estado", "render": function (valor) {
+                            if (valor) {
+                                return '<button type="button" class="btn btn-success">Sí</button>'
+                            }
+                            else {
+                                return '<button type="button" class="btn btn-danger">No</button>'
+                            }
+                        }
+                    },
+                    { data: "creadoPor" },
+                    {
+                        "defaultContent": '<button type="button" class="btn btn-warning btn-sm btn-editar"><i class="bi bi-pencil"></i></button>' +
+                            '<button type="button"class="btn btn-danger btn-sm ms-2"><i class="bi bi-trash"></i></button>',
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "90px"
+                    }
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/es-MX.json',
+                },
+            });
+
+            $("#tabla tbody").on("click", ".btn-editar", function () {
+                filaSeleccionada = table.row($(this).closest("tr")).data();
+                var data = table.row(filaSeleccionada).data();
+                abrirModal(data);
+            });
+
+            
+        });
+        function Guardar() {
+                var Usuario = {
+                    //actualizadoPor: Para mas adelante
+                    // contraseña: Para mas adelante
+                    creadoPor: $("#txtAutor").val(),
+                    estado: $("#cboEstado").val() == 1 ? true: false,
+                    fechaCambio: $("#txtFecha").val(),
+                    nombreUsuario: $("#txtUser").val(),
+                    personaID: $("#txtNombre").val(),
+                    rolID: $("#cboRol").val(),
+                    usuarioID: $("#txtId").val()
+                }
+
+            if (Usuario.usuarioID == 0) {
+                    table.row.add(Usuario).draw(false);
+
+                } else {
+                    table.row(filaSeleccionada).data(Usuario).draw(false);
+                }
+                $("#formodal").modal("hide");
+            }
+    </script>
+}
